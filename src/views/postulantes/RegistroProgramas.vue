@@ -6,11 +6,11 @@
           <h2 class="pt-4">Registro de producciones</h2>
           <h4 class="pt-4">
             Para postular una producción o talento a los Premios india Catalina
-            2024 es necesario registrar primero la producción y luego postularla
+            2025 es necesario registrar primero la producción y luego postularla
             a las categorías en las que se quiera participar. Antes de postular,
             por favor revise atentamente el 
             <a
-              href="https://premiosindiacatalina.com/wp-content/uploads/2023/12/PIC-2024-REGLAMENTO-GENERAL-VF.pdf"
+              href="https://premiosindiacatalina.com/wp-content/uploads/2024/12/PIC-2025-REGLAMENTO-GENERAL-.pdf"
               target="_blank"
               >REGLAMENTO</a
             >

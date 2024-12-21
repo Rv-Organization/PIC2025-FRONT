@@ -123,7 +123,7 @@
                 <h3>
                   Una muestra de la producción. Para esto, revisar el anexo de
                   <a
-                    href="https://premiosindiacatalina.com/wp-content/uploads/2023/12/PIC-2024-REQUERIMIENTO-AUDIOVISUAL-PARA-POSTULACION.pdf"
+                    href="https://premiosindiacatalina.com/wp-content/uploads/2024/12/PIC-2025-REQUERIMIENTO-AUDIOVISUAL-PARA-POSTULACION.pdf"
                     target="_blank"
                     >requerimientos</a
                   >

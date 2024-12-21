@@ -20,7 +20,7 @@
     :id="field.id"
     type="text"
     row-height="30"
-    outlined
+    class="border-input"
     dense
   >
   <!-- no-resize -->

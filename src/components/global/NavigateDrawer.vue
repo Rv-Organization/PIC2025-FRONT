@@ -7,7 +7,7 @@
     disable-resize-watcher
   >
     <v-container fluid class="container-sidebar ma-0 pa-0 d-flex align-center flex-column">
-      <v-img width="200" contain src="@/assets/image/logoPic40.png"></v-img>
+      <v-img width="200" contain src="@/assets/image/logoPic41.png"></v-img>
       <h2 class="black--text mt-0">{{ usuario.name }}</h2>
       <p class="black--text">{{ usuario.email }}</p>
       <v-row>
@@ -142,7 +142,7 @@
                     <h5 class="black--text pt-1">
                       ¿Necesitas ayuda?
                       <br />
-                      direccionejecutiva@premiosindiacatalina.com
+                      coordinacion@premiosindiacatalina.com
                     </h5>
                   </v-col>
                 </v-row> 

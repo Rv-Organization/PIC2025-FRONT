@@ -1,104 +1,109 @@
 <template>
-  <v-app>
-    <v-container class="fill-height pb-0 pt-0 mb-0" fluid>
-      <v-row justify="center" align="center">
-        <v-col cols="5" md="6" sm="6" xl="6" lg="6" class="py-2">
-          <v-img
-            width="415"
-            contain
-            class="mx-auto fill-height"
-            src="../assets/image/logoPic40.png"
-          ></v-img>
-        </v-col>
-        <v-col cols="12" md="4" sm="6" xl="6" lg="6">
-          <v-card
-            :disabled="_stateLoading"
-            color="white"
-            elevation="3"
-            class="pt-8 d-sm-block d-inline"
-            width="500"
-            height="470"
-            v-if="!register_usuario.estado"
-            style="border-radius: 20px"
-          >
-            <h2 class="text-center my-2">Iniciar sesión</h2>
-            <v-form v-model="validacion" ref="form" lazy-validation>
-              <v-row justify="center">
-                <v-col cols="12" class="px-10 0pb-0 mt-4">
-                  <Input_
-                    :field="form.usuario"
-                    v-model="user.email"
-                    @validateEnter="datoCorreo()"
-                  />
-                </v-col>
-                <v-col cols="12" class="px-10 pb-0 py-0">
-                  <Input_
-                    :field="form.password"
-                    v-model="user.password"
-                    @validateEnter="ingresar()"
-                  />
-                </v-col>
-                <v-col
-                  cols="12"
-                  class="px-10 pt-0 text-end"
-                  @click="cambiar_password.estado = true"
-                >
-                  <div>
-                    <a style="font-size: 15px" class="botone"
-                      >Olvidé la contraseña</a
+  <v-main>
+    <v-app>
+      <v-container class="fill-height pb-0 pt-0 mb-0" fluid>
+        <v-row justify="center" align="center">
+          <v-col cols="5" md="6" sm="6" xl="6" lg="6" class="py-2">
+            <v-img
+              width="415"
+              contain
+              class="mx-auto fill-height"
+              src="../assets/image/logoPic41.png"
+            ></v-img>
+          </v-col>
+          <v-col cols="12" md="4" sm="6" xl="6" lg="6">
+            <v-card
+              :disabled="_stateLoading"
+              color="white"
+              elevation="3"
+              class="pt-8 d-sm-block d-inline"
+              width="500"
+              height="520"
+              v-if="!register_usuario.estado"
+              style="border-radius: 20px"
+            >
+              <h2 class="text-center my-2">Iniciar sesión</h2>
+              <v-form v-model="validacion" ref="form" lazy-validation>
+                <v-row justify="center">
+                  <v-col cols="12" class="px-10 0pb-0 mt-4">
+                    <Input_
+                      class="border-input"
+                      :field="form.usuario"
+                      v-model="user.email"
+                      @validateEnter="datoCorreo()"
+                    />
+                  </v-col>
+                  <v-col cols="12" class="px-10 pb-0 py-0">
+                    <Input_
+                    class="border-input"
+                      :field="form.password"
+                      v-model="user.password"
+                      @validateEnter="ingresar()"
+                    />
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    class="px-10 pt-0 text-end"
+                    @click="cambiar_password.estado = true"
+                  >
+                    <div>
+                      <a style="font-size: 15px" class="botone"
+                        >Olvidé la contraseña</a
+                      >
+                    </div>
+                  </v-col>
+                  <v-col cols="12" class="px-10 pt-0">
+                    <v-btn
+                      class="botone"
+                      color="boton"
+                      dark
+                      block
+                      @click="ingresar()"
+                      elevation="0"
+                      large
+                      >Ingresar</v-btn
                     >
-                  </div>
+                  </v-col>
+                </v-row>
+              </v-form>
+              <v-row justify="center" class="mt-3">
+                <v-col cols="3" class="mx-0 px-0">
+                  <v-divider class="mt-2 ml-10"></v-divider>
                 </v-col>
-                <v-col cols="12" class="px-10 pt-0 botone">
+                <v-col cols="5" class="mx-0 px-0">
+                  <h4 class="text-center">¿Aún no tienes una cuenta?</h4>
+                </v-col>
+                <v-col cols="3" class="mx-0 px-0">
+                  <v-divider class="mt-2 mr-8"></v-divider>
+                </v-col>
+                <v-col cols="12" class="px-9 pt-3 text-center">
                   <v-btn
                     color="boton"
-                    dark
-                    block
-                    @click="ingresar()"
-                    elevation="0"
+                    class="botone-outlined"
+                    @click="register_usuario.estado = true"
+                    outlined
                     large
-                    >Ingresar</v-btn
+                    >Crear cuenta</v-btn
                   >
                 </v-col>
               </v-row>
-            </v-form>
-            <v-row justify="center" class="mt-3">
-              <v-col cols="3" class="mx-0 px-0">
-                <v-divider class="mt-2 ml-10"></v-divider>
-              </v-col>
-              <v-col cols="5" class="mx-0 px-0">
-                <h4 class="text-center">¿Aún no tienes una cuenta?</h4>
-              </v-col>
-              <v-col cols="3" class="mx-0 px-0">
-                <v-divider class="mt-2 mr-8"></v-divider>
-              </v-col>
-              <v-col cols="12" class="px-9 pt-3 text-center">
-                <v-btn
-                  color="boton"
-                  class="botone"
-                  @click="register_usuario.estado = true"
-                  outlined
-                  large
-                  >Crear cuenta</v-btn
-                >
-              </v-col>
-            </v-row>
-          </v-card>
-          <REGISTRARUSUARIO
-            :register_usuario="register_usuario"
-            class="my-10"
-          />
-          <CAMBIARPASSWORD
-            :cambiar_password="cambiar_password"
-            v-if="cambiar_password.estado"
-            class="my-10"
-          />
-        </v-col>
-      </v-row>
-    </v-container>
-    <FOOTER />
-    <Alerta_ :alert="alert_" v-if="alert_.estado" />
-  </v-app>
+            </v-card>
+            <REGISTRARUSUARIO
+              :register_usuario="register_usuario"
+              class="my-10"
+            />
+            <CAMBIARPASSWORD
+              :cambiar_password="cambiar_password"
+              v-if="cambiar_password.estado"
+              class="my-10"
+            />
+          </v-col>
+        </v-row>
+      </v-container>
+      <FOOTER />
+      <Alerta_ :alert="alert_" v-if="alert_.estado" />
+    </v-app>
+  </v-main>
 </template>
 
 <script>
@@ -251,3 +256,27 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.input-password .v-input__icon--append {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: auto; /* Cambiado de none a auto para permitir la interacción */
+}
+
+.v-text-field {
+  border: none !important;
+  box-shadow: none !important;
+}
+.border-input .v-input__slot {
+  border: solid 2px #ecc962 !important;
+  border-radius: 4px;
+  width: 100% !important;
+  height: 60px !important;
+  font-size: 20px !important;
+  padding: 10px;
+  transition: all 0.3s ease !important;
+}
+</style>

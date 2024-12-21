@@ -22,7 +22,7 @@
     @input="input()"
     :ref="field.id"
     :id="field.id"
-    outlined
+    class="border-input"
     dense
   >
   </v-text-field>
