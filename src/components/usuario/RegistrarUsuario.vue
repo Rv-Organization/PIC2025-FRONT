@@ -32,7 +32,15 @@
           <INPUT :field="form.password_repetir" />
         </v-col>
         <v-col cols="12" class="pt-1 pb-8">
-          <v-btn elevation="0" color="boton" dark block @click="registrarUsuario()" large>Crear cuenta</v-btn>
+          <v-btn
+            elevation="0"
+            color="boton"
+            dark
+            block
+            @click="registrarUsuario()"
+            large
+            >Crear cuenta</v-btn
+          >
         </v-col>
       </v-row>
     </v-form>
@@ -47,7 +55,13 @@
         <v-divider class="mt-2 mr-10"></v-divider>
       </v-col>
       <v-col cols="12" class="px-13 pt-4 pb-10 text-center">
-        <v-btn color="boton" @click="register_usuario.estado = false" outlined large>Iniciar sesión</v-btn>
+        <v-btn
+          color="boton"
+          @click="register_usuario.estado = false"
+          outlined
+          large
+          >Iniciar sesión</v-btn
+        >
       </v-col>
     </v-row>
     <ALT
@@ -101,7 +115,10 @@ export default {
           id: "usuario",
           label: "Email",
           maxlength: "50",
-          rules: [(v) => !!v || "Email es requerido", (v) => /.+@.+\..+/.test(v) || "Email no es valido"],
+          rules: [
+            (v) => !!v || "Email es requerido",
+            (v) => /.+@.+\..+/.test(v) || "Email no es valido",
+          ],
         },
         tipo_identidad: {
           value: "",
@@ -141,7 +158,8 @@ export default {
           show_password: false,
           rules: [
             (v) => !!v || "Contraseña es requerida",
-            (v) => v === this.form.password.value || `Las contraseñas no coinciden`,
+            (v) =>
+              v === this.form.password.value || `Las contraseñas no coinciden`,
           ],
         },
       },
@@ -149,7 +167,7 @@ export default {
   },
   mounted() {
     const opciones = { PICI: 6, PICM: 5 };
-    this.roleId = opciones[this.$route.query.llave] || 2;
+    this.roleId = opciones[this.$route.query.llave] || 1;
   },
   methods: {
     ...mapActions({
@@ -175,7 +193,7 @@ export default {
         } else if (res.status == 400) this.ALT_("CORREO-3", "warning");
       }
     },
-    
+
     cancel() {
       this.register_usuario.estado = false;
       this.ALTD_();
