@@ -1,0 +1,674 @@
+<template>
+  <v-app>
+    <v-row class="container-channel px-8">
+      <v-col cols="12" class="mt-0 pt-0">
+        <v-container>
+          <h2 class="py-5">FORMULARIO DE INSCRIPCIÓN Y POSTULACIÓN</h2>
+          <h4>
+            PRIMER PASO: Inscripción o ratificación del canal, plataforma o
+            productora de participar en los Premios India Catalina 2024.
+          </h4>
+          <v-divider class="my-6"></v-divider>
+          <v-card-text class="asaccent--text pb-8"
+            >Voy a postular producciones y/o talentos como representante de:
+            <v-radio-group v-model="tipo_productora" row>
+              <v-radio label="Un canal o plataforma" value="1"></v-radio>
+              <v-radio label="Una casa productora" value="2"></v-radio>
+              <v-radio
+                label="Una persona natural independiente"
+                value="3"
+              ></v-radio>
+            </v-radio-group>
+          </v-card-text>
+          <v-card-text class="asaccent--text pb-8 pl-0"
+            >Nota: Todos los campos con asteriscos (*) son obligatorios
+          </v-card-text>
+          <v-form v-model="validacion" ref="form" lazy-validation>
+            <v-row justify="start">
+              <v-col
+                cols="12"
+                xs="6"
+                sm="6"
+                md="6"
+                lg="6"
+                xl="12"
+                class="py-0"
+                v-if="tipo_productora == '1'"
+              >
+                <AUTOCOMPLETE :field="form.canales_productoras" />
+                <INPUT
+                  v-if="form.canales_productoras.value == 'Otro. Cuál'"
+                  :field="form.otro_canales_productoras"
+                />
+              </v-col>
+              <v-col
+                cols="12"
+                xs="6"
+                sm="6"
+                md="6"
+                lg="6"
+                xl="12"
+                class="py-0"
+                v-if="tipo_productora == '2'"
+              >
+                <INPUT :field="form.nombre_canal" />
+              </v-col>
+              <v-col
+                cols="12"
+                xs="6"
+                sm="6"
+                md="6"
+                lg="6"
+                xl="12"
+                class="py-0"
+                v-if="tipo_productora == '3'"
+              >
+                <INPUT :field="form.nombre_canal" />
+              </v-col>
+              <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
+                <INPUT :field="form.cargo" />
+              </v-col>
+              <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
+                <INPUT :field="form.email_1" />
+              </v-col>
+              <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
+                <INPUT :field="form.email_1_veri" />
+              </v-col>
+              <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
+                <INPUT :field="form.celular" />
+              </v-col>
+              <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
+                <INPUT :field="form.celular_verificacion" />
+              </v-col>
+              <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
+                <INPUT :field="form.direccion_oficina" />
+              </v-col>
+              <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
+                <AUTOCOMPLETE :field="form.paises" />
+              </v-col>
+              <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
+                <AUTOCOMPLETE
+                  :field="form.departamento"
+                  v-if="form.paises.value == 'Colombia'"
+                />
+                <INPUT
+                  v-else
+                  :field="{
+                    ...form.departamento,
+                    label: 'Estado o departamento',
+                  }"
+                />
+              </v-col>
+              <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
+                <AUTOCOMPLETE
+                  :field="form.ciudad"
+                  v-if="form.paises.value == 'Colombia'"
+                />
+                <INPUT v-else :field="form.ciudad" />
+              </v-col>
+            </v-row>
+          </v-form>
+          <v-divider class="my-4"></v-divider>
+          <v-form v-model="validacion" ref="form_uploads" lazy-validation>
+            <h2 class="text-start my-10">Archivos requeridos</h2>
+            <v-card elevation="1" class="px-3 pb-0 mb-0" outlined>
+              <v-row aling="center" class="my-0">
+                <v-col cols="12" sm="12" xs="6" md="8" lg="8" xl="8">
+                  <v-card-text>
+                    <h3>
+                      Certificado actualizado de Cámara de Comercio del canal o
+                      productora *
+                    </h3>
+                    <h6>
+                      - Para canal o productora, adjuntar el certificado
+                      actualizado de Cámara de Comercio. <br>
+                      - Para plataforma o
+                      empresa constituida en otro país, adjuntar el documento
+                      equivalente. <br>
+                      - Para personas naturales con producciones en
+                      cuentas digitales, adjuntar el RUT (si es menor de edad,
+                      debe adjuntar carta de autorización de sus padres o
+                      acudiente). <br>
+                      - Para canales universitarios, adjuntar la
+                      constancia de acreditación ante el Ministerio de Educación
+                      Nacional.<br>
+                    </h6>
+                    <h4>
+                      Extensiones permitidas JPG, JPEG, PNG, PDF, máximo 5 megas
+                    </h4>
+                  </v-card-text>
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="12"
+                  xs="6"
+                  md="4"
+                  lg="4"
+                  xl="4"
+                  class="text-center mx-auto"
+                >
+                  <v-btn
+                    @click="subirArchivo('input-file1')"
+                    plain
+                    class="upload mb-3 py-2"
+                    height="100%"
+                  >
+                    <v-row align="center">
+                      <v-col
+                        cols="5"
+                        xs="5"
+                        sm="5"
+                        md="5"
+                        lg="5"
+                        xl="5"
+                        class="py-0 mx-auto pl-9 my-0"
+                      >
+                        <v-file-input
+                          prepend-icon="mdi-cloud-upload-outline"
+                          accept="application/pdf, image/png, image/jpeg, image/jpg"
+                          v-model="form_uploads.certificado"
+                          truncate-length="1"
+                          id="input-file1"
+                          class="mt-0"
+                          hide-input
+                        />
+                      </v-col>
+                      <v-row>
+                        <v-col class="py-4">
+                          <h3 v-if="!form_uploads.certificado.name">
+                            SUBIR ARCHIVO
+                          </h3>
+                          <h3 v-else>VOLVER A SUBIR</h3>
+                        </v-col>
+                      </v-row>
+                    </v-row>
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-card>
+            <v-col v-if="this.form_uploads.certificado.name" class="py-4">
+              <iframe
+                v-if="this.format_certificado === 'pdf'"
+                height="500px"
+                width="500px"
+                class="container"
+                :src="frames.certificado"
+              ></iframe>
+              <v-img
+                v-else
+                max-height="100%"
+                contain
+                max-width="100%"
+                :src="frames.certificado"
+                aspect-ratio="1.4"
+              ></v-img>
+            </v-col>
+            <v-card elevation="1" class="px-3 my-10" outlined>
+              <v-row aling="center" class="my-0">
+                <v-col cols="12" sm="12" xs="6" md="8" lg="8" xl="8">
+                  <v-card-text>
+                    <h3>
+                      Carta de intención de postulación del canal o productora
+                      firmada y escaneada *
+                    </h3>
+                    <h6>
+                      En la carta se debe mencionar quién es la persona
+                      autorizada para representar al canal, plataforma o casa
+                      productora en este proceso de postulaciones..
+                    </h6>
+                    <h4>
+                      Extensiones permitidas (JPG, JPEG, PNG, PDF, máximo 2
+                      megas)
+                    </h4>
+                  </v-card-text>
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="12"
+                  xs="6"
+                  md="4"
+                  lg="4"
+                  xl="4"
+                  class="text-center mx-auto"
+                >
+                  <v-btn
+                    @click="subirArchivo('input-file2')"
+                    plain
+                    class="upload py-2 mb-3"
+                    height="100%"
+                  >
+                    <v-row align="center">
+                      <v-col
+                        cols="5"
+                        xs="5"
+                        sm="5"
+                        md="5"
+                        lg="5"
+                        xl="5"
+                        class="py-0 mx-auto pl-9 my-0"
+                      >
+                        <v-file-input
+                          prepend-icon="mdi-cloud-upload-outline"
+                          accept="application/pdf, image/png, image/jpeg, image/jpg"
+                          v-model="form_uploads.carta"
+                          truncate-length="1"
+                          id="input-file2"
+                          class="mt-0"
+                          hide-input
+                          show-size
+                        />
+                      </v-col>
+                      <v-row>
+                        <v-col class="py-4">
+                          <h3 v-if="!form_uploads.carta.name">SUBIR ARCHIVO</h3>
+                          <h3 v-else>VOLVER A SUBIR</h3>
+                        </v-col>
+                      </v-row>
+                    </v-row>
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-card>
+            <v-col v-if="this.form_uploads.carta.name" class="py-4">
+              <iframe
+                v-if="this.format_carta === 'pdf'"
+                height="500px"
+                width="500px"
+                class="container"
+                :src="frames.carta"
+              ></iframe>
+              <v-img
+                v-else
+                max-height="100%"
+                contain
+                max-width="100%"
+                :src="frames.carta"
+                aspect-ratio="1.4"
+              ></v-img>
+            </v-col>
+          </v-form>
+          <v-container>
+            <v-row class="my-15 justify-center">
+              <v-col cols="12" xs="8" sm="8" md="8" lg="8" xl="8">
+                <v-btn
+                  @click="alertaGuardar()"
+                  class="botone"
+                  color="boton"
+                  elevation="0"
+                  large
+                  block
+                  dark
+                  >Guardar
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-container>
+      </v-col>
+      <ALT
+        @exitEsc="cancel()"
+        @cancel="cancel()"
+        @cancelAlert="cancelAlert()"
+        @confirm="registrarCanal()"
+        :alert="alert"
+        v-if="alert.estado"
+      />
+    </v-row>
+  </v-app>
+</template>
+
+<script>
+import Departamentos from "../../listas/Departamentos";
+import Paises from "../../listas/Paises";
+import { INPUT, AUTOCOMPLETE } from "@/mixins/global";
+import { ALERTA } from "../../mixins/alerta";
+import { CURRTET_USER } from "../../global";
+import { mapActions } from "vuex";
+export default {
+  mixins: [INPUT, AUTOCOMPLETE, ALERTA],
+
+  data() {
+    return {
+      format_certificado: "",
+      format_carta: "",
+      frames: { certificado: "", carta: "" },
+      tipo_productora: "1",
+      validacion: true,
+      estado: false,
+
+      form: {
+        canales_productoras: {
+          value: "",
+          id: "canales_productoras",
+          label: "Nombre del canal o Productora Postulante",
+          items: [
+            { id: "Caracol Tv", text: "Caracol TV" },
+            { id: "Canal RCN", text: " Canal RCN" },
+            { id: "Canal 1", text: "Canal 1" },
+            { id: "Señal Colombia", text: "Señal Colombia" },
+            { id: "Canal Institucional", text: "Canal Institucional" },
+            { id: "RTVCPlay", text: "RTVCPlay" },
+            { id: "Teleantioquia", text: "Teleantioquia" },
+            { id: "Telemedellín", text: "Telemedellín" },
+            { id: "Telecaribe", text: "Telecaribe" },
+            { id: "Telepacífico", text: "Telepacífico" },
+            { id: "Capital", text: "Capital" },
+            { id: "Eureka", text: "Eureka" },
+            { id: "Teleislas", text: "Teleislas" },
+            { id: "Telecafé", text: "Telecafé" },
+            { id: "Canal TRO", text: "Canal TRO" },
+            { id: "CityTV", text: "CityTV" },
+            { id: "Canal Trece", text: "Canal Trece" },
+            { id: "Netflix", text: "Netflix" },
+            { id: "HBO Max", text: "HBO Max" },
+            { id: "Star +", text: "Star +" },
+            { id: "Prime Video", text: "Prime Video" },
+            { id: "Disney +", text: "Disney +" },
+            { id: "MinTIC", text: "MinTIC" },
+            { id: "", text: "Otro. Cuál" },
+          ],
+          rules: [(v) => !!v || "Nombre del canal o Productora Postulante"],
+        },
+        casa_productoras: {
+          value: "",
+          id: "casa_productoras",
+          label: "Nombre de la casa Productora Postulante",
+          items: [
+            { id: "CityTV", text: "CityTV" },
+            { id: " Canal Trece", text: " Canal Trece" },
+            { id: "Netflix", text: "Netflix" },
+            { id: "HBO Max", text: "HBO Max" },
+            { id: "Canal Institucional", text: "Canal Institucional" },
+            { id: "RTVCPlay", text: "RTVCPlay" },
+            { id: "Star +", text: "Star +" },
+            { id: "Prime Video", text: "Prime Video" },
+            { id: "Disney +", text: "Disney +" },
+            { id: "MinTIC", text: "MinTIC" },
+            { id: "", text: "Otros, especifica cual" },
+          ],
+          rules: [(v) => !!v || "Nombre de la casa Productora Postulante"],
+        },
+        otro_canales_productoras: {
+          value: "",
+          id: "otro_canales_productoras",
+          label: "Indique cual... *",
+          maxlength: "100",
+          rules: [(v) => !!v || "Nombre es requerido"],
+        },
+        otro_casa_productoras: {
+          value: "",
+          id: "otro_casa_productoras",
+          label: "Indique cual... *",
+          maxlength: "100",
+          rules: [(v) => !!v || "Nombre es requerido"],
+        },
+        nombre_canal: {
+          value: "",
+          id: "nombre_canal",
+          label: "Nombre *",
+          maxlength: "100",
+          rules: [(v) => !!v || "Nombre es requerido"],
+        },
+        contacto: {
+          value: "",
+          id: "contacto",
+          label: "Contacto autorizado por canal o productora *",
+          maxlength: "100",
+          rules: [(v) => !!v || "Contacto autizado es requerido"],
+        },
+        cargo: {
+          value: "",
+          id: "cargo",
+          label: "Cargo *",
+          maxlength: "100",
+          rules: [(v) => !!v || "Cargo es requerido"],
+        },
+
+        email_1: {
+          value: "",
+          tipo: "email",
+          id: "email_1",
+          label: "Correo *",
+          maxlength: "50",
+          rules: [
+            (v) => !!v || "Correo es requerido",
+            (v) => /.+@.+\..+/.test(v) || "Correo no es valido",
+          ],
+        },
+        email_1_veri: {
+          value: "",
+          tipo: "email",
+          id: "email_1_veri",
+          label: "Verificar correo *",
+          maxlength: "50",
+          rules: [
+            (v) => !!v || "Correo es requerido",
+            (v) => /.+@.+\..+/.test(v) || "Correo no es valido",
+            (v) => v == this.form.email_1.value || "Correo no coincide",
+          ],
+        },
+        celular: {
+          value: "",
+          id: "celular",
+          label: "Celular *",
+          tipo: "number",
+          maxlength: "10",
+          rules: [
+            (v) => !!v || "Celular es requerido",
+            (v) => v.length >= 10 || "Numero celular invalido",
+          ],
+        },
+        celular_verificacion: {
+          value: "",
+          id: "celular_verificacion",
+          label: "Confirmación de celular *",
+          tipo: "number",
+          maxlength: "10",
+          rules: [
+            (v) => !!v || "Celular es requerido",
+            (v) => v.length >= 10 || "Numero celular invalido",
+            (v) => v == this.form.celular.value || "email no coincide",
+          ],
+        },
+        direccion_oficina: {
+          value: "",
+          id: "direccion_oficina",
+          label: "Dirección *",
+          maxlength: "100",
+          rules: [(v) => !!v || "Dirreción de oficina es requerida"],
+        },
+        departamento: {
+          value: "",
+          id: "departamento",
+          label: "Departamento",
+          maxlength: "100",
+          items: Departamentos.departamento,
+          rules: [(v) => !!v || "Departamento es requerido"],
+        },
+        paises: {
+          value: "",
+          id: "paises",
+          label: "País",
+          items: Paises.paises,
+          rules: [(v) => !!v || "Pais es requerido"],
+        },
+        ciudad: {
+          value: "",
+          id: "ciudad",
+          label: "Ciudad",
+          maxlength: "100",
+          items: [],
+          rules: [(v) => !!v || "Ciudad es requerida"],
+        },
+      },
+      form_uploads: {
+        certificado: [],
+        carta: [],
+      },
+    };
+  },
+  watch: {
+    tipo_productora() {
+      this.form.canales_productoras.value = "";
+      this.form.casa_productoras.value = "";
+      this.form.nombre_canal.value = "";
+    },
+    "form.canales_productoras.value"() {
+      this.form.otro_canales_productoras.value = "";
+    },
+    "form.departamento.value"() {
+      Departamentos.departamento.forEach((u) => {
+        this.form.departamento.value == u.text
+          ? (this.form.ciudad.items = u.municipio)
+          : null;
+      });
+    },
+    "form_uploads.certificado"() {
+      this.format_certificado = this.form_uploads.certificado.name.split(".");
+      this.format_certificado =
+        this.format_certificado[this.format_certificado.length - 1];
+      if (this.form_uploads.certificado.size > 5000000) {
+        this.form_uploads.certificado = "";
+        this.ALT_("CORREO-7", "warning");
+      } else
+        this.frames.certificado = URL.createObjectURL(
+          this.form_uploads.certificado
+        );
+    },
+    "form_uploads.carta"() {
+      this.format_carta = this.form_uploads.carta.name.split(".");
+      this.format_carta = this.format_carta[this.format_carta.length - 1];
+      if (this.form_uploads.carta.size > 2000000) {
+        this.form_uploads.carta = "";
+        this.ALT_("CORREO-6", "warning");
+      } else this.frames.carta = URL.createObjectURL(this.form_uploads.carta);
+    },
+  },
+  mounted() {
+    this.obetenerCanal();
+    this.form.paises.value = "Colombia";
+  },
+  methods: {
+    ...mapActions({
+      _addCanal: "canales/_addCanal",
+      _getCanal: "canales/_getCanal",
+      _uploadFile: "canales/_uploadFile",
+    }),
+    async obetenerCanal() {
+      const id = CURRTET_USER.id;
+      const res = await this._getCanal({ id });
+      if (res.data?.data?.id)
+        this.$router.push("/postulantes/registro-produccion");
+    },
+    subirArchivo(id) {
+      document.getElementById(id).click();
+    },
+    async registrarCanal() {
+      const validacion = this.$refs.form.validate();
+      if (this.tipo_productora == "1") {
+        this.form.canales_productoras.value == "Otro. Cuál"
+          ? (this.form.nombre_canal.value =
+              this.form.otro_canales_productoras.value)
+          : (this.form.nombre_canal.value =
+              this.form.canales_productoras.value);
+      }
+      // if (this.tipo_productora == "2") {
+      //   this.form.casa_productoras.value == "Otros, especifica cual"
+      //     ? (this.form.nombre_canal.value =
+      //         this.form.otro_casa_productoras.value)
+      //     : (this.form.nombre_canal.value = this.form.casa_productoras.value);
+      // }
+
+      if (validacion) {
+        if (this.form_uploads.carta && this.form_uploads.certificado) {
+          const certificado = await this.uploadCertificado();
+          const carta = await this.uploadCarta();
+          if (certificado.status === 200 && carta.status === 200) {
+            const data = {
+              nameClient: this.form.nombre_canal.value,
+              contact: this.form.contacto.value,
+              position: this.form.cargo.value,
+              celphone: this.form.celular.value,
+              // phone: this.form.telefono.value,
+              email: this.form.email_1.value,
+              // emailTwo: this.form.email_2.value,
+              adress: this.form.direccion_oficina.value,
+              departament: this.form.departamento.value,
+              city: this.form.ciudad.value,
+              ProducerTypeId: this.tipo_productora,
+              certifycc: certificado.data.data,
+              letter: carta.data.data,
+              userId: CURRTET_USER.id,
+            };
+            const respuesta = await this._addCanal(data);
+            if (respuesta.status === 200)
+              this.$router.push("/postulantes/registro-produccion");
+            else this.ALT_("CORREO-5", "warning");
+          } else {
+            this.ALT_("CORREO-5", "warning");
+          }
+        } else {
+          this.ALT_("CORREO-4", "warning");
+        }
+      }
+    },
+    alertaGuardar() {
+      const validacion = this.$refs.form.validate();
+      if (validacion) {
+        if (this.frames.carta && this.frames.certificado) {
+          this.ALT_("guardarCanal", "info", "p");
+        } else {
+          this.ALT_("CORREO-4", "warning");
+        }
+      }
+    },
+    confirm() {
+      this.registrarCanal();
+    },
+    async uploadCertificado() {
+      return await this._uploadFile({
+        archivo: this.form_uploads.certificado,
+        tipo: 1,
+      });
+    },
+    async uploadCarta() {
+      return await this._uploadFile({
+        archivo: this.form_uploads.carta,
+        tipo: 2,
+      });
+    },
+    cancel() {
+      this.ALTD_();
+    },
+  },
+};
+</script>
+
+<style>
+.container-channel {
+  width: 75%;
+  margin: auto;
+  padding-top: 2rem;
+}
+
+.upload {
+  border-style: dashed;
+  border-color: rgba(102, 102, 102, 0.5);
+}
+
+.mdi-cloud-upload-outline::before {
+  transform: scale(2);
+}
+
+/* Movil  */
+@media (max-width: 600px) {
+  .upload {
+    border-style: dashed;
+    border-color: rgba(102, 102, 102, 0.5);
+  }
+
+  .container-channel {
+    width: 100%;
+  }
+}
+</style>

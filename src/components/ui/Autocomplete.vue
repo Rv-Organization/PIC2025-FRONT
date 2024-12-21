@@ -1,0 +1,65 @@
+<template>
+  <v-autocomplete
+    :item-value="field.item_value"
+    :item-text="field.item_text"
+    :required="field.required"
+    :disabled="field.disabled"
+    :messages="field.message"
+    :label="field.label"
+    :rules="field.rules"
+    autocomplete="none"
+    @input="onValue"
+    :ref="field.id"
+    :id="field.id"
+    :items="items"
+    :value="value"
+    outlined
+    dense
+  ></v-autocomplete>
+</template>
+<script>
+export default {
+  name: "Combobox",
+  props: {
+    value: [Number, String],
+    items: [Array],
+    field: {
+      id: String,
+      label: String,
+      disabled: Boolean,
+      items: Array,
+      item_value: String,
+      item_text: String,
+      rules: {
+        type: Array,
+        default: () => false,
+      },
+      required: {
+        type: Boolean,
+        default: () => false,
+      },
+    },
+  },
+  data() {
+    return {
+      cont: 0,
+    };
+  },
+  watch: {
+    "field.disabled"() {
+      if (this.field.disabled === false) {
+        this.setCaja(this.field);
+        this.$nextTick(() => {
+          this.$refs.combo.focus();
+        });
+      }
+    },
+  },
+  methods: {
+    onValue(e) {
+      this.$emit("input", e);
+    },
+    async pressEnter() {},
+  },
+};
+</script>
