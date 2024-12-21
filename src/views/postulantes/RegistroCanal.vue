@@ -3,18 +3,13 @@
     <v-row class="container-channel px-8">
       <v-col cols="12" class="mt-0 pt-0">
         <v-container>
-          <h2 class="py-5">
-            Inscripción canal productora, operadora y/o programadora
-          </h2>
+          <h2 class="py-5">FORMULARIO DE INSCRIPCIÓN Y POSTULACIÓN</h2>
           <h4>
             PRIMER PASO: Inscripción o ratificación del canal, plataforma o
-            productora de participar en los Premios India Catalina 2025.
+            productora de participar en los Premios India Catalina 2024.
           </h4>
-          <v-divider class="mt-6 mb-2"></v-divider>
-          <v-card-text class="asaccent--text pb-6 pl-0"
-            >Nota: Todos los campos con asteriscos (*) son obligatorios
-          </v-card-text>
-          <v-card-text class="asaccent--text pb-4"
+          <v-divider class="my-6"></v-divider>
+          <v-card-text class="asaccent--text pb-8"
             >Voy a postular producciones y/o talentos como representante de:
             <v-radio-group v-model="tipo_productora" row>
               <v-radio label="Un canal o plataforma" value="1"></v-radio>
@@ -25,7 +20,9 @@
               ></v-radio>
             </v-radio-group>
           </v-card-text>
-
+          <v-card-text class="asaccent--text pb-8 pl-0"
+            >Nota: Todos los campos con asteriscos (*) son obligatorios
+          </v-card-text>
           <v-form v-model="validacion" ref="form" lazy-validation>
             <v-row justify="start">
               <v-col
@@ -42,7 +39,6 @@
                 <INPUT
                   v-if="form.canales_productoras.value == 'Otro. Cuál'"
                   :field="form.otro_canales_productoras"
-                  class="border-input"
                 />
               </v-col>
               <v-col
@@ -55,7 +51,7 @@
                 class="py-0"
                 v-if="tipo_productora == '2'"
               >
-                <INPUT :field="form.nombre_canal" class="border-input" />
+                <INPUT :field="form.nombre_canal" />
               </v-col>
               <v-col
                 cols="12"
@@ -111,125 +107,35 @@
                 <INPUT v-else :field="form.ciudad" />
               </v-col>
             </v-row>
-            <v-card-text class="asaccent--text mt-8 pb-2 pl-0"
-              >Seleccione el sector que lo representa como postulante
-            </v-card-text>
-            <v-radio-group v-model="form.sector.value" row>
-              <v-radio
-                label="Sector Audiovisual Privado - Canales"
-                value="1"
-              ></v-radio>
-              <v-radio
-                label="Sector Audiovisual Privado - Plataformas"
-                value="2"
-              ></v-radio>
-              <v-radio label="Sector Audiovisual Público" value="3"></v-radio>
-              <v-radio label="Independiente" value="4"></v-radio>
-            </v-radio-group>
           </v-form>
           <v-divider class="my-4"></v-divider>
           <v-form v-model="validacion" ref="form_uploads" lazy-validation>
-            <h4 class="text-start my-10">
-              Documentos requeridos para la Inscripción de Producciones:
-            </h4>
-            <v-card elevation="0" class="px-3 pb-0 mb-0">
-              <v-row align="center" class="my-0">
+            <h2 class="text-start my-10">Archivos requeridos</h2>
+            <v-card elevation="1" class="px-3 pb-0 mb-0" outlined>
+              <v-row aling="center" class="my-0">
                 <v-col cols="12" sm="12" xs="6" md="8" lg="8" xl="8">
                   <v-card-text>
-                    <h4>
+                    <h3>
                       Certificado actualizado de Cámara de Comercio del canal o
                       productora *
+                    </h3>
+                    <h6>
+                      - Para canal o productora, adjuntar el certificado
+                      actualizado de Cámara de Comercio. <br>
+                      - Para plataforma o
+                      empresa constituida en otro país, adjuntar el documento
+                      equivalente. <br>
+                      - Para personas naturales con producciones en
+                      cuentas digitales, adjuntar el RUT (si es menor de edad,
+                      debe adjuntar carta de autorización de sus padres o
+                      acudiente). <br>
+                      - Para canales universitarios, adjuntar la
+                      constancia de acreditación ante el Ministerio de Educación
+                      Nacional.<br>
+                    </h6>
+                    <h4>
+                      Extensiones permitidas JPG, JPEG, PNG, PDF, máximo 5 megas
                     </h4>
-                    <p>
-                      Para garantizar la participación, es necesario adjuntar
-                      los siguientes documentos según corresponda:
-                    </p>
-                    <br />
-                    <ol>
-                      <li v-if="tipo_productora == '1'">
-                        <strong>Canales y productoras:</strong>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-icon v-bind="attrs" v-on="on"
-                              >mdi-information-outline</v-icon
-                            >
-                          </template>
-                          <span
-                            >Certificado actualizado de la Cámara de Comercio o
-                            documento equivalente que acredite su existencia
-                            legal.</span
-                          >
-                        </v-tooltip>
-                      </li>
-                      <li v-if="tipo_productora == '2'">
-                        <strong>Plataformas o empresas de otros países:</strong>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-icon v-bind="attrs" v-on="on"
-                              >mdi-information-outline</v-icon
-                            >
-                          </template>
-                          <span
-                            >Documento oficial que certifique su constitución,
-                            como un registro mercantil, certificado de
-                            incorporación o inscripción en un registro
-                            público.</span
-                          >
-                        </v-tooltip>
-                      </li>
-                      <li v-if="tipo_productora == '3'">
-                        <strong
-                          >Personas naturales con producciones en cuentas
-                          digitales:</strong
-                        >
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-icon v-bind="attrs" v-on="on"
-                              >mdi-information-outline</v-icon
-                            >
-                          </template>
-                          <span
-                            >Documento oficial de identificación fiscal (RUT o
-                            equivalente según el país).</span
-                          >
-                        </v-tooltip>
-                      </li>
-                      <li v-if="tipo_productora == '3'">
-                        <strong>Menores de edad:</strong>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-icon v-bind="attrs" v-on="on"
-                              >mdi-information-outline</v-icon
-                            >
-                          </template>
-                          <span
-                            >Carta de autorización firmada por los padres o
-                            tutor legal.</span
-                          >
-                        </v-tooltip>
-                      </li>
-                      <li v-if="tipo_productora == '1'">
-                        <strong>Canales universitarios:</strong>
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-icon v-bind="attrs" v-on="on"
-                              >mdi-information-outline</v-icon
-                            >
-                          </template>
-                          <span
-                            >Constancia de acreditación emitida por la autoridad
-                            educativa competente del país (en Colombia, el
-                            Ministerio de Educación Nacional).</span
-                          >
-                        </v-tooltip>
-                      </li>
-                    </ol>
-                    <br />
-                    <h4>Formato y tamaño permitido:</h4>
-                    <ul>
-                      <li>Extensiones: PDF.</li>
-                      <li>Peso máximo por archivo: 5 MB.</li>
-                    </ul>
                   </v-card-text>
                 </v-col>
                 <v-col
@@ -244,24 +150,38 @@
                   <v-btn
                     @click="subirArchivo('input-file1')"
                     plain
-                    class="botone-outlined mb-3 py-2"
+                    class="upload mb-3 py-2"
+                    height="100%"
                   >
-                    <v-file-input
-                      prepend-icon="mdi-cloud-upload-outline"
-                      accept="application/pdf, image/png, image/jpeg, image/jpg"
-                      v-model="form_uploads.certificado"
-                      truncate-length="1"
-                      id="input-file1"
-                      class="d-none"
-                      hide-input
-                    />
-                    <p>
-                      {{
-                        form_uploads.certificado.name
-                          ? "VOLVER A SUBIR"
-                          : "SUBIR ARCHIVO"
-                      }}
-                    </p>
+                    <v-row align="center">
+                      <v-col
+                        cols="5"
+                        xs="5"
+                        sm="5"
+                        md="5"
+                        lg="5"
+                        xl="5"
+                        class="py-0 mx-auto pl-9 my-0"
+                      >
+                        <v-file-input
+                          prepend-icon="mdi-cloud-upload-outline"
+                          accept="application/pdf, image/png, image/jpeg, image/jpg"
+                          v-model="form_uploads.certificado"
+                          truncate-length="1"
+                          id="input-file1"
+                          class="mt-0"
+                          hide-input
+                        />
+                      </v-col>
+                      <v-row>
+                        <v-col class="py-4">
+                          <h3 v-if="!form_uploads.certificado.name">
+                            SUBIR ARCHIVO
+                          </h3>
+                          <h3 v-else>VOLVER A SUBIR</h3>
+                        </v-col>
+                      </v-row>
+                    </v-row>
                   </v-btn>
                 </v-col>
               </v-row>
@@ -283,7 +203,7 @@
                 aspect-ratio="1.4"
               ></v-img>
             </v-col>
-            <v-card elevation="0" class="px-3 my-10">
+            <v-card elevation="1" class="px-3 my-10" outlined>
               <v-row aling="center" class="my-0">
                 <v-col cols="12" sm="12" xs="6" md="8" lg="8" xl="8">
                   <v-card-text>
@@ -314,24 +234,37 @@
                   <v-btn
                     @click="subirArchivo('input-file2')"
                     plain
-                    class="botone-outlined"
+                    class="upload py-2 mb-3"
                     height="100%"
                   >
-                    <v-file-input
-                      prepend-icon="mdi-cloud-upload-outline"
-                      accept="application/pdf, image/png, image/jpeg, image/jpg"
-                      v-model="form_uploads.carta"
-                      truncate-length="1"
-                      id="input-file2"
-                      class="d-none"
-                      hide-input
-                      show-size
-                    />
-                    <p>
-                      {{
-                        form_uploads.carta.name ? "VOLVER A SUBIR" : "SUBIR ARCHIVO"
-                      }}
-                    </p>
+                    <v-row align="center">
+                      <v-col
+                        cols="5"
+                        xs="5"
+                        sm="5"
+                        md="5"
+                        lg="5"
+                        xl="5"
+                        class="py-0 mx-auto pl-9 my-0"
+                      >
+                        <v-file-input
+                          prepend-icon="mdi-cloud-upload-outline"
+                          accept="application/pdf, image/png, image/jpeg, image/jpg"
+                          v-model="form_uploads.carta"
+                          truncate-length="1"
+                          id="input-file2"
+                          class="mt-0"
+                          hide-input
+                          show-size
+                        />
+                      </v-col>
+                      <v-row>
+                        <v-col class="py-4">
+                          <h3 v-if="!form_uploads.carta.name">SUBIR ARCHIVO</h3>
+                          <h3 v-else>VOLVER A SUBIR</h3>
+                        </v-col>
+                      </v-row>
+                    </v-row>
                   </v-btn>
                 </v-col>
               </v-row>
@@ -567,11 +500,6 @@ export default {
           items: [],
           rules: [(v) => !!v || "Ciudad es requerida"],
         },
-        sector: {
-          value: "", 
-          id: "sector",
-          label: "Seleccione el sector que lo representa como postulante",
-          rules: [(v) => !!v || "El sector es obligatorio"],         },
       },
       form_uploads: {
         certificado: [],
@@ -668,7 +596,6 @@ export default {
               departament: this.form.departamento.value,
               city: this.form.ciudad.value,
               ProducerTypeId: this.tipo_productora,
-              sectorId: this.form.sector.value,
               certifycc: certificado.data.data,
               letter: carta.data.data,
               userId: CURRTET_USER.id,
@@ -679,10 +606,6 @@ export default {
             else this.ALT_("CORREO-5", "warning");
           } else {
             this.ALT_("CORREO-5", "warning");
-          }
-          if (!this.form.sector.value) {
-            this.ALT_("Debe seleccionar un sector", "warning");
-            return;
           }
         } else {
           this.ALT_("CORREO-4", "warning");
@@ -726,6 +649,15 @@ export default {
   width: 75%;
   margin: auto;
   padding-top: 2rem;
+}
+
+.upload {
+  border-style: dashed;
+  border-color: rgba(102, 102, 102, 0.5);
+}
+
+.mdi-cloud-upload-outline::before {
+  transform: scale(2);
 }
 
 /* Movil  */
