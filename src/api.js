@@ -3,14 +3,22 @@ import { TOKEN } from "./global";
 
 const uri = "https://app.premiosindiacatalina.com/api/";
 
-const postData = ({ url, data = {}, method = "POST", header = {}, responseType = "json" }) => {
+const postData = ({
+  url,
+  data = {},
+  method = "POST",
+  responseType = "json",
+}) => {
   return new Promise((resolve, reject) => {
     let config = {
       data,
       method,
       responseType,
       url: `${uri}${url}`,
-      headers: { "access-control-allow-origin": "*", Authorization: "Bearer " + TOKEN },
+      headers: {
+        "access-control-allow-origin": "*",
+        Authorization: "Bearer " + TOKEN,
+      },
       validateStatus: (status) => status >= 200 && status < 400,
     };
     axios(config)

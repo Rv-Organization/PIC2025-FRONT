@@ -12,7 +12,8 @@ export default {
   mutations: {
     _logout() {
       sessionStorage.removeItem("current_user");
-      if (process.env.NODE_ENV == "production") location.href = "https://premiosindiacatalina.com/";
+      if (process.env.NODE_ENV == "production")
+        location.href = "https://premiosindiacatalina.com/";
       else location.reload();
     },
     setUsers(state, data) {
@@ -92,15 +93,8 @@ export default {
         commit("_loadingState", null, { root: true });
         postDatav2({ url: `Auth/login`, method: "POST", data })
           .then((response) => {
-            if (![4].includes(response.data.roleId)) {
-              return resolve("finally");
-            }
-
-            if (response.data.emailConfirm === false) return 2;
+            if (response.data.emailConfirm === false) resolve(2);
             else {
-              // if ([1, 2, 5].includes(response.data.roleId)) {
-              //   return resolve("rest");
-              // }
               sessionStorage.current_user = btoa(JSON.stringify(response.data));
               location.reload();
             }
@@ -150,7 +144,8 @@ export default {
       try {
         commit("_loadingState", null, { root: true });
         const RES = await postData({ header: {}, method: "GET", url: `` });
-        if (!RES.msg) return commit("setUsuario", { list: "usuarios", data: RES.data });
+        if (!RES.msg)
+          return commit("setUsuario", { list: "usuarios", data: RES.data });
         return RES;
       } catch (error) {
         console.error("_getusuarios", error);
