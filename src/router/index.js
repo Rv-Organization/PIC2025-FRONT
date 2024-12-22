@@ -205,7 +205,8 @@ const routes = [
       {
         path: "/comite-tecnico/panel-comite-tecnico",
         name: "/comite-tecnico/panel-comite-tecnico",
-        component: () => import("../views/comite-tecnico/PanelComiteTecnico.vue"),
+        component: () =>
+          import("../views/comite-tecnico/PanelComiteTecnico.vue"),
         meta: {
           requiresAuth: true,
           title: `${TITLE} - Inicio`,
@@ -241,7 +242,8 @@ const routes = [
       {
         path: "/comite-tecnico/detalle-postulacion",
         name: "/comite-tecnico/detalle-postulacion",
-        component: () => import("../views/comite-tecnico/DetallePostulacion.vue"),
+        component: () =>
+          import("../views/comite-tecnico/DetallePostulacion.vue"),
         meta: {
           requiresAuth: true,
           title: `${TITLE} - Detalle Postulacion`,
@@ -287,7 +289,8 @@ const routes = [
       {
         path: "/miembro-votante/sugerencia",
         name: "/miembro-votante/sugerencia",
-        component: () => import("../views/miembro-votante/SugerenciaVotante.vue"),
+        component: () =>
+          import("../views/miembro-votante/SugerenciaVotante.vue"),
         meta: {
           requiresAuth: true,
           title: `${TITLE} - sugerencia`,
@@ -296,7 +299,8 @@ const routes = [
       {
         path: "/miembro-votante/instrucciones",
         name: "/miembro-votante/instrucciones",
-        component: () => import("../views/miembro-votante/InstruccionesVotante.vue"),
+        component: () =>
+          import("../views/miembro-votante/InstruccionesVotante.vue"),
         meta: {
           requiresAuth: true,
           title: `${TITLE} - instrucciones`,
@@ -305,7 +309,8 @@ const routes = [
       {
         path: "/miembro-votante/instruccionesM",
         name: "/miembro-votante/instruccionesM",
-        component: () => import("../views/miembro-votante/InstruccionesVotanteM.vue"),
+        component: () =>
+          import("../views/miembro-votante/InstruccionesVotanteM.vue"),
         meta: {
           requiresAuth: true,
           title: `${TITLE} - instrucciones`,
@@ -360,7 +365,8 @@ const routes = [
       {
         path: "/publico-general/sugerencia",
         name: "/publico-general/sugerencia",
-        component: () => import("../views/publico-general/SugerenciaVotante.vue"),
+        component: () =>
+          import("../views/publico-general/SugerenciaVotante.vue"),
         meta: {
           requiresAuth: true,
           title: `${TITLE} - sugerencia`,
@@ -369,7 +375,8 @@ const routes = [
       {
         path: "/publico-general/instrucciones",
         name: "/publico-general/instrucciones",
-        component: () => import("../views/publico-general/InstruccionesVotante.vue"),
+        component: () =>
+          import("../views/publico-general/InstruccionesVotante.vue"),
         meta: {
           requiresAuth: true,
           title: `${TITLE} - instrucciones`,
@@ -378,7 +385,8 @@ const routes = [
       {
         path: "/publico-general/instruccionesM",
         name: "/publico-general/instruccionesM",
-        component: () => import("../views/publico-general/InstruccionesVotanteM.vue"),
+        component: () =>
+          import("../views/publico-general/InstruccionesVotanteM.vue"),
         meta: {
           requiresAuth: true,
           title: `${TITLE} - instrucciones`,
@@ -426,7 +434,7 @@ const routes = [
         path: "/postulantes/registro-produccion",
         name: "/postulantes/registro-produccion",
         beforeEnter: isValidCanal,
-        component: () => import("../views/postulantes/RegistroProgramas.vue"),
+        component: () => import("../views/postulantes/RegistroProduccion.vue"),
         meta: {
           requiresAuth: true,
           title: `${TITLE} - Registro programa`,
@@ -481,7 +489,11 @@ router.beforeEach((to, from, next) => {
     next("admin/panel-administrativo");
   } else if (!requiresAuth && CURRTET_USER && CURRTET_USER.roleId == "5") {
     next("miembro-votante/registro");
-  } else if (!requiresAuth && CURRTET_USER && to.path !== "/postulantes/registro-canal") {
+  } else if (
+    !requiresAuth &&
+    CURRTET_USER &&
+    to.path !== "/postulantes/registro-canal"
+  ) {
     next("/postulantes/registro-canal");
   } else next();
   window.scrollTo({ top: 0, behavior: "smooth" });

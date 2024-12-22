@@ -1,8 +1,20 @@
 <template>
   <v-text-field
     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-    :append-icon="field.id == 'password' ? (field.show_password ? 'mdi-eye' : 'mdi-eye-off') : undefined"
-    :type="field.id == 'password' ? (field.show_password ? 'text' : 'password') : field.tipo"
+    :append-icon="
+      field.id == 'password'
+        ? field.show_password
+          ? 'mdi-eye'
+          : 'mdi-eye-off'
+        : undefined
+    "
+    :type="
+      field.id == 'password'
+        ? field.show_password
+          ? 'text'
+          : 'password'
+        : field.tipo
+    "
     @click:append="field.show_password = !field.show_password"
     :hide-details="field.details == false ? true : false"
     :counter="field.counter ? field.maxlength : false"
@@ -22,8 +34,9 @@
     @input="input()"
     :ref="field.id"
     :id="field.id"
-    class="border-input"
+    outlined
     dense
+    solo
   >
   </v-text-field>
 </template>
@@ -93,3 +106,18 @@ export default {
   },
 };
 </script>
+<style>
+.custom-text-field .v-input {
+  border: 2px solid #e4cc8e !important; /* Borde con color personalizado */
+  border-radius: 4px; /* Opcional: ajusta el radio del borde */
+  transition: border-color 0.3s ease; /* Transición suave */
+}
+
+.custom-text-field.v-input--is-focused .v-input {
+  border-color: #d1b572 !important; /* Color más oscuro al enfocar */
+}
+
+.custom-text-field.v-input--error .v-input {
+  border-color: #f44336 !important; /* Borde rojo en caso de error */
+}
+</style>

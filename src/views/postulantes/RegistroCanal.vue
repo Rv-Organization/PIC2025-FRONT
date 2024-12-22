@@ -42,7 +42,6 @@
                 <INPUT
                   v-if="form.canales_productoras.value == 'Otro. Cuál'"
                   :field="form.otro_canales_productoras"
-                  class="border-input"
                 />
               </v-col>
               <v-col
@@ -55,7 +54,7 @@
                 class="py-0"
                 v-if="tipo_productora == '2'"
               >
-                <INPUT :field="form.nombre_canal" class="border-input" />
+                <INPUT :field="form.nombre_canal" />
               </v-col>
               <v-col
                 cols="12"
@@ -329,7 +328,9 @@
                     />
                     <p>
                       {{
-                        form_uploads.carta.name ? "VOLVER A SUBIR" : "SUBIR ARCHIVO"
+                        form_uploads.carta.name
+                          ? "VOLVER A SUBIR"
+                          : "SUBIR ARCHIVO"
                       }}
                     </p>
                   </v-btn>
@@ -568,10 +569,11 @@ export default {
           rules: [(v) => !!v || "Ciudad es requerida"],
         },
         sector: {
-          value: "", 
+          value: "",
           id: "sector",
           label: "Seleccione el sector que lo representa como postulante",
-          rules: [(v) => !!v || "El sector es obligatorio"],         },
+          rules: [(v) => !!v || "El sector es obligatorio"],
+        },
       },
       form_uploads: {
         certificado: [],

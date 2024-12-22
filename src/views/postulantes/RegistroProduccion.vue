@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <v-row class="card">
       <v-col cols="12" class="mt-0 py-0">
         <v-container>
@@ -8,7 +8,7 @@
             Para postular una producción o talento a los Premios india Catalina
             2025 es necesario registrar primero la producción y luego postularla
             a las categorías en las que se quiera participar. Antes de postular,
-            por favor revise atentamente el 
+            por favor revise atentamente el
             <a
               href="https://premiosindiacatalina.com/wp-content/uploads/2024/12/PIC-2025-REGLAMENTO-GENERAL-.pdf"
               target="_blank"
@@ -41,17 +41,7 @@
               <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
                 <INPUT :field="form.horario" />
               </v-col>
-              <!-- <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5" class="py-0">
-                <INPUT :field="form.formato" />
-              </v-col> -->
-              <!-- <v-col cols="1" xs="1" sm="1" md="1" lg="1" xl="1" class="py-0">
-                <v-tooltip bottom color="primary">
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-icon v-bind="attrs" v-on="on" class="my-2" color="boton">mdi-information</v-icon>
-                  </template>
-                  <span>Descripción del formato</span>
-                </v-tooltip>
-              </v-col> -->
+
               <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
                 <INPUT :field="form.numero_temporada" />
               </v-col>
@@ -93,7 +83,7 @@
                 >
                   <v-btn
                     @click="subirArchivo('input-file1')"
-                    class="upload py-2 mb-3"
+                    class="upload boton-focus-animation py-2 mb-3"
                     height="100%"
                     plain
                   >
@@ -162,7 +152,7 @@
                 >
                   <v-btn
                     @click="subirArchivo('input-file2')"
-                    class="upload py-2 mb-3"
+                    class="upload boton-focus-animation py-2 mb-3"
                     height="100%"
                     plain
                   >
@@ -284,7 +274,7 @@
       :alert="alert"
       v-if="alert.estado"
     />
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -422,7 +412,7 @@ export default {
   },
 
   mounted() {
-    if (this.$route.params.data.programa) {
+    if (this.$route.params.data?.programa) {
       this.form.nombre_programa.value =
         this.$route.params.data.programa.nameProgram;
       this.form.fecha.value = this.$route.params.data.programa.dateIssue;
@@ -569,7 +559,7 @@ export default {
 
 .upload {
   border-style: dashed;
-  border-color: rgba(102, 102, 102, 0.5);
+  border-color: #e4cc8e;
 }
 
 .card {
@@ -580,6 +570,22 @@ export default {
 @media (max-width: 600px) {
   .card {
     width: 100%;
+  }
+}
+.boton-focus-animation {
+  animation: focus-animation 1.5s infinite;
+  border-style: dashed;
+  color: #e4cc8e;
+}
+@keyframes focus-animation {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    transform: rotate(0deg);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0);
+    transform: rotate(0deg);
   }
 }
 </style>

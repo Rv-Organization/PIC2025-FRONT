@@ -245,7 +245,7 @@ export default {
     }),
     async obteberCategorias() {
       const respuesta = await this._getCatergorias();
-      console.log("🍑  respuesta", respuesta)
+      console.log("🍑  respuesta", respuesta);
       const programa = [];
       const talento = [];
       const programa_1 = [];
@@ -293,7 +293,6 @@ export default {
             id: respuesta.data.data[i].id,
             video: respuesta.data.data[i].video,
           });
-
         } else {
           newDesserts.push({
             categoria: respuesta.data.data[i].category.nameCategory,
@@ -306,10 +305,10 @@ export default {
       }
       this.dessertsTaltento = newDessertTalento;
       // this.dessertsTaltento.forEach((element) => {
-        //   this.form.categoria.items = this.categoria_lista.filter((e) => element.categoria != e.nameCategory);
-        // });
-        this.desserts = newDesserts;
-        
+      //   this.form.categoria.items = this.categoria_lista.filter((e) => element.categoria != e.nameCategory);
+      // });
+      this.desserts = newDesserts;
+
       // this.desserts.forEach((element) => {
       //   this.form.talento.items = this.talento_lista.filter((e) => element.categoria != e.nameCategory);
       // });

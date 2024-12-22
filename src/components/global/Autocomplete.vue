@@ -12,7 +12,7 @@
     autocomplete="none"
     :ref="field.id"
     :id="field.id"
-    class="border-input"
+    outlined
     dense
   ></v-autocomplete>
 </template>

@@ -67,7 +67,9 @@
             <h4 class="my-2">
               <span v-if="nombreTalento">{{ nombreTalento }}/</span>
               <span> {{ datos.postulacion.nameProgram }}/</span>
-              <span v-if="this.programa.channelProduct">{{ this.programa.channelProduct }}/</span>
+              <span v-if="this.programa.channelProduct"
+                >{{ this.programa.channelProduct }}/</span
+              >
               <span>{{ this.programa.channelIssue }}</span>
             </h4>
             <h4 class="my-2">

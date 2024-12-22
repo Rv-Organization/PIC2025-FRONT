@@ -1,33 +1,26 @@
 <template>
-  <v-app>
-    <v-row class="card">
+  <div>
+    <v-row class="mx-10 mt-4">
       <v-col cols="12" class="mt-0 pt-0">
         <v-container>
           <h2 class="pt-4">Resumen de producciones inscritas</h2>
           <v-divider class="my-4"></v-divider>
           <v-row>
-            <!-- <v-col cols="12">
-              <lottie-animation
-            :animationData="animacionVideo"
-            height="300px"
-            :autoPlay="true"
-            :loop="true"
-            :speed="2"
-          />
-            </v-col> -->
             <v-col cols="12">
               <h4 class="pt-4" v-if="total_registrados">
-                A continuación encontrará la lista de producciones inscritas hasta este momento para
-                participar en los Premios India Catalina 2024. Para postular la producción en una o
-                varias categorías, se debe click en el botón Categorías de producción, si se va a
-                postular la producción en categorías que premian el talento, o dar click en
-                Categorías de talento, si lo que se va a postular es a un talento dentro de la
-                producción.
+                A continuación encontrará la lista de producciones inscritas
+                hasta este momento para participar en los Premios India Catalina
+                2024. Para postular la producción en una o varias categorías, se
+                debe click en el botón Categorías de producción, si se va a
+                postular la producción en categorías que premian el talento, o
+                dar click en Categorías de talento, si lo que se va a postular
+                es a un talento dentro de la producción.
               </h4>
               <h4 class="pt-4" v-else>
-                Para inscribir una nueva producción, dar click en el botón Añadir +. Cuando el
-                proceso de postulación haya terminado, dar click en “he terminado” o "guardar" para
-                regresar más tarde y culminar con el proceso.
+                Para inscribir una nueva producción, dar click en el botón
+                Añadir +. Cuando el proceso de postulación haya terminado, dar
+                click en “he terminado” o "guardar" para regresar más tarde y
+                culminar con el proceso.
               </h4>
             </v-col>
           </v-row>
@@ -40,7 +33,11 @@
               >
             </v-col>
             <v-col col="6" class="ma-0 text-end">
-              <v-btn color="primary" outlined class="botone" @click="añadirPrograma()"
+              <v-btn
+                color="primary"
+                outlined
+                class="botone"
+                @click="añadirPrograma()"
                 >Añadir <v-icon>mdi-plus</v-icon></v-btn
               >
             </v-col>
@@ -49,80 +46,97 @@
             <v-col
               v-for="(item, i) in programas"
               class="py-4"
-              cols="9"
+              cols="12"
               :key="i"
-              xs="9"
-              sm="8"
-              md="5"
-              lg="5"
-              xl="3"
+              xs="12"
+              sm="12"
+              md="6"
+              lg="6"
+              xl="6"
             >
-              <v-card elevation="2" class="border-card" color="white">
-                <v-card-title class="title">
-                  <v-icon color="primary" size="32" left>mdi-movie</v-icon>
-                  {{ item.nameProgram }}</v-card-title
+              <v-card
+                elevation="2"
+                class="rounded-xl d-flex flex-no-wrap"
+                color="white"
+              >
+                <div>
+                  <v-img
+                    :src="item.poster"
+                    class="white--text align-end rounded-xl ma-2"
+                    height="94%"
+                    width="150px"
+                  ></v-img>
+                </div>
+                <div
+                  class="flex-grow-1 d-flex flex-column justify-between px-2"
                 >
-                <v-img :src="item.poster" class="white--text align-end img" contain height="250px">
-                </v-img>
+                  <v-card-title class="title text-left py-3">
+                    {{ item.nameProgram }}
+                  </v-card-title>
+                  <v-card-subtitle>
+                    Postular en categorías de:
+                  </v-card-subtitle>
 
-                <v-card-subtitle class="pb-0"> Postular en categorías de:</v-card-subtitle>
-                <v-card-actions class="mx-2 my-2 pb-4" d-flex justify-center>
-                  <v-tooltip bottom color="info">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-hover v-slot="{ hover }" open-delay="0">
-                        <v-btn
-                          @click="editarPostulacion(item, 1)"
-                          class="text-center mr-2"
-                          color="primary"
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          Producción
-                        </v-btn>
-                      </v-hover>
-                    </template>
-                    <span>Postular producción </span>
-                  </v-tooltip>
-                  <v-tooltip bottom color="info">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-hover v-slot="{ hover }" open-delay="0">
-                        <v-btn
-                          @click="editarPostulacion(item, 2)"
-                          class="text-center"
-                          color="primary"
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          Talento
-                        </v-btn>
-                      </v-hover>
-                    </template>
-                    <span>Postular talento </span>
-                  </v-tooltip>
-                </v-card-actions>
+                  <v-card-actions class="d-flex flex-column my-1">
+                    <v-btn
+                      @click="editarPostulacion(item, 1)"
+                      color="primary "
+                      class="mb-2 botone-outline"
+                      outlined
+                      block
+                    >
+                      <span class="black--text font-weight-bold">
+                        + Producción
+                      </span>
+                    </v-btn>
+                    <v-btn
+                      @click="editarPostulacion(item, 2)"
+                      class="ml-0 botone-outline"
+                      color="primary"
+                      outlined
+                      block
+                    >
+                      <span class="black--text font-weight-bold">
+                        + Talento
+                      </span>
+                    </v-btn>
+                  </v-card-actions>
+                  <v-divider class="px-md"></v-divider>
+                  <v-card-actions class="d-flex justify-left">
+                    <v-btn fab x-small color="primary">
+                      <v-icon>mdi-eye-outline</v-icon>
+                    </v-btn>
+                    <v-btn fab x-small color="primary">
+                      <v-icon>mdi-pencil-outline</v-icon>
+                    </v-btn>
+                    <v-btn fab x-small color="error">
+                      <v-icon>mdi-delete-outline</v-icon>
+                    </v-btn>
+                  </v-card-actions>
+                </div>
               </v-card>
             </v-col>
           </v-row>
           <v-row v-if="true" justify="center" class="mt-10">
-            <v-col cols="12" sm="12" xs="12" md="12" lg="12" xl="12" class="text-center">
+            <v-col
+              cols="12"
+              sm="12"
+              xs="12"
+              md="12"
+              lg="12"
+              xl="12"
+              class="text-center"
+            >
               <div>
                 <v-btn
-                  color="boton"
+                  color="primary"
                   height="50"
                   class="botone my-2 mr-3"
                   dark
-                  outlined
                   @click="pago.estado = true"
-                  >Resumen de pago</v-btn
+                  >Resumen de pago
+                  <v-icon class="ml-1">mdi-cash-sync</v-icon></v-btn
                 >
-                <!-- <v-btn
-                  color="boton"
-                  height="50"
-                  class="botone my-2"
-                  dark
-                  @click="añadirPrograma()"
-                  >Añadir programa</v-btn
-                > -->
               </div>
             </v-col>
           </v-row>
@@ -136,10 +150,12 @@
       />
       <ResumenPago
         :pago="pago"
-        v-if="pago.estado || currentUser.email == 'alejandrodavidospina@gmail.com'"
+        v-if="
+          pago.estado || currentUser.email == 'alejandrodavidospina@gmail.com'
+        "
       />
     </v-row>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -185,6 +201,7 @@ export default {
     },
     async getAllPrograms() {
       const respuesta = await this._getProgramas(CURRTET_USER.id);
+      console.log(respuesta);
       this.programas = respuesta.data.data;
       this.total_registrados = respuesta.data.data.length;
     },
@@ -197,31 +214,8 @@ export default {
 };
 </script>
 <style scoped>
-.border-card {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-.shadow {
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15) !important;
-}
-.card {
-  width: 80%;
-  padding-top: 3%;
-  margin: auto;
-}
-.img {
-  padding: 0;
-  margin: 0;
-}
 .title {
   font-size: 05;
   font-weight: 600;
-}
-@media (max-width: 600px) {
-  .card {
-    width: 100%;
-  }
 }
 </style>

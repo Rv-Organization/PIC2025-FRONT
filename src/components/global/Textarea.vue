@@ -20,11 +20,10 @@
     :id="field.id"
     type="text"
     row-height="30"
-    class="border-input"
+    outlined
     dense
+    solo
   >
-  <!-- no-resize -->
-
   </v-textarea>
 </template>
 <script>

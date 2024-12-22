@@ -27,7 +27,6 @@
                 <v-row justify="center">
                   <v-col cols="12" class="px-10 0pb-0 mt-4">
                     <Input_
-                      class="border-input"
                       :field="form.usuario"
                       v-model="user.email"
                       @validateEnter="datoCorreo()"
@@ -35,7 +34,6 @@
                   </v-col>
                   <v-col cols="12" class="px-10 pb-0 py-0">
                     <Input_
-                    class="border-input"
                       :field="form.password"
                       v-model="user.password"
                       @validateEnter="ingresar()"
@@ -256,27 +254,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.input-password .v-input__icon--append {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  pointer-events: auto; /* Cambiado de none a auto para permitir la interacción */
-}
-
-.v-text-field {
-  border: none !important;
-  box-shadow: none !important;
-}
-.border-input .v-input__slot {
-  border: solid 2px #ecc962 !important;
-  border-radius: 4px;
-  width: 100% !important;
-  height: 60px !important;
-  font-size: 20px !important;
-  padding: 10px;
-  transition: all 0.3s ease !important;
-}
-</style>
