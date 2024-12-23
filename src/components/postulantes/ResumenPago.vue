@@ -1,5 +1,10 @@
 <template>
-  <v-dialog v-model="pago.estado" persistent width="700" class="rounded-0 border-card">
+  <v-dialog
+    v-model="pago.estado"
+    persistent
+    width="700"
+    class="rounded-0 border-card"
+  >
     <v-card width="700" class="mx-auto border-card">
       <v-footer color="white" class="mb-0 pb-0">
         <h3 class="mx-auto py-6">Resumen de pago</h3>
@@ -20,11 +25,19 @@
           </template>
         </v-data-table>
         <v-card class="border-footer mx-4" height="40">
-          <h4 class="text-end mr-8 py-2">Total: &nbsp; &nbsp; ${{ formatNum_(total) }}</h4>
+          <h4 class="text-end mr-8 py-2">
+            Total: &nbsp; &nbsp; ${{ formatNum_(total) }}
+          </h4>
         </v-card>
         <v-card-actions class="mx-0 my-4 py-0">
           <v-container class="text-end">
-            <v-btn outlined @click="pago.estado = false" class="botone mb-1" dark color="boton">
+            <v-btn
+              outlined
+              @click="pago.estado = false"
+              class="botone mb-1"
+              dark
+              color="boton"
+            >
               Guardar y Salir</v-btn
             >
             <!-- <v-btn @click="pagoEpayco()" class="botone" dark color="boton"> Pagar</v-btn> -->
@@ -32,7 +45,7 @@
               type="button"
               class="mx-7"
               id="Epayco"
-              style="height: 30px; width: 100px"
+              style="height: 30px; width: 120px"
             ></v-btn>
           </v-container>
         </v-card-actions>
@@ -59,6 +72,7 @@ export default {
       pagos: [],
       pruebaArray: [],
       total: 0,
+      buttonContainer: null,
     };
   },
   async created() {
@@ -98,13 +112,26 @@ export default {
         "https://app.premiosindiacatalina.com/api/order/epayco"
       );
       node.setAttribute("data-epayco-extra1", this.page.data.data.id);
-      node.setAttribute("data-epayco-button", "https://oneclickstore.com.co/botonPagoD.png");
-      const test = document.getElementById("Epayco");
-      if (test) {
-        test.appendChild(node);
+      node.setAttribute(
+        "data-epayco-button",
+        "https://epayco.com/wp-content/uploads/2022/01/logo.png"
+      );
+      document.body.appendChild(node);
+      this.buttonContainer = document.getElementById("Epayco");
+      if (this.buttonContainer) {
+        this.buttonContainer.appendChild(node);
+        setTimeout(() => {
+          const images = this.buttonContainer.querySelectorAll("img");
+          images.forEach((img) => {
+            img.style.width = "120px";
+            img.style.height = "30px";
+            img.style.objectFit = "contain";
+          });
+        }, 100);
       }
     }
   },
+
   methods: {
     formatNum_,
     ...mapActions({

@@ -4,7 +4,14 @@
       <v-row justify="center"> </v-row>
     </v-container>
     <FOOTER />
-    <ALT @exitEsc="cancel()" @cancel="cancel()" @cancelAlert="cancelAlert()" @confirm="confirm()" :alert="alert" v-if="alert.estado" />
+    <ALT
+      @exitEsc="cancel()"
+      @cancel="cancel()"
+      @cancelAlert="cancelAlert()"
+      @confirm="confirm()"
+      :alert="alert"
+      v-if="alert.estado"
+    />
   </v-app>
 </template>
 <script>
@@ -32,7 +39,10 @@ export default {
           label: "  Correo Electrónico",
           maxlength: "50",
           placeholder: "Ingresar usuario",
-          rules: [(v) => !!v || "Email es requerido", (v) => /.+@.+\..+/.test(v) || "Email no es valido"],
+          rules: [
+            (v) => !!v || "Email es requerido",
+            (v) => /.+@.+\..+/.test(v) || "Email no es valido",
+          ],
         },
         token: {
           value: "",
@@ -64,7 +74,8 @@ export default {
         tokenEmail: this.$route.params.token,
       };
       const res = await this._confimarCorreo({ data });
-      if (res.data.message == "Previously confirmed email") return this.ALT_("CORREO-T1", "info");
+      if (res.data.message == "Previously confirmed email")
+        return this.ALT_("CORREO-T1", "info");
       else if (res.data.data) return this.ALT_("CORREO-T", "success");
       else this.ALT_("CORREO-T1", "error");
     },
