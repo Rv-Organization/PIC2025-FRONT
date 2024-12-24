@@ -90,3 +90,13 @@ body {
   color: #ffff;
   border: 2.5px solid #e4cc8e;
 }
+
+.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(
+    .v-input--has-state
+  )
+  > .v-input__control
+  > .v-input__slot
+  fieldset {
+  color: #edc358 !important;
+  border: 2.5px solid #edc358;
+}
