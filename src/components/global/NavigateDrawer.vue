@@ -6,7 +6,10 @@
     @input="lastEstado"
     disable-resize-watcher
   >
-    <v-container fluid class="container-sidebar ma-0 pa-0 d-flex align-center flex-column">
+    <v-container
+      fluid
+      class="container-sidebar ma-0 pa-0 d-flex align-center flex-column"
+    >
       <v-img width="200" contain src="@/assets/image/logoPic41.png"></v-img>
       <h2 class="black--text mt-0">{{ usuario.name }}</h2>
       <p class="black--text">{{ usuario.email }}</p>
@@ -16,7 +19,11 @@
           <v-row class="pl-12 py-0 my-0">
             <v-col cols="12" class="pa-0 ml-10">
               <h4
-                :class="`${$route.path == '/postulantes/registro-canal' ? 'primary--text' : ''}`"
+                :class="`${
+                  $route.path == '/postulantes/registro-canal'
+                    ? 'primary--text'
+                    : ''
+                }`"
                 @click="$router.push('/postulantes/registro-canal')"
                 style="cursor: pointer"
               >
@@ -40,7 +47,9 @@
             <v-col cols="12" class="pa-0 ml-10">
               <h4
                 :class="`${
-                  $route.path == '/postulantes/registro-produccion' ? 'primary--text' : ''
+                  $route.path == '/postulantes/registro-produccion'
+                    ? 'primary--text'
+                    : ''
                 }`"
                 @click="$router.push('/postulantes/registro-produccion')"
                 style="cursor: pointer"
@@ -65,7 +74,9 @@
             <v-col cols="12" class="pa-0 ml-10">
               <h4
                 :class="`${
-                  $route.path == '/postulantes/resumen-produccion' ? 'primary--text' : ''
+                  $route.path == '/postulantes/resumen-produccion'
+                    ? 'primary--text'
+                    : ''
                 }`"
                 @click="$router.push('/postulantes/resumen-produccion')"
                 style="cursor: pointer"
@@ -81,7 +92,11 @@
             </v-col>
 
             <div>
-              <v-divider vertical class="ml-14" :color="pagos ? 'success' : 'accent'"></v-divider>
+              <v-divider
+                vertical
+                class="ml-14"
+                :color="pagos ? 'success' : 'accent'"
+              ></v-divider>
             </div>
             <!-- click="$router.push('/postulantes/pagos')" -->
             <v-col cols="12" class="pa-0 ml-10">
@@ -90,7 +105,11 @@
                 @click="pago.estado = true"
                 style="cursor: pointer"
               >
-                <v-icon size="30" class="mr-4" :color="pago_exist ? 'success' : 'accent'">
+                <v-icon
+                  size="30"
+                  class="mr-4"
+                  :color="pago_exist ? 'success' : 'accent'"
+                >
                   mdi-check-circle-outline</v-icon
                 >Pago
               </h4>
@@ -103,14 +122,18 @@
       </v-row> -->
       <v-row justify="center">
         <v-col cols="12" class="py-0 my-0 text-center">
-          <v-btn class="my-2 botone" @click="cerrarSesion()" color="icon" small dark text>
-            <v-icon size="30" class="mr-2" color="botone">mdi-exit-to-app </v-icon>
+          <v-btn class="my-2 botone" @click="cerrarSesion()" color="icon" dark>
+            <v-icon size="25" class="mr-2" color="botone"
+              >mdi-exit-to-app
+            </v-icon>
             Cerrar sesión
           </v-btn>
         </v-col>
         <v-col cols="12" class="py-0 my-0 text-center" v-if="!is_mobil">
           <v-btn icon @click="is_open = false" class="botone" color="accent">
-            <v-icon size="30" class="mr-2" color="red"> mdi-close-circle-outline</v-icon>
+            <v-icon size="30" class="mr-2" color="red">
+              mdi-close-circle-outline</v-icon
+            >
             minimizar
           </v-btn>
         </v-col>
@@ -145,11 +168,11 @@
                       coordinacion@premiosindiacatalina.com
                     </h5>
                   </v-col>
-                </v-row> 
+                </v-row>
                 <v-row>
-                  <v-col cols="6" class="my-0" >
+                  <v-col cols="6" class="my-0">
                     <h5
-                      class="black--text "
+                      class="black--text"
                       @click="$router.push('/postulantes/reglamento')"
                       style="cursor: pointer"
                     >
@@ -157,16 +180,18 @@
                     </h5>
                   </v-col>
                   <v-col cols="6" justify="center">
-                        <h5  class="black--text ">Powered By</h5> 
-                        <img class="text-center" src="../../assets/image/logo-rv.svg" alt="" width="50" />
-                      <v-col cols="12">
-                      </v-col>
+                    <h5 class="black--text">Powered By</h5>
+                    <img
+                      class="text-center"
+                      src="../../assets/image/logo-rv.svg"
+                      alt=""
+                      width="50"
+                    />
+                    <v-col cols="12"> </v-col>
                   </v-col>
                 </v-row>
 
-                <v-row class="">
-                
-                </v-row>
+                <v-row class=""> </v-row>
               </v-col>
             </v-row>
           </v-container>
