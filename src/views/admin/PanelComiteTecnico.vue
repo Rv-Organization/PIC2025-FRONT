@@ -4,8 +4,9 @@
       <v-col>
         <h2 class="my-8">Panel de Votaciones</h2>
         <h3>
-          En este panel podrá visualizar los votos a los nominados sugeridos para cada una de las 41 categorías concursantes de la 39° versión de los Premios India
-          Catalina de la industria audiovisual colombiana.
+          En este panel podrá visualizar los votos a los nominados sugeridos
+          para cada una de las 41 categorías concursantes de la 39° versión de
+          los Premios India Catalina de la industria audiovisual colombiana.
         </h3>
         <v-divider class="my-8"></v-divider>
       </v-col>
@@ -51,7 +52,11 @@ export default {
   watch: {
     buscar() {
       this.array_categorias = this.array_categoria_base;
-      let filtro = this.array_categorias.filter((categoria) => categoria.nameProgram.includes(this.buscar) || categoria.canal.includes(this.buscar));
+      let filtro = this.array_categorias.filter(
+        (categoria) =>
+          categoria.nameProgram.includes(this.buscar) ||
+          categoria.canal.includes(this.buscar)
+      );
       this.array_categorias = filtro;
       this.validar_buscar = this.array_categorias.length == 0 ? true : false;
     },
@@ -106,7 +111,7 @@ export default {
           },
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     },
     buscarCanal() {
@@ -116,8 +121,12 @@ export default {
 
       if (this.canal) {
         for (let i = 0; i < this.array_categorias.length; i++) {
-          categoria = this.categorias.find((id) => id.id == this.array_categorias[i].categoryId);
-          nameProgram = this.programs.find((id) => id.id == this.array_categorias[i].programId);
+          categoria = this.categorias.find(
+            (id) => id.id == this.array_categorias[i].categoryId
+          );
+          nameProgram = this.programs.find(
+            (id) => id.id == this.array_categorias[i].programId
+          );
           if (categoria != undefined) {
             this.array_categorias[i].category = categoria.nameCategory;
           } else {
@@ -132,8 +141,12 @@ export default {
         }
       } else {
         for (let i = 0; i < this.array_categorias.length; i++) {
-          canal = this.canales.data.data.find((id) => id.userId == this.array_categorias[i].userId);
-          nameProgram = this.programs.find((id) => id.id == this.array_categorias[i].programId);
+          canal = this.canales.data.data.find(
+            (id) => id.userId == this.array_categorias[i].userId
+          );
+          nameProgram = this.programs.find(
+            (id) => id.id == this.array_categorias[i].programId
+          );
 
           if (canal != undefined) {
             this.array_categorias[i].canal = canal.nameClient;
@@ -143,13 +156,21 @@ export default {
             this.array_categorias[i].nameProgram = nameProgram.nameProgram;
           } else this.array_categorias[i].nameProgram = "PROGRAMA NO EXISTE";
         }
-        this.array_categoria_base = JSON.parse(JSON.stringify(this.array_categorias));
+        this.array_categoria_base = JSON.parse(
+          JSON.stringify(this.array_categorias)
+        );
       }
     },
     editarPostulacion(item) {
       this.$router.push({
         name: "admin/editar-postulacion",
-        params: { data: { programa: item, postulacion: { nameCategory: this.name_catetgory }, id: item.id } },
+        params: {
+          data: {
+            programa: item,
+            postulacion: { nameCategory: this.name_catetgory },
+            id: item.id,
+          },
+        },
       });
     },
     async getAllPrgramas() {

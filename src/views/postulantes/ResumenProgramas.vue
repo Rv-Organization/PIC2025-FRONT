@@ -201,7 +201,7 @@ export default {
     },
     async getAllPrograms() {
       const respuesta = await this._getProgramas(CURRTET_USER.id);
-      console.log(respuesta);
+
       this.programas = respuesta.data.data;
       this.total_registrados = respuesta.data.data.length;
     },

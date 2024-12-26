@@ -4,7 +4,8 @@
       <v-col>
         <h2 class="my-8">Panel de Votaciones</h2>
         <h3>
-          En este panel podrá consignar los nominados sugeridos para cada una de las 41 categorías concursantes de la 39° versión de los Premios India
+          En este panel podrá consignar los nominados sugeridos para cada una de
+          las 41 categorías concursantes de la 39° versión de los Premios India
           Catalina de la industria audiovisual colombiana.
         </h3>
         <v-divider class="my-8"></v-divider>
@@ -73,7 +74,7 @@ export default {
     async iniciarConsultas() {
       await this.getAllCategorys();
       let id = this.$route.query?.id;
-      console.log(this.$route, "INICIO")
+
       // this.name_catetgory = this.$route.query.titulo;
       // await this.getAllPrgramas();
       // await this.getUsuarios();
@@ -109,7 +110,7 @@ export default {
           },
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     },
     buscarCanal() {
@@ -119,8 +120,12 @@ export default {
 
       if (this.canal) {
         for (let i = 0; i < this.array_categorias.length; i++) {
-          categoria = this.categorias.find((id) => id.id == this.array_categorias[i].categoryId);
-          nameProgram = this.programs.find((id) => id.id == this.array_categorias[i].programId);
+          categoria = this.categorias.find(
+            (id) => id.id == this.array_categorias[i].categoryId
+          );
+          nameProgram = this.programs.find(
+            (id) => id.id == this.array_categorias[i].programId
+          );
           if (categoria != undefined) {
             this.array_categorias[i].category = categoria.nameCategory;
           } else {
@@ -135,8 +140,12 @@ export default {
         }
       } else {
         for (let i = 0; i < this.array_categorias.length; i++) {
-          canal = this.canales.data.data.find((id) => id.userId == this.array_categorias[i].userId);
-          nameProgram = this.programs.find((id) => id.id == this.array_categorias[i].programId);
+          canal = this.canales.data.data.find(
+            (id) => id.userId == this.array_categorias[i].userId
+          );
+          nameProgram = this.programs.find(
+            (id) => id.id == this.array_categorias[i].programId
+          );
 
           if (canal != undefined) {
             this.array_categorias[i].canal = canal.nameClient;
@@ -146,13 +155,21 @@ export default {
             this.array_categorias[i].nameProgram = nameProgram.nameProgram;
           } else this.array_categorias[i].nameProgram = "PROGRAMA NO EXISTE";
         }
-        this.array_categoria_base = JSON.parse(JSON.stringify(this.array_categorias));
+        this.array_categoria_base = JSON.parse(
+          JSON.stringify(this.array_categorias)
+        );
       }
     },
     editarPostulacion(item) {
       this.$router.push({
         name: "admin/editar-postulacion",
-        params: { data: { programa: item, postulacion: { nameCategory: this.name_catetgory }, id: item.id } },
+        params: {
+          data: {
+            programa: item,
+            postulacion: { nameCategory: this.name_catetgory },
+            id: item.id,
+          },
+        },
       });
     },
     async getAllPrgramas() {
@@ -161,7 +178,7 @@ export default {
     },
     async getAllCategorys() {
       const respuesta = await this._getCatergoriasAdmin();
-      console.log(respuesta, "categorias")
+
       this.categorias = respuesta.data.data;
     },
     eliminarPostulacion(item) {

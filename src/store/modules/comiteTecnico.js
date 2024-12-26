@@ -65,7 +65,7 @@ export default {
           url: `VotingMember/vote/category/${data}`,
           data,
         });
-        console.log("🚀 ~ RES", RES)
+
         if (RES.status == 200) {
           return RES;
         }
@@ -78,6 +78,5 @@ export default {
         commit("_loadingState", null, { root: true });
       }
     },
-    
   },
 };

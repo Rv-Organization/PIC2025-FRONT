@@ -35,7 +35,6 @@
     :id="field.id"
     outlined
     dense
-    solo
   >
   </v-text-field>
 </template>

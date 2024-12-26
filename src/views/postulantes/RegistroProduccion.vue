@@ -373,7 +373,7 @@ export default {
         sipnosis: {
           value: "",
           id: "sipnosis",
-          label: "Sinopsis",
+          label: "Sinopsis *",
           row: "2",
           maxlength: "3000",
           rules: [(v) => !!v || "Sinopsis es requerida"],
@@ -557,11 +557,6 @@ export default {
   padding-top: 2rem;
 }
 
-.upload {
-  border-style: dashed;
-  border-color: #e4cc8e;
-}
-
 .card {
   width: 80%;
   padding-top: 3%;
@@ -570,22 +565,6 @@ export default {
 @media (max-width: 600px) {
   .card {
     width: 100%;
-  }
-}
-.boton-focus-animation {
-  animation: focus-animation 1.5s infinite;
-  border-style: dashed;
-  color: #e4cc8e;
-}
-@keyframes focus-animation {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
-    transform: rotate(0deg);
-  }
-  50% {
-    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0);
-    transform: rotate(0deg);
   }
 }
 </style>

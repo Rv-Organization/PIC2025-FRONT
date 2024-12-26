@@ -2,20 +2,50 @@
   <v-container>
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
-        Nota: Para la validación de las postulaciones de los nominados debe diligenciar las 41 categorías
+        Nota: Para la validación de las postulaciones de los nominados debe
+        diligenciar las 41 categorías
       </v-col>
-      <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6" class="py-0 pt-3 text-end">
-        <h3 v-if="['0', ''].includes(filtro_category)">{{ total_votadas.length }} de {{ array_categorias.length }}
-          Completos</h3>
-        <h3 v-if="filtro_category == 1">{{ array_categorias.length }} Completos</h3>
-        <h3 v-if="filtro_category == 2">{{ array_categorias.length }} Incompletos</h3>
-        <h3 v-if="filtro_category == 3">{{ array_categorias.length }} Sin nominar</h3>
+      <v-col
+        cols="12"
+        xs="12"
+        sm="12"
+        md="6"
+        lg="6"
+        xl="6"
+        class="py-0 pt-3 text-end"
+      >
+        <h3 v-if="['0', ''].includes(filtro_category)">
+          {{ total_votadas.length }} de {{ array_categorias.length }} Completos
+        </h3>
+        <h3 v-if="filtro_category == 1">
+          {{ array_categorias.length }} Completos
+        </h3>
+        <h3 v-if="filtro_category == 2">
+          {{ array_categorias.length }} Incompletos
+        </h3>
+        <h3 v-if="filtro_category == 3">
+          {{ array_categorias.length }} Sin nominar
+        </h3>
       </v-col>
     </v-row>
     <v-row class="mt-6">
-      <v-col cols="12" xs="12" sm="6" md="6" lg="6" xl="6" class="py-0 pt-6 mb-6">
-        <v-autocomplete @input="buscar = buscar.toUpperCase()" prepend-icon="mdi-filter" label="Filtrar categorias"
-          v-model="filtro_category" item-value="id" item-color="primary" :items="[
+      <v-col
+        cols="12"
+        xs="12"
+        sm="6"
+        md="6"
+        lg="6"
+        xl="6"
+        class="py-0 pt-6 mb-6"
+      >
+        <v-autocomplete
+          @input="buscar = buscar.toUpperCase()"
+          prepend-icon="mdi-filter"
+          label="Filtrar categorias"
+          v-model="filtro_category"
+          item-value="id"
+          item-color="primary"
+          :items="[
             {
               id: '0',
               text: 'Todas',
@@ -36,103 +66,279 @@
               id: '4',
               text: 'Abstenidas',
             },
-          ]" outlined rounded dense></v-autocomplete>
+          ]"
+          outlined
+          rounded
+          dense
+        ></v-autocomplete>
       </v-col>
-      <v-col cols="12" xs="12" sm="6" md="6" lg="6" xl="6" class="py-0 pt-6 mb-6">
-        <v-text-field label="Buscar categorias" v-model="buscar" @input="buscar = buscar.toUpperCase()" outlined rounded
-          prepend-icon="mdi-magnify" dense></v-text-field>
+      <v-col
+        cols="12"
+        xs="12"
+        sm="6"
+        md="6"
+        lg="6"
+        xl="6"
+        class="py-0 pt-6 mb-6"
+      >
+        <v-text-field
+          label="Buscar categorias"
+          v-model="buscar"
+          @input="buscar = buscar.toUpperCase()"
+          outlined
+          rounded
+          prepend-icon="mdi-magnify"
+          dense
+        ></v-text-field>
       </v-col>
     </v-row>
     <transition-group name="fade">
-      <v-card :disabled="estado_votaciones.data.data || item.vcc" v-for="item in array_categorias"
-        :key="item.nameCategory" class="py-5 my-2" cols="12">
+      <v-card
+        :disabled="estado_votaciones.data.data || item.vcc"
+        v-for="item in array_categorias"
+        :key="item.nameCategory"
+        class="py-5 my-2"
+        cols="12"
+      >
         <v-row class="align-center mx-3">
           <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
             <h4>{{ item.nameCategory }}</h4>
           </v-col>
           <v-col cols="6" xs="6" sm="6" md="3" lg="3" xl="3">
-            <a style="font-size: 18px" class="icon--text underline" @click="consultarPostulaciones(item)">Ver
-              postulados</a>
+            <a
+              style="font-size: 18px"
+              class="icon--text underline"
+              @click="consultarPostulaciones(item)"
+              >Ver postulados</a
+            >
           </v-col>
-          <v-col cols="6" xs="16" sm="6" md="3" lg="3" xl="3" class="text-center">
-            <div v-if="item.postulations.length == 3 || item.postulations.length == 4">
+          <v-col
+            cols="6"
+            xs="16"
+            sm="6"
+            md="3"
+            lg="3"
+            xl="3"
+            class="text-center"
+          >
+            <div
+              v-if="
+                item.postulations.length == 3 || item.postulations.length == 4
+              "
+            >
               <h3 v-if="!item.vcc">{{ item.votes.length }}/3</h3>
-              <v-btn v-if="item.votes.length == 0 && !item.vcc" dark small color="#FFEBB8" rounded class="botone"
-                elevation="0">
+              <v-btn
+                v-if="item.votes.length == 0 && !item.vcc"
+                dark
+                small
+                color="#FFEBB8"
+                rounded
+                class="botone"
+                elevation="0"
+              >
                 <h3 class="black--text">Sin nominar</h3>
               </v-btn>
-              <v-btn v-if="item.votes.length > 0 && item.votes.length != 3 && !item.vcc" dark small color="#FFEBB8"
-                rounded class="botone" elevation="0">
+              <v-btn
+                v-if="
+                  item.votes.length > 0 && item.votes.length != 3 && !item.vcc
+                "
+                dark
+                small
+                color="#FFEBB8"
+                rounded
+                class="botone"
+                elevation="0"
+              >
                 <h3 class="black--text">Incompleto</h3>
               </v-btn>
-              <v-btn v-if="item.votes.length == 3 && !item.vcc" dark small color="#C2FFD0" rounded class="botone"
-                elevation="0">
+              <v-btn
+                v-if="item.votes.length == 3 && !item.vcc"
+                dark
+                small
+                color="#C2FFD0"
+                rounded
+                class="botone"
+                elevation="0"
+              >
                 <h3 class="black--text">Completo</h3>
               </v-btn>
             </div>
-            <div v-if="item.postulations.length == 5 || item.postulations.length == 6">
+            <div
+              v-if="
+                item.postulations.length == 5 || item.postulations.length == 6
+              "
+            >
               <h3 v-if="!item.vcc">{{ item.votes.length }}/4</h3>
-              <v-btn @click="abstenerse(item)" v-if="item.votes.length == 0 && !item.vcc" dark small color="#FFBEBE"
-                rounded class="botone" elevation="0">
+              <v-btn
+                @click="abstenerse(item)"
+                v-if="item.votes.length == 0 && !item.vcc"
+                dark
+                small
+                color="#FFBEBE"
+                rounded
+                class="botone"
+                elevation="0"
+              >
                 <h3 class="black--text">Sin nominar</h3>
               </v-btn>
               <v-tooltip bottom color="info">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-icon v-if="item.votes.length == 0 && !item.vcc" v-bind="attrs" v-on="on" class="pr-2"
-                    color="info">mdi-information-outline</v-icon>
+                  <v-icon
+                    v-if="item.votes.length == 0 && !item.vcc"
+                    v-bind="attrs"
+                    v-on="on"
+                    class="pr-2"
+                    color="info"
+                    >mdi-information-outline</v-icon
+                  >
                 </template>
-                <span>Si deseas abstenerse de votar en esta categoría, haz clic en el botón sin nominar.</span>
+                <span
+                  >Si deseas abstenerse de votar en esta categoría, haz clic en
+                  el botón sin nominar.</span
+                >
               </v-tooltip>
-              <v-btn @click="abstenerse(item)" v-if="item.votes.length > 0 && item.votes.length != 4 && !item.vcc" dark
-                small color="#FFEBB8" rounded class="botone" elevation="0">
+              <v-btn
+                @click="abstenerse(item)"
+                v-if="
+                  item.votes.length > 0 && item.votes.length != 4 && !item.vcc
+                "
+                dark
+                small
+                color="#FFEBB8"
+                rounded
+                class="botone"
+                elevation="0"
+              >
                 <h3 class="black--text">Incompleto</h3>
               </v-btn>
               <v-tooltip bottom color="info">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-icon v-if="item.votes.length > 0 && item.votes.length != 4 && !item.vcc" v-bind="attrs" v-on="on"
-                    class="pr-2" color="info">mdi-information-outline</v-icon>
+                  <v-icon
+                    v-if="
+                      item.votes.length > 0 &&
+                      item.votes.length != 4 &&
+                      !item.vcc
+                    "
+                    v-bind="attrs"
+                    v-on="on"
+                    class="pr-2"
+                    color="info"
+                    >mdi-information-outline</v-icon
+                  >
                 </template>
-                <span>Si deseas abstenerse de votar en esta categoría, haz clic en el botón incompleto.</span>
-              </v-tooltip>
-              <v-btn v-if="item.votes.length == 4 && !item.vcc" dark small color="#C2FFD0" rounded class="botone"
+                <span
+                  >Si deseas abstenerse de votar en esta categoría, haz clic en
+                  el botón incompleto.</span
                 >
+              </v-tooltip>
+              <v-btn
+                v-if="item.votes.length == 4 && !item.vcc"
+                dark
+                small
+                color="#C2FFD0"
+                rounded
+                class="botone"
+              >
                 <h3 class="black--text">Completo</h3>
               </v-btn>
-              <v-btn v-if="item.vcc" dark small color="#C2FFD0" rounded class="botone" elevation="0">
+              <v-btn
+                v-if="item.vcc"
+                dark
+                small
+                color="#C2FFD0"
+                rounded
+                class="botone"
+                elevation="0"
+              >
                 <h3 class="black--text">Abstención</h3>
               </v-btn>
             </div>
             <div v-if="item.postulations.length > 6">
               <h3 v-if="!item.vcc">{{ item.votes.length }}/5</h3>
-              <v-btn @click="abstenerse(item)" v-if="item.votes.length == 0 && !item.vcc" dark small color="#FFBEBE"
-                rounded class="botone" elevation="0">
+              <v-btn
+                @click="abstenerse(item)"
+                v-if="item.votes.length == 0 && !item.vcc"
+                dark
+                small
+                color="#FFBEBE"
+                rounded
+                class="botone"
+                elevation="0"
+              >
                 <h3 class="black--text">Sin nominar</h3>
               </v-btn>
               <v-tooltip bottom color="info">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-icon v-if="item.votes.length == 0 && !item.vcc" v-bind="attrs" v-on="on" class="pr-2"
-                    color="info">mdi-information-outline</v-icon>
+                  <v-icon
+                    v-if="item.votes.length == 0 && !item.vcc"
+                    v-bind="attrs"
+                    v-on="on"
+                    class="pr-2"
+                    color="info"
+                    >mdi-information-outline</v-icon
+                  >
                 </template>
-                <span>Si deseas abstenerse de votar en esta categoría, haz clic en el botón sin nominar.</span>
+                <span
+                  >Si deseas abstenerse de votar en esta categoría, haz clic en
+                  el botón sin nominar.</span
+                >
               </v-tooltip>
 
-              <v-btn v-if="item.votes.length > 0 && item.votes.length != 5 && !item.vcc" dark small color="#FFEBB8"
-                rounded class="botone" elevation="0" @click="abstenerse(item)">
+              <v-btn
+                v-if="
+                  item.votes.length > 0 && item.votes.length != 5 && !item.vcc
+                "
+                dark
+                small
+                color="#FFEBB8"
+                rounded
+                class="botone"
+                elevation="0"
+                @click="abstenerse(item)"
+              >
                 <h3 class="black--text">Incompleto</h3>
               </v-btn>
 
               <v-tooltip bottom color="info">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-icon v-if="item.votes.length > 0 && item.votes.length != 5 && !item.vcc" v-bind="attrs" v-on="on"
-                    class="pr-2" color="info">mdi-information-outline</v-icon>
+                  <v-icon
+                    v-if="
+                      item.votes.length > 0 &&
+                      item.votes.length != 5 &&
+                      !item.vcc
+                    "
+                    v-bind="attrs"
+                    v-on="on"
+                    class="pr-2"
+                    color="info"
+                    >mdi-information-outline</v-icon
+                  >
                 </template>
-                <span>Si deseas abstenerse de votar en esta categoría, haz clic en el botón incompleto.</span>
+                <span
+                  >Si deseas abstenerse de votar en esta categoría, haz clic en
+                  el botón incompleto.</span
+                >
               </v-tooltip>
-              <v-btn v-if="item.votes.length == 5 && !item.vcc" dark small color="#C2FFD0" rounded class="botone"
-                elevation="0">
+              <v-btn
+                v-if="item.votes.length == 5 && !item.vcc"
+                dark
+                small
+                color="#C2FFD0"
+                rounded
+                class="botone"
+                elevation="0"
+              >
                 <h3 class="black--text">Completo</h3>
               </v-btn>
-              <v-btn v-if="item.vcc" dark small color="#C2FFD0" rounded class="botone" elevation="0">
+              <v-btn
+                v-if="item.vcc"
+                dark
+                small
+                color="#C2FFD0"
+                rounded
+                class="botone"
+                elevation="0"
+              >
                 <h3 class="black--text">Abstención</h3>
               </v-btn>
             </div>
@@ -141,15 +347,27 @@
       </v-card>
     </transition-group>
     <v-container class="text-center pb-12">
-      <v-btn rounded elevation="0" color="boton" class="botone py-6 px-6" :disabled="estado_votaciones.data.data"
-        @click="validarVotar()">
+      <v-btn
+        rounded
+        elevation="0"
+        color="boton"
+        class="botone py-6 px-6"
+        :disabled="estado_votaciones.data.data"
+        @click="validarVotar()"
+      >
         <h2 class="">Enviar votaciones</h2>
       </v-btn>
     </v-container>
     <h2 v-if="array_categorias.length == 0">No exiten datos</h2>
     <h2>{{ validar_buscar ? "No se encontraron coincidencias" : "" }}</h2>
-    <ALT @exitEsc="cancel()" @cancel="cancel()" @cancelAlert="cancelAlert()" @confirm="confirmar()" :alert="alert"
-      v-if="alert.estado" />
+    <ALT
+      @exitEsc="cancel()"
+      @cancel="cancel()"
+      @cancelAlert="cancelAlert()"
+      @confirm="confirmar()"
+      :alert="alert"
+      v-if="alert.estado"
+    />
   </v-container>
 </template>
 <script>
@@ -185,22 +403,32 @@ export default {
         case "0": //Todas
           return (this.array_categorias = this.array_categoria_base);
         case "1": //Completas
-          this.array_categorias = this.array_categorias.filter((e) => e.nominationsAllowed == e.total);
+          this.array_categorias = this.array_categorias.filter(
+            (e) => e.nominationsAllowed == e.total
+          );
           break;
         case "2": //Incompleto
-          this.array_categorias = this.array_categorias.filter((e) => e.nominationsAllowed != e.total && e.votes.length != 0);
+          this.array_categorias = this.array_categorias.filter(
+            (e) => e.nominationsAllowed != e.total && e.votes.length != 0
+          );
           break;
         case "3": //Sin nominar
-          return (this.array_categorias = this.array_categorias.filter((e) => e.votes.length == 0 && !e.vcc));
+          return (this.array_categorias = this.array_categorias.filter(
+            (e) => e.votes.length == 0 && !e.vcc
+          ));
         case "4": //Abstenerse
-          return (this.array_categorias = this.array_categorias.filter((e) => e.vcc));
+          return (this.array_categorias = this.array_categorias.filter(
+            (e) => e.vcc
+          ));
         default:
           return (this.array_categorias = this.array_categoria_base);
       }
     },
     buscar() {
       this.array_categorias = this.array_categoria_base;
-      let filtro = this.array_categorias.filter((categoria) => categoria.nameCategory.includes(this.buscar));
+      let filtro = this.array_categorias.filter((categoria) =>
+        categoria.nameCategory.includes(this.buscar)
+      );
       this.array_categorias = filtro;
       this.validar_buscar = this.array_categorias.length == 0 ? true : false;
     },
@@ -223,7 +451,8 @@ export default {
     },
     async estadoVotacion() {
       this.estado_votaciones = await this._getVotaciones();
-      if (this.estado_votaciones?.data?.data) this.ALT_("VOTO-05", "info", "", () => this.terminarVoto(false));
+      if (this.estado_votaciones?.data?.data)
+        this.ALT_("VOTO-05", "info", "", () => this.terminarVoto(false));
     },
 
     async abstenerse(item) {
@@ -261,7 +490,10 @@ export default {
     total_category_(item) {
       if (item.postulations.length == 3 || item.postulations.length == 4) {
         return 3;
-      } else if (item.postulations.length == 5 || item.postulations.length == 6) {
+      } else if (
+        item.postulations.length == 5 ||
+        item.postulations.length == 6
+      ) {
         return 4;
       } else if (item.postulations.length > 6) {
         return 5;
@@ -272,7 +504,10 @@ export default {
 
       if (item.postulations.length == 3 || item.postulations.length == 4) {
         total_category = 3;
-      } else if (item.postulations.length == 5 || item.postulations.length == 6) {
+      } else if (
+        item.postulations.length == 5 ||
+        item.postulations.length == 6
+      ) {
         total_category = 4;
       } else if (item.postulations.length) {
         total_category = 5;
@@ -295,9 +530,11 @@ export default {
 
     async getAllCategories() {
       const categories = await this._getCatergoriasComite();
-      console.log(categories)
+
       this.array_categorias = categories.data.data;
-      this.total_votadas = this.array_categorias.filter((e) => e.nominationsAllowed == e.total || e.vcc);
+      this.total_votadas = this.array_categorias.filter(
+        (e) => e.nominationsAllowed == e.total || e.vcc
+      );
       this.array_categoria_base = categories.data.data;
     },
   },
@@ -353,8 +590,7 @@ export default {
 .fade-enter,
 .fade-leave-to
 
-/* .fade-leave-active below version 2.1.8 */
-  {
+/* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
 

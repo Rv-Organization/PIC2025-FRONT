@@ -8,7 +8,15 @@
       <v-col cols="12" class="mt-0 pt-0">
         <v-container>
           <v-row justify="start">
-            <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="12" class="py-0 text-start">
+            <v-col
+              cols="12"
+              xs="6"
+              sm="6"
+              md="6"
+              lg="6"
+              xl="12"
+              class="py-0 text-start"
+            >
               <h2 class="">Descargar reportes</h2>
             </v-col>
           </v-row>
@@ -20,13 +28,32 @@
                   <v-spacer></v-spacer>
                   <v-tooltip bottom color="info">
                     <template v-slot:activator="{ on, attrs }">
-                      <v-btn v-bind="attrs" v-on="on" fab dark small color="green" rounded class="botone" @click="preguntarImpresion(item.id)">
+                      <v-btn
+                        v-bind="attrs"
+                        v-on="on"
+                        fab
+                        dark
+                        small
+                        color="green"
+                        rounded
+                        class="botone"
+                        @click="preguntarImpresion(item.id)"
+                      >
                         <v-icon>mdi-microsoft-excel</v-icon>
                       </v-btn>
                     </template>
                     <span>Descargar formato XLSX</span>
                   </v-tooltip>
-                  <v-btn fab dark small rounded color="info" class="ml-2 botone" v-if="item.auditor" @click="verTabla(item)">
+                  <v-btn
+                    fab
+                    dark
+                    small
+                    rounded
+                    color="info"
+                    class="ml-2 botone"
+                    v-if="item.auditor"
+                    @click="verTabla(item)"
+                  >
                     <v-icon>mdi-account-search</v-icon>
                   </v-btn>
                 </v-container>
@@ -38,14 +65,27 @@
 
       <Alerta_ :alert="alert_" v-if="alert_.estado" />
     </v-row>
-    <TablaVotosCategoria :voto_categoria="voto_categoria" v-if="voto_categoria.estado" />
-    <TablaVotosPostulacion :voto_postulacion="voto_postulacion" v-if="voto_postulacion.estado" />
-    <TablaResultados :resultado_votaciones="resultado_votaciones" v-if="resultado_votaciones.estado" />
+    <TablaVotosCategoria
+      :voto_categoria="voto_categoria"
+      v-if="voto_categoria.estado"
+    />
+    <TablaVotosPostulacion
+      :voto_postulacion="voto_postulacion"
+      v-if="voto_postulacion.estado"
+    />
+    <TablaResultados
+      :resultado_votaciones="resultado_votaciones"
+      v-if="resultado_votaciones.estado"
+    />
   </v-app>
 </template>
 
 <script>
-import { reporteVotos, reporteVotosPostulacion, reporteComite } from "../../excel/index";
+import {
+  reporteVotos,
+  reporteVotosPostulacion,
+  reporteComite,
+} from "../../excel/index";
 import TablaVotosPostulacion from "../../components/auditor/TablaVotosPostulacion.vue";
 import TablaVotosCategoria from "../../components/auditor/TablaVotosCategoria.vue";
 import TablaResultados from "../../components/auditor/TablaResultados.vue";
@@ -121,12 +161,15 @@ export default {
   watch: {},
   mounted() {
     if (this.usuario.email == "jhonbra@gmail.com") {
-      this.array_lista = this.array_lista.filter(({ email }) => this.usuario.email == email);
+      this.array_lista = this.array_lista.filter(
+        ({ email }) => this.usuario.email == email
+      );
     }
   },
   methods: {
     ...mapActions({
-      _consultVotacionMiembrosVotantes: "admin/_consultVotacionMiembrosVotantes",
+      _consultVotacionMiembrosVotantes:
+        "admin/_consultVotacionMiembrosVotantes",
       _consultResultadoVotosV2: "admin/_consultResultadoVotosV2",
       _consultResultadoVotos: "admin/_consultResultadoVotos",
       _getPostulaciones: "postulacion/_getPostulaciones",
@@ -137,7 +180,13 @@ export default {
       _getConteos: "admin/_getConteos",
     }),
     preguntarImpresion(item) {
-      this.callAlerta("xlsx_", "info", "p", () => this.seleccionarImpresion(item), this.ALTD_);
+      this.callAlerta(
+        "xlsx_",
+        "info",
+        "p",
+        () => this.seleccionarImpresion(item),
+        this.ALTD_
+      );
     },
     seleccionarImpresion(item) {
       switch (item) {
@@ -371,7 +420,9 @@ export default {
           });
         });
       }
-      this.array_usuarios = this.array_usuarios.filter((e) => e.stateOrderId != 1);
+      this.array_usuarios = this.array_usuarios.filter(
+        (e) => e.stateOrderId != 1
+      );
       generarImpresion({
         header,
         logo: this.logo,
@@ -389,8 +440,16 @@ export default {
           { title: "Postulación", value: "postulationName" },
           { title: "# evaluadores", value: "evaluatorsCompleted" },
           { title: "Programa", value: "programName" },
-          { title: "Promedio votos evaluadores", value: "resultEvaluators", tipo: "number" },
-          { title: "Promedio votos publico general", value: "resultPublic", tipo: "number" },
+          {
+            title: "Promedio votos evaluadores",
+            value: "resultEvaluators",
+            tipo: "number",
+          },
+          {
+            title: "Promedio votos publico general",
+            value: "resultPublic",
+            tipo: "number",
+          },
         ];
         let header = [
           { text: "PREMIOS INDIA CATALINA 2024", bold: true, size: 16 },
@@ -398,8 +457,19 @@ export default {
           `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
           ` `,
         ];
-        await generarImpresion({ header, logo: this.logo, tabla: { columnas, data: response } });
-        this.callAlerta("", "success", null, this.ALTD_, this.ALTD_, "Impresión generada correctamente");
+        await generarImpresion({
+          header,
+          logo: this.logo,
+          tabla: { columnas, data: response },
+        });
+        this.callAlerta(
+          "",
+          "success",
+          null,
+          this.ALTD_,
+          this.ALTD_,
+          "Impresión generada correctamente"
+        );
       } catch (error) {
         this.callAlerta("", "info", error, this.ALTD_, this.ALTD_, error);
       }
@@ -424,8 +494,19 @@ export default {
           `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
           ` `,
         ];
-        await generarImpresion({ header, logo: this.logo, tabla: { columnas, data: response } });
-        this.callAlerta("", "success", null, this.ALTD_, this.ALTD_, "Impresión generada correctamente");
+        await generarImpresion({
+          header,
+          logo: this.logo,
+          tabla: { columnas, data: response },
+        });
+        this.callAlerta(
+          "",
+          "success",
+          null,
+          this.ALTD_,
+          this.ALTD_,
+          "Impresión generada correctamente"
+        );
       } catch (error) {
         this.callAlerta("", "info", error, this.ALTD_, this.ALTD_, error);
       }
@@ -450,8 +531,19 @@ export default {
           `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
           ` `,
         ];
-        await generarImpresion({ header, logo: this.logo, tabla: { columnas, data: response } });
-        this.callAlerta("", "success", null, this.ALTD_, this.ALTD_, "Impresión generada correctamente");
+        await generarImpresion({
+          header,
+          logo: this.logo,
+          tabla: { columnas, data: response },
+        });
+        this.callAlerta(
+          "",
+          "success",
+          null,
+          this.ALTD_,
+          this.ALTD_,
+          "Impresión generada correctamente"
+        );
       } catch (error) {
         this.callAlerta("", "info", error, this.ALTD_, this.ALTD_, error);
       }
@@ -476,8 +568,19 @@ export default {
           `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
           ` `,
         ];
-        await generarImpresion({ header, logo: this.logo, tabla: { columnas, data: response } });
-        this.callAlerta("", "success", null, this.ALTD_, this.ALTD_, "Impresión generada correctamente");
+        await generarImpresion({
+          header,
+          logo: this.logo,
+          tabla: { columnas, data: response },
+        });
+        this.callAlerta(
+          "",
+          "success",
+          null,
+          this.ALTD_,
+          this.ALTD_,
+          "Impresión generada correctamente"
+        );
       } catch (error) {
         this.callAlerta("", "info", error, this.ALTD_, this.ALTD_, error);
       }
@@ -485,7 +588,7 @@ export default {
     async cargarVotacionMiembrosVotantes() {
       try {
         const response = await this._getMiembroVotantes();
-        console.log(response);
+
         let columnas = [
           { title: "Nombre", value: "name" },
           { title: "Apellido", value: "lastName" },
@@ -502,7 +605,11 @@ export default {
           `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
           ` `,
         ];
-        await generarImpresion({ header, logo: this.logo, tabla: { columnas, data: response } });
+        await generarImpresion({
+          header,
+          logo: this.logo,
+          tabla: { columnas, data: response },
+        });
       } catch (error) {
         this.callAlerta("", "info", error, this.ALTD_, this.ALTD_, error);
       }

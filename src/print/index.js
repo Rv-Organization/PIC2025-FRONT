@@ -57,7 +57,12 @@ class _impresion_excel {
         preTable.forEach((el) => {
           if (el.merge) {
             let rango = el.merge;
-            this.worksheet.mergeCells(final_encabezado, rango[0], final_encabezado, rango[1]);
+            this.worksheet.mergeCells(
+              final_encabezado,
+              rango[0],
+              final_encabezado,
+              rango[1]
+            );
             row.getCell(rango[0]).value = el.text;
           } else {
             let column = parseInt(el.columna);
@@ -73,7 +78,12 @@ class _impresion_excel {
         posTable.forEach((el) => {
           if (el.merge) {
             let rango = el.merge;
-            this.worksheet.mergeCells(final_encabezado, rango[0], final_encabezado, rango[1]);
+            this.worksheet.mergeCells(
+              final_encabezado,
+              rango[0],
+              final_encabezado,
+              rango[1]
+            );
             row.getCell(rango[0]).value = el.text;
           } else {
             let column = parseInt(el.columna);
@@ -126,7 +136,10 @@ class _impresion_excel {
     let final_text = String.fromCharCode(96 + columnas_limite);
 
     let inicial = $this.content.merge_header[0];
-    let final = columnas_final < 4 ? $this.content.merge_header[1] : final_text.toUpperCase();
+    let final =
+      columnas_final < 4
+        ? $this.content.merge_header[1]
+        : final_text.toUpperCase();
     header.forEach((val, index) => {
       index++;
       let key_inicial = `${inicial + index}`;
@@ -191,7 +204,9 @@ class _impresion_excel {
     let limite_ini = rango[0].substr(1);
 
     let limite_fin = null;
-    columnas_final_2 > 26 ? (limite_fin = rango[1].substr(2)) : (limite_fin = rango[1].substr(1));
+    columnas_final_2 > 26
+      ? (limite_fin = rango[1].substr(2))
+      : (limite_fin = rango[1].substr(1));
 
     this.worksheet.pageSetup.scale = this.content.scale;
     this.worksheet.pageSetup.orientation = this.content.orientation;
@@ -199,7 +214,8 @@ class _impresion_excel {
 
     let heightRow = this.content.tabla.heightRow || false;
     this.worksheet._rows.forEach((row) => {
-      if (row._number >= limite_ini && row._number <= limite_fin) row.height = heightRow || 30;
+      if (row._number >= limite_ini && row._number <= limite_fin)
+        row.height = heightRow || 30;
     });
 
     this.worksheet.columns.forEach((column) => {
@@ -214,7 +230,6 @@ class _impresion_excel {
         let col2 = cell._address.substring(1, 2);
 
         if (isNaN(parseFloat(col2))) {
-          console.log(col2);
           coord = parseInt(cell._address.substr(2));
           columna = String.fromCharCode(96 + id_columna).toUpperCase();
           parent_columna = cell._address.substr(0, 2);

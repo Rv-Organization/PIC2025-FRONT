@@ -15,7 +15,6 @@ export default {
   },
   actions: {
     async _addVotacion({ commit }, data) {
-      console.log("🚀 ~ data", data)
       try {
         commit("_loadingState", null, { root: true });
         const RES = await postData({

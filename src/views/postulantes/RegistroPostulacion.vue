@@ -18,23 +18,6 @@
         <h4>{{ $route.params.data?.postulacion.nameCategory }}</h4>
         <v-divider class="my-6"></v-divider>
 
-        <!-- <v-col>
-          <h3 class="asaccent--text pb-8">Datos del postulado</h3>
-          <v-form v-model="validacion" ref="form" lazy-validation>
-            <v-row justify="start">
-              <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
-                <INPUT :field="form.contacto" />
-              </v-col>
-              <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
-                <INPUT :field="form.email" />
-              </v-col>
-              <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
-                <INPUT :field="form.telefono" />
-              </v-col>
-            </v-row>
-          </v-form>
-          <v-divider class="my-4"></v-divider>
-        </v-col> -->
         <v-col
           cols="12"
           xs="12"
@@ -63,12 +46,15 @@
           el nombre de la lista en el reglamento), y añada solamente el nombre
           de la producción o del talento postulado sin créditos adicionales.
           Tipo de letra Lato, tamaños 48, 90 y 40 de acuerdo con el
-          <a href="https://premiosindiacatalina.com/wp-content/uploads/2023/12/Plantilla-muestra-tipo-letra-Loto.mp4" target="_blank">ejemplo.</a>
+          <a
+            href="https://premiosindiacatalina.com/wp-content/uploads/2023/12/Plantilla-muestra-tipo-letra-Loto.mp4"
+            target="_blank"
+            >ejemplo.</a
+          >
         </h3>
         <h2 class="text-start my-10">Archivos requeridos</h2>
 
         <v-col v-if="subir_foto" class="py-4">
-          <!-- <iframe height="500px" width="500px" class="container" :src="frame.photo"></iframe> -->
           <v-img
             max-height="100%"
             contain
@@ -110,7 +96,7 @@
               <v-btn
                 @click="elegirArchivo()"
                 plain
-                class="upload py-2 mb-3"
+                class="boton-focus-animation py-2 mb-3"
                 height="100%"
               >
                 <v-row align="center">
@@ -199,8 +185,6 @@
           ></iframe>
         </div>
         <v-container class="px-3">
-          <!-- <vimeo-player ref="player" :video-id="id_vimeo_c" @ready="onReady" player-height="500"></vimeo-player> -->
-
           <v-row class="justify-center mt-12">
             <v-col cols="12" xs="8" sm="8" md="8" lg="8" xl="8">
               <v-btn
@@ -356,7 +340,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.$route.params.data.programa);
     if (!this.$route.params?.data)
       this.$router.push("/postulantes/resumen-produccion");
     if (this.$route.params?.data?.id) this.buscarPostulacion();
@@ -609,18 +592,12 @@ export default {
   padding-top: 2rem;
 }
 
-.upload {
-  border-style: dashed;
-  border-color: rgba(102, 102, 102, 0.5);
-}
-
 /* Movil  */
 @media (max-width: 600px) {
   .upload {
     border-style: dashed;
     border-color: rgba(102, 102, 102, 0.5);
   }
-
   .container-channel {
     width: 100%;
   }

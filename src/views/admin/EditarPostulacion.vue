@@ -2,13 +2,24 @@
   <v-row class="container-channel px-2">
     <v-col cols="12" class="mt-0 pt-0">
       <v-container>
-        <v-btn fab color="boton" class="botone" x-small elevation="0" sm-d-none @click="retroceder()"
+        <v-btn
+          fab
+          color="boton"
+          class="botone"
+          x-small
+          elevation="0"
+          sm-d-none
+          @click="retroceder()"
           ><v-icon color="white">mdi-arrow-left</v-icon></v-btn
         >
-        <h2 class="py-5">Programa: {{ $route.params.data?.programa.nameProgram }}</h2>
+        <h2 class="py-5">
+          Programa: {{ $route.params.data?.programa.nameProgram }}
+        </h2>
         <h4>{{ $route.params.data?.postulacion.nameCategory }}</h4>
         <v-divider class="my-6"></v-divider>
-        <h3 class="asaccent--text pb-8">Datos productora, operadora y/o programadora</h3>
+        <h3 class="asaccent--text pb-8">
+          Datos productora, operadora y/o programadora
+        </h3>
         <v-form v-model="validacion" ref="form" lazy-validation>
           <v-row justify="start">
             <v-col
@@ -21,13 +32,25 @@
               md="6"
               lg="6"
             >
-              <Input_ v-model="registro.nameTalent" :field="form.nameTalent" v-if="registro.nameTalent" />
+              <Input_
+                v-model="registro.nameTalent"
+                :field="form.nameTalent"
+                v-if="registro.nameTalent"
+              />
             </v-col>
             <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="12" class="py-0">
-              <Input_ v-model="registro.nameProgram" :field="form.nameProgram" v-if="registro.nameProgram" />
+              <Input_
+                v-model="registro.nameProgram"
+                :field="form.nameProgram"
+                v-if="registro.nameProgram"
+              />
             </v-col>
             <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
-              <Input_ v-model="registro.canal" :field="form.canal" v-if="registro.canal" />
+              <Input_
+                v-model="registro.canal"
+                :field="form.canal"
+                v-if="registro.canal"
+              />
             </v-col>
             <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
               <Input_
@@ -37,7 +60,11 @@
               />
             </v-col>
             <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
-              <Input_ v-model="registro.fecha" :field="form.fecha" v-if="registro.fecha" />
+              <Input_
+                v-model="registro.fecha"
+                :field="form.fecha"
+                v-if="registro.fecha"
+              />
             </v-col>
             <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
               <Input_
@@ -68,10 +95,18 @@
               />
             </v-col>
             <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
-              <Input_ v-model="registro.linkPromo" :field="form.linkPromo" v-if="registro.linkPromo" />
+              <Input_
+                v-model="registro.linkPromo"
+                :field="form.linkPromo"
+                v-if="registro.linkPromo"
+              />
             </v-col>
             <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12">
-              <Textarea_ v-model="registro.sinopsis" :field="form.sinopsis" v-if="registro.sinopsis" />
+              <Textarea_
+                v-model="registro.sinopsis"
+                :field="form.sinopsis"
+                v-if="registro.sinopsis"
+              />
             </v-col>
           </v-row>
         </v-form>
@@ -87,10 +122,31 @@
               </v-card-text>
             </v-col>
 
-            <v-col cols="5" xs="6" sm="4" md="4" lg="4" xl="4" class="text-center mx-auto">
-              <v-btn @click="subirArchivo('file-libreto')" plain class="upload py-2 mb-3" height="100%">
+            <v-col
+              cols="5"
+              xs="6"
+              sm="4"
+              md="4"
+              lg="4"
+              xl="4"
+              class="text-center mx-auto"
+            >
+              <v-btn
+                @click="subirArchivo('file-libreto')"
+                plain
+                class="upload py-2 mb-3"
+                height="100%"
+              >
                 <v-row align="center">
-                  <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5" class="py-0 mx-auto pl-9 my-0">
+                  <v-col
+                    cols="5"
+                    xs="5"
+                    sm="5"
+                    md="5"
+                    lg="5"
+                    xl="5"
+                    class="py-0 mx-auto pl-9 my-0"
+                  >
                     <v-file-input
                       accept="application/pdf"
                       prepend-icon="mdi-cloud-upload-outline"
@@ -114,7 +170,12 @@
           </v-row>
         </v-card>
         <v-col class="py-4" v-if="showLibreto">
-          <iframe :src="frame.libreto" class="container" height="500px" width="500px"></iframe>
+          <iframe
+            :src="frame.libreto"
+            class="container"
+            height="500px"
+            width="500px"
+          ></iframe>
         </v-col>
         <v-card elevation="0" class="px-3 pb-0 mb-0">
           <v-row aling="center" class="my-0">
@@ -125,10 +186,31 @@
               </v-card-text>
             </v-col>
 
-            <v-col cols="5" xs="6" sm="4" md="4" lg="4" xl="4" class="text-center mx-auto">
-              <v-btn @click="subirArchivo('input-file2')" plain class="upload py-2 mb-3" height="100%">
+            <v-col
+              cols="5"
+              xs="6"
+              sm="4"
+              md="4"
+              lg="4"
+              xl="4"
+              class="text-center mx-auto"
+            >
+              <v-btn
+                @click="subirArchivo('input-file2')"
+                plain
+                class="upload py-2 mb-3"
+                height="100%"
+              >
                 <v-row align="center">
-                  <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5" class="py-0 mx-auto pl-9 my-0">
+                  <v-col
+                    cols="5"
+                    xs="5"
+                    sm="5"
+                    md="5"
+                    lg="5"
+                    xl="5"
+                    class="py-0 mx-auto pl-9 my-0"
+                  >
                     <v-file-input
                       accept="image/png, image/jpeg, image/jpg"
                       prepend-icon="mdi-cloud-upload-outline"
@@ -152,7 +234,13 @@
           </v-row>
         </v-card>
         <v-col class="py-4">
-          <v-img max-height="100%" contain max-width="100%" :src="frame.photo" aspect-ratio="1.4" />
+          <v-img
+            max-height="100%"
+            contain
+            max-width="100%"
+            :src="frame.photo"
+            aspect-ratio="1.4"
+          />
         </v-col>
 
         <v-card elevation="0" class="px-3 pb-0 mb-0 my-12">
@@ -160,17 +248,41 @@
             <v-col cols="12" xs="12" sm="8" md="8" lg="8" xl="8">
               <v-card-text>
                 <h3>
-                  Una muestra de la producción. Para esto, revisar el anexo de requerimientos de acuerdo con
-                  la categoría.
+                  Una muestra de la producción. Para esto, revisar el anexo de
+                  requerimientos de acuerdo con la categoría.
                 </h3>
-                <h4>Extensiones permitidas: MP4, WEBM, AVI, MOV. Tamaño máximo:750 megas.</h4>
+                <h4>
+                  Extensiones permitidas: MP4, WEBM, AVI, MOV. Tamaño máximo:750
+                  megas.
+                </h4>
               </v-card-text>
             </v-col>
 
-            <v-col cols="5" xs="6" sm="4" md="4" lg="4" xl="4" class="text-center mx-auto">
-              <v-btn @click="elegirArchivo()" plain class="upload py-2 mb-3" height="100%">
+            <v-col
+              cols="5"
+              xs="6"
+              sm="4"
+              md="4"
+              lg="4"
+              xl="4"
+              class="text-center mx-auto"
+            >
+              <v-btn
+                @click="elegirArchivo()"
+                plain
+                class="upload py-2 mb-3"
+                height="100%"
+              >
                 <v-row align="center">
-                  <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5" class="py-0 mx-auto pl-9 my-0">
+                  <v-col
+                    cols="5"
+                    xs="5"
+                    sm="5"
+                    md="5"
+                    lg="5"
+                    xl="5"
+                    class="py-0 mx-auto pl-9 my-0"
+                  >
                     <v-file-input
                       accept="video/mov, video/mkv, video/mp4, video/avi"
                       prepend-icon="mdi-cloud-upload-outline"
@@ -188,11 +300,20 @@
                   <v-row>
                     <v-col class="py-4">
                       <h3 v-if="!files[0] && !id_video">SUBIR VIDEO</h3>
-                      <h3 v-if="![0, 100].includes(progreso_crear)">CREANDO VIDEO</h3>
-                      <h3 v-if="![0, 100].includes(progreso_carga) && ![0].includes(progreso_crear)">
+                      <h3 v-if="![0, 100].includes(progreso_crear)">
+                        CREANDO VIDEO
+                      </h3>
+                      <h3
+                        v-if="
+                          ![0, 100].includes(progreso_carga) &&
+                          ![0].includes(progreso_crear)
+                        "
+                      >
                         SUBIENDO VIDEO
                       </h3>
-                      <h3 v-if="progreso_carga == 100 || id_video">MODIFICAR VIDEO</h3>
+                      <h3 v-if="progreso_carga == 100 || id_video">
+                        MODIFICAR VIDEO
+                      </h3>
                     </v-col>
                   </v-row>
                 </v-row>
@@ -210,7 +331,12 @@
           </v-progress-linear>
         </v-card>
         <v-col v-if="subir_video" class="py-4">
-          <iframe height="500px" width="500px" class="container" :src="frame.video"></iframe>
+          <iframe
+            height="500px"
+            width="500px"
+            class="container"
+            :src="frame.video"
+          ></iframe>
         </v-col>
         <v-container class="px-3">
           <div class="text-center">
@@ -226,7 +352,14 @@
           </div>
           <v-row class="justify-center mt-12">
             <v-col cols="12" xs="8" sm="8" md="8" lg="8" xl="8">
-              <v-btn color="boton" elevation="0" class="botone" block dark @click="agregarPostulacion()" large
+              <v-btn
+                color="boton"
+                elevation="0"
+                class="botone"
+                block
+                dark
+                @click="agregarPostulacion()"
+                large
                 >Guardar
               </v-btn>
             </v-col>
@@ -422,7 +555,14 @@ export default {
       document.getElementById(id).click();
     },
 
-    axiosSc({ url, data = {}, header = {}, method = "POST", responseType = "json", options }) {
+    axiosSc({
+      url,
+      data = {},
+      header = {},
+      method = "POST",
+      responseType = "json",
+      options,
+    }) {
       return new Promise((resolve, reject) => {
         let config = {
           url: url,
@@ -432,12 +572,16 @@ export default {
           responseType,
           onUploadProgress: (progressEvent) => {
             if (options) {
-              this.progreso_carga = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+              this.progreso_carga = Math.round(
+                (progressEvent.loaded / progressEvent.total) * 100
+              );
               if (this.progreso_carga > 100) {
                 this.progreso_carga = 100;
               }
             } else {
-              this.progreso_crear = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+              this.progreso_crear = Math.round(
+                (progressEvent.loaded / progressEvent.total) * 100
+              );
               if (this.progreso_crear > 100) {
                 this.progreso_crear = 100;
               }
@@ -466,14 +610,19 @@ export default {
       });
     },
 
-    async createVimeo(tk = "82e2b1510dc5f744de0a8c5f6f52586c", fileSize = this.files[0].size) {
+    async createVimeo(
+      tk = "82e2b1510dc5f744de0a8c5f6f52586c",
+      fileSize = this.files[0].size
+    ) {
       const header = {
         Authorization: "Bearer " + tk,
         "Content-Type": "application/json",
         Accept: "application/vnd.vimeo.*+json;version=3.4",
       };
       const name =
-        this.datosPostulacion.typePostulation == 1 ? this.registro.nameTalent : this.registro.nameProgram;
+        this.datosPostulacion.typePostulation == 1
+          ? this.registro.nameTalent
+          : this.registro.nameProgram;
 
       const initBody = {
         upload: { approach: "tus", size: fileSize },
@@ -482,11 +631,20 @@ export default {
       };
 
       const url = `https://api.vimeo.com/me/videos`;
-      this.vimeo_crear = await this.axiosSc({ data: initBody, method: "POST", header, url });
+      this.vimeo_crear = await this.axiosSc({
+        data: initBody,
+        method: "POST",
+        header,
+        url,
+      });
 
       let id_video = this.vimeo_crear.data.link.split("/");
       this.url_test_vimeo = this.vimeo_crear.data.player_embed_url;
-      this.vimeoUpload(this.vimeo_crear.data.upload.upload_link, this.files[0], id_video);
+      this.vimeoUpload(
+        this.vimeo_crear.data.upload.upload_link,
+        this.files[0],
+        id_video
+      );
     },
 
     async vimeoUpload(url, file, id_video) {
@@ -497,7 +655,13 @@ export default {
         Accept: "application/vnd.vimeo.*+json;version=3.4",
       };
       let options = true;
-      await this.axiosSc({ url, header: headers, data: file, method: "PATCH", options });
+      await this.axiosSc({
+        url,
+        header: headers,
+        data: file,
+        method: "PATCH",
+        options,
+      });
       options = false;
       this.id_video = id_video[id_video.length - 1];
       this.id_video = this.id_video;
@@ -549,10 +713,8 @@ export default {
       const programa = await this._getPrograma(this.datosPostulacion.programId);
       this.programa = programa.data.data;
 
-      console.log("Postulación", this.datosPostulacion);
-      console.log("Programa", this.programa);
-
-      if (!this.registro.numeroTemporadas) this.registro.numeroTemporadas = null;
+      if (!this.registro.numeroTemporadas)
+        this.registro.numeroTemporadas = null;
       if (!this.registro.numeroCapitulos) this.registro.numeroCapitulos = null;
       if (!this.registro.horarioEmision) this.registro.horarioEmision = null;
       if (!this.registro.canalEmision) this.registro.canalEmision = null;
@@ -576,7 +738,8 @@ export default {
       this.registro.sinopsis = this.programa.sipnosis;
       this.registro.fecha = this.programa.dateIssue;
 
-      if (this.datosPostulacion.typePostulation == 1) this.frame.photo = this.datosPostulacion.photo;
+      if (this.datosPostulacion.typePostulation == 1)
+        this.frame.photo = this.datosPostulacion.photo;
       else this.frame.photo = this.programa.poster;
 
       const new_id_video = this.datosPostulacion.video.split("/");
@@ -610,7 +773,10 @@ export default {
         Name: this.registro.nameTalent,
         Link: this.registro.linkProyecto,
         TypePostulation: `${this.datosPostulacion.typePostulation}`,
-        Photo: this.datosPostulacion.typePostulation == 1 ? new_logo : this.datosPostulacion.photo,
+        Photo:
+          this.datosPostulacion.typePostulation == 1
+            ? new_logo
+            : this.datosPostulacion.photo,
         Video: `https://player.vimeo.com/video/${this.id_video}`,
         CategoryId: this.datosPostulacion.categoryId,
         UserId: this.datosPostulacion.userId,
@@ -623,7 +789,10 @@ export default {
       const dataProgram = {
         Letter: this.programa.letter,
         id: this.datosPostulacion.programId,
-        poster: this.datosPostulacion.typePostulation == 1 ? this.programa.poster : new_logo,
+        poster:
+          this.datosPostulacion.typePostulation == 1
+            ? this.programa.poster
+            : new_logo,
         nameProgram: this.registro.nameProgram,
         channelIssue: this.registro.canal,
         channelProduct: this.registro.canalEmision,
@@ -637,7 +806,11 @@ export default {
       };
       const respuestaPostulacion = await this._editPostulacion(dataPostulation);
       const respuestaPrograma = await this._editProgramas(dataProgram);
-      if (respuestaPostulacion.status === 200 && respuestaPrograma.status === 200) this.retroceder();
+      if (
+        respuestaPostulacion.status === 200 &&
+        respuestaPrograma.status === 200
+      )
+        this.retroceder();
     },
     retroceder() {
       window.history.back();

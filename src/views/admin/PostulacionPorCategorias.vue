@@ -8,10 +8,25 @@
       <v-row class="container-channel my-10">
         <v-col cols="12" class="mt-0 pt-0">
           <v-row justify="start">
-            <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0 text-start">
+            <v-col
+              cols="12"
+              xs="6"
+              sm="6"
+              md="6"
+              lg="6"
+              xl="6"
+              class="py-0 text-start"
+            >
               <v-row>
                 <v-col cols="1" class="my-4 mr-3">
-                  <v-btn fab color="boton" class="botone d-flex" x-small elevation="0" sm-d-none @click="retroceder"
+                  <v-btn
+                    fab
+                    color="boton"
+                    class="botone d-flex"
+                    x-small
+                    elevation="0"
+                    sm-d-none
+                    @click="retroceder"
                     ><v-icon color="white">mdi-arrow-left</v-icon>
                   </v-btn>
                 </v-col>
@@ -21,33 +36,80 @@
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0 pt6">
-              <v-text-field label="Buscar Producción o Talento" v-model="buscar" outlined rounded prepend-icon="mdi-magnify" dense></v-text-field>
+            <v-col
+              cols="12"
+              xs="6"
+              sm="6"
+              md="6"
+              lg="6"
+              xl="6"
+              class="py-0 pt6"
+            >
+              <v-text-field
+                label="Buscar Producción o Talento"
+                v-model="buscar"
+                outlined
+                rounded
+                prepend-icon="mdi-magnify"
+                dense
+              ></v-text-field>
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" v-for="(item, index) in array_categorias" :key="index">
+            <v-col
+              cols="12"
+              v-for="(item, index) in array_categorias"
+              :key="index"
+            >
               <v-card border-new>
                 <v-container class="fill-height">
-                  <v-col v-if="item.typePostulation==1" cols="12" xs="12" sm="12" md="7" lg="7" xl="7">
-                    <h4 v-if="canal">{{ item.category }} - {{ item.nameProgram }}</h4>
-                    <h4 v-else>{{ item.name }} - {{ item.nameProgram }} - {{ item.canal }}</h4>
+                  <v-col
+                    v-if="item.typePostulation == 1"
+                    cols="12"
+                    xs="12"
+                    sm="12"
+                    md="7"
+                    lg="7"
+                    xl="7"
+                  >
+                    <h4 v-if="canal">
+                      {{ item.category }} - {{ item.nameProgram }}
+                    </h4>
+                    <h4 v-else>
+                      {{ item.name }} - {{ item.nameProgram }} -
+                      {{ item.canal }}
+                    </h4>
                   </v-col>
                   <v-col v-else cols="12" xs="12" sm="12" md="7" lg="7" xl="7">
-                    <h4 v-if="canal">{{ item.category }} - {{ item.nameProgram }}</h4>
+                    <h4 v-if="canal">
+                      {{ item.category }} - {{ item.nameProgram }}
+                    </h4>
                     <h4 v-else>{{ item.nameProgram }} - {{ item.canal }}</h4>
                   </v-col>
                   <v-col cols="8" xs="6" sm="6" md="3" lg="3" xl="3">
-                    <v-btn color="boton" height="40" width="175" class="botone my-0 mr-3" rounded dark outlined @click="verPrograma(item)">
+                    <v-btn
+                      color="boton"
+                      height="40"
+                      width="175"
+                      class="botone my-0 mr-3"
+                      rounded
+                      dark
+                      outlined
+                      @click="verPrograma(item)"
+                    >
                       <h3 class="">ver detalles</h3>
                     </v-btn>
                   </v-col>
                   <v-col cols="4" xs="6" sm="6" md="2" lg="2" xl="2">
                     <v-btn icon>
-                      <v-icon @click="editarPostulacion(item)" color="black"> mdi-pencil </v-icon>
+                      <v-icon @click="editarPostulacion(item)" color="black">
+                        mdi-pencil
+                      </v-icon>
                     </v-btn>
                     <v-btn icon>
-                      <v-icon @click="eliminarPostulacion(item)" color="black"> mdi-trash-can-outline </v-icon>
+                      <v-icon @click="eliminarPostulacion(item)" color="black">
+                        mdi-trash-can-outline
+                      </v-icon>
                     </v-btn>
                   </v-col>
                 </v-container>
@@ -55,10 +117,24 @@
             </v-col>
           </v-row>
         </v-col>
-        <ALT @exitEsc="cancel()" @cancel="cancel()" @cancelAlert="cancelAlert()" @confirm="confirm()" :alert="alert" v-if="alert.estado" />
+        <ALT
+          @exitEsc="cancel()"
+          @cancel="cancel()"
+          @cancelAlert="cancelAlert()"
+          @confirm="confirm()"
+          :alert="alert"
+          v-if="alert.estado"
+        />
       </v-row>
     </v-container>
-    <ALT @exitEsc="cancel()" @cancel="cancel()" @cancelAlert="cancelAlert()" @confirm="confirmar()" :alert="alert" v-if="alert.estado" />
+    <ALT
+      @exitEsc="cancel()"
+      @cancel="cancel()"
+      @cancelAlert="cancelAlert()"
+      @confirm="confirmar()"
+      :alert="alert"
+      v-if="alert.estado"
+    />
   </v-app>
 </template>
 
@@ -95,7 +171,11 @@ export default {
   watch: {
     buscar() {
       this.array_categorias = this.array_categoria_base;
-      let filtro = this.array_categorias.filter((categoria) => categoria.nameProgram.includes(this.buscar) || categoria.canal.includes(this.buscar));
+      let filtro = this.array_categorias.filter(
+        (categoria) =>
+          categoria.nameProgram.includes(this.buscar) ||
+          categoria.canal.includes(this.buscar)
+      );
       this.array_categorias = filtro;
       this.validar_buscar = this.array_categorias.length == 0 ? true : false;
     },
@@ -147,7 +227,7 @@ export default {
           },
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     },
     buscarCanal() {
@@ -157,8 +237,12 @@ export default {
 
       if (this.canal) {
         for (let i = 0; i < this.array_categorias.length; i++) {
-          categoria = this.categorias.find((id) => id.id == this.array_categorias[i].categoryId);
-          nameProgram = this.programs.find((id) => id.id == this.array_categorias[i].programId);
+          categoria = this.categorias.find(
+            (id) => id.id == this.array_categorias[i].categoryId
+          );
+          nameProgram = this.programs.find(
+            (id) => id.id == this.array_categorias[i].programId
+          );
           if (categoria != undefined) {
             this.array_categorias[i].category = categoria.nameCategory;
           } else {
@@ -173,8 +257,12 @@ export default {
         }
       } else {
         for (let i = 0; i < this.array_categorias.length; i++) {
-          canal = this.canales.data.data.find((id) => id.userId == this.array_categorias[i].userId);
-          nameProgram = this.programs.find((id) => id.id == this.array_categorias[i].programId);
+          canal = this.canales.data.data.find(
+            (id) => id.userId == this.array_categorias[i].userId
+          );
+          nameProgram = this.programs.find(
+            (id) => id.id == this.array_categorias[i].programId
+          );
 
           if (canal != undefined) {
             this.array_categorias[i].canal = canal.nameClient;
@@ -183,13 +271,21 @@ export default {
             this.array_categorias[i].nameProgram = nameProgram.nameProgram;
           } else this.array_categorias[i].nameProgram = "PROGRAMA NO EXISTE";
         }
-        this.array_categoria_base = JSON.parse(JSON.stringify(this.array_categorias));
+        this.array_categoria_base = JSON.parse(
+          JSON.stringify(this.array_categorias)
+        );
       }
     },
     editarPostulacion(item) {
       this.$router.push({
         name: "admin/editar-postulacion",
-        params: { data: { programa: item, postulacion: { nameCategory: this.name_catetgory }, id: item.id } },
+        params: {
+          data: {
+            programa: item,
+            postulacion: { nameCategory: this.name_catetgory },
+            id: item.id,
+          },
+        },
       });
     },
     async getAllPrgramas() {

@@ -257,6 +257,10 @@ export default {
         "/postulantes/registro-produccion",
         "/postulantes/pagos",
       ],
+      rutas_produccion: [
+        "/postulantes/registro-talento",
+        "/postulantes/registro-postulacion",
+      ],
     };
   },
   watch: {
@@ -270,7 +274,13 @@ export default {
       return this.rutas.includes(this.ruta) ? true : false;
     },
     resumen_inscripcion() {
-      return this.rutas.slice(1, 2).includes(this.ruta) ? true : false;
+      const ruta_part = this.rutas.slice(1, 2);
+      const rutas_produccion = this.rutas_produccion;
+
+      return ruta_part.includes(this.ruta) ||
+        rutas_produccion.includes(this.ruta)
+        ? true
+        : false;
     },
     registro_programa() {
       return this.rutas.slice(1).includes(this.ruta) ? true : false;

@@ -8,7 +8,15 @@
       <v-row class="container-channel my-10">
         <v-col cols="12" class="mt-0 pt-0">
           <v-row justify="start">
-            <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0 text-start">
+            <v-col
+              cols="12"
+              xs="6"
+              sm="6"
+              md="6"
+              lg="6"
+              xl="6"
+              class="py-0 text-start"
+            >
               <v-row>
                 <v-col cols="1" class="my-4 mr-3">
                   <v-btn
@@ -49,7 +57,9 @@
                 :search="search"
               >
                 <template v-slot:item.actions="{ item }">
-                  <v-icon class="mx-1" small @click="verMiembroVotante(item)"> mdi-eye </v-icon>
+                  <v-icon class="mx-1" small @click="verMiembroVotante(item)">
+                    mdi-eye
+                  </v-icon>
                 </template>
               </v-data-table>
             </v-col>
@@ -99,7 +109,8 @@ export default {
       this.array_categorias = this.array_categoria_base;
       let filtro = this.array_categorias.filter(
         (categoria) =>
-          categoria.nameProgram.includes(this.buscar) || categoria.canal.includes(this.buscar)
+          categoria.nameProgram.includes(this.buscar) ||
+          categoria.canal.includes(this.buscar)
       );
       this.array_categorias = filtro;
       this.validar_buscar = this.array_categorias.length == 0 ? true : false;
@@ -127,7 +138,6 @@ export default {
       try {
         const response = await this._getCategoryMember(id);
         this.voterMember = response;
-        console.log(response);
       } catch (error) {
         this.ALT_("", "warning", null, null, this.ALTD_, error);
       }

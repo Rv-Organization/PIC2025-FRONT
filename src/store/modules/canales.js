@@ -56,7 +56,7 @@ export default {
         commit("_loadingState", null, { root: true });
         const RES = await postData({
           method: "POST",
-          headers: {  "Content-Type": "multipart/form-data" },
+          headers: { "Content-Type": "multipart/form-data" },
           url: `s3/${data.tipo}`,
           data: file,
         });

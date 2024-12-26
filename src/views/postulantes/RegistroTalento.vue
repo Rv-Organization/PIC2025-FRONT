@@ -29,7 +29,11 @@
           el nombre de la lista en el reglamento), y añada solamente el nombre
           de la producción o del talento postulado sin créditos adicionales.
           Tipo de letra Lato, tamaños 48, 90 y 40 de acuerdo con el
-          <a href="https://premiosindiacatalina.com/wp-content/uploads/2023/12/Plantilla-muestra-tipo-letra-Loto.mp4" target="_blank">ejemplo.</a>
+          <a
+            href="https://premiosindiacatalina.com/wp-content/uploads/2023/12/Plantilla-muestra-tipo-letra-Loto.mp4"
+            target="_blank"
+            >ejemplo.</a
+          >
         </h3>
         <v-form v-model="validacion" ref="form" lazy-validation>
           <v-row justify="start">
@@ -68,10 +72,10 @@
               class="text-center mx-auto"
             >
               <v-btn
+                class="upload py-2 mb-3 boton-focus-animation"
                 @click="subirArchivo('input-file2')"
-                plain
-                class="upload py-2 mb-3"
                 height="100%"
+                plain
               >
                 <v-row align="center">
                   <v-col
@@ -146,10 +150,10 @@
               class="text-center mx-auto"
             >
               <v-btn
+                class="upload boton-focus-animation py-2 mb-3"
                 @click="elegirArchivo()"
-                plain
-                class="upload py-2 mb-3"
                 height="100%"
+                plain
               >
                 <v-row align="center">
                   <v-col
@@ -641,11 +645,6 @@ export default {
   width: 75%;
   margin: auto;
   padding-top: 2rem;
-}
-
-.upload {
-  border-style: dashed;
-  border-color: rgba(102, 102, 102, 0.5);
 }
 
 /* Movil  */

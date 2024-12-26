@@ -33,7 +33,11 @@
       <h4 class="mt-10" v-else>
         Genial, ya completo la evaluación de los criterios para esta categoria
       </h4>
-      <v-progress-linear :value="porcentaje" height="25" v-if="!validarUsuariosIbero()">
+      <v-progress-linear
+        :value="porcentaje"
+        height="25"
+        v-if="!validarUsuariosIbero()"
+      >
         <strong>{{ Math.ceil(porcentaje) }}%</strong>
       </v-progress-linear>
     </v-row>
@@ -129,10 +133,20 @@
                     <strong>Temporadas:</strong>
                     {{ item.program?.numberSeason }}
                   </p>
-                  <a class="my-2"  target="_blank" :href=item.link v-if="item.link">
+                  <a
+                    class="my-2"
+                    target="_blank"
+                    :href="item.link"
+                    v-if="item.link"
+                  >
                     <strong>Link</strong>
                   </a>
-                  <a class="my-12"  target="_blank" :href=item.libretto v-if="item.libretto">
+                  <a
+                    class="my-12"
+                    target="_blank"
+                    :href="item.libretto"
+                    v-if="item.libretto"
+                  >
                     <strong>Libreto</strong>
                   </a>
                 </v-col>
@@ -392,7 +406,6 @@ export default {
         (element) => element.id == Number(this.$route.query?.id)
       );
       this.array_postulados = postulados.postulations;
-      console.log("🍑  this.array_postulados", this.array_postulados)
 
       this.array_postulados = this.array_postulados.map((e) => {
         return { ...e, rating_criterios: [], dialogo_votacion: false };
@@ -489,7 +502,11 @@ export default {
 
     validarUsuariosIbero() {
       const CORREO = JSON.parse(atob(sessionStorage.current_user)).email;
-      const CORREOS_NO_VOTAN = ["marioemorales@hotmail.com", "yalgior@gmail.com", "majidaissa@yahoo.com"];
+      const CORREOS_NO_VOTAN = [
+        "marioemorales@hotmail.com",
+        "yalgior@gmail.com",
+        "majidaissa@yahoo.com",
+      ];
 
       return CORREOS_NO_VOTAN.find((e) => e == CORREO) ? true : false;
     },
@@ -560,12 +577,6 @@ export default {
 
 .underline {
   text-decoration: underline;
-}
-
-.container-channel {
-  width: 75%;
-  margin: auto;
-  padding-top: 2rem;
 }
 
 @keyframes slide-down {

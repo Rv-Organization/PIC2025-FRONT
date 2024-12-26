@@ -125,10 +125,9 @@ export default {
           id: "tipo_identidad",
           label: "Tipo",
           items: [
-            { id: "0", text: "C.C" },
-            { id: "1", text: "T.I" },
-            { id: "2", text: "C.E" },
-            { id: "3", text: "C.C" },
+            { id: "0", text: "C.C - Cedúla de ciudadanía" },
+            { id: "1", text: "T.I - Tarjeta de identidad" },
+            { id: "2", text: "C.E - Documento de identidad o extranjería" },
           ],
           rules: [(v) => !!v || "Obligatorio"],
         },

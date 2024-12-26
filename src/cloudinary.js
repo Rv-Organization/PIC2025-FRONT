@@ -9,7 +9,6 @@
 // //   .image('https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg')
 // //   .setDeliveryType('fetch');
 
-// // console.log(fetchedImage.toURL());
 // // https://res.cloudinary.com/<cloud_name>/image/fetch/https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg
 
 // // Transform

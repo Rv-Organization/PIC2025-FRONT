@@ -75,24 +75,40 @@ export default {
       buttonContainer: null,
     };
   },
-  async created() {
-    this.page = await this._getPago();
 
-    let totalPrice = 0;
-    this.total = this.page.data.data.totalPrice;
-    this.page.data.data.orderItems.forEach((e) => {
-      totalPrice += e.category.price;
-      this.array_order_items.push({
-        nameCategory: e.category.nameCategory,
-        price: e.category.price,
-        quantity: e.quantity,
+  created() {
+    this.initializeEpaycoScript();
+  },
+  methods: {
+    formatNum_,
+    ...mapActions({
+      _getPago: "postulacion/_getPago",
+    }),
+    async initializeEpaycoScript() {
+      this.page = await this._getPago();
+
+      let totalPrice = 0;
+      this.total = this.page.data.data.totalPrice;
+      this.page.data.data.orderItems.forEach((e) => {
+        totalPrice += e.category.price;
+        this.array_order_items.push({
+          nameCategory: e.category.nameCategory,
+          price: e.category.price,
+          quantity: e.quantity,
+        });
       });
-    });
-    if (totalPrice == 0) this.pago.estado = false;
 
-    if (this.total != 0) {
+      if (totalPrice === 0) {
+        this.pago.estado = false;
+        return;
+      }
+
       const node = document.createElement("script");
       node.src = "https://checkout.epayco.co/checkout.js";
+      node.setAttribute(
+        "data-epayco-button",
+        "https://epayco.com/wp-content/uploads/2022/01/logo.png"
+      );
       node.setAttribute("data-epayco-key", "a43c7b06b80c9e6cf02c5370c76e304c");
       node.setAttribute("class", "epayco-button");
       node.setAttribute("data-epayco-amount", this.total.toString());
@@ -112,35 +128,71 @@ export default {
         "https://app.premiosindiacatalina.com/api/order/epayco"
       );
       node.setAttribute("data-epayco-extra1", this.page.data.data.id);
-      node.setAttribute(
-        "data-epayco-button",
-        "https://epayco.com/wp-content/uploads/2022/01/logo.png"
-      );
+
       document.body.appendChild(node);
       this.buttonContainer = document.getElementById("Epayco");
-      if (this.buttonContainer) {
-        this.buttonContainer.appendChild(node);
-        setTimeout(() => {
-          const images = this.buttonContainer.querySelectorAll("img");
-          images.forEach((img) => {
-            img.style.width = "120px";
-            img.style.height = "30px";
-            img.style.objectFit = "contain";
-          });
-        }, 100);
-      }
-    }
-  },
 
-  methods: {
-    formatNum_,
-    ...mapActions({
-      _getPago: "postulacion/_getPago",
-    }),
+      this.buttonContainer.appendChild(node);
+      this.observeButtonContainer();
+
+      this.$nextTick(() => {
+        this.buttonContainer = document.getElementById("Epayco");
+        if (this.buttonContainer) {
+          this.buttonContainer.appendChild(node);
+          this.applyImageStylesOnLoad();
+        } else {
+          console.error("El contenedor del botón Epayco no se encontró.");
+        }
+      });
+    },
+    observeButtonContainer() {
+      const observer = new MutationObserver((mutationsList) => {
+        mutationsList.forEach((mutation) => {
+          if (mutation.type === "childList") {
+            this.applyImageStylesOnLoad();
+          }
+        });
+      });
+
+      observer.observe(this.buttonContainer, {
+        childList: true,
+        subtree: true,
+      });
+
+      this.observer = observer;
+    },
+    applyImageStylesOnLoad() {
+      if (!this.buttonContainer) {
+        console.error("buttonContainer no está definido.");
+        return;
+      }
+
+      const images = this.buttonContainer.querySelectorAll("img");
+
+      images.forEach((img) => {
+        if (img.complete) {
+          this.applyStyles(img);
+        } else {
+          img.addEventListener("load", () => {
+            this.applyStyles(img);
+          });
+        }
+      });
+    },
+    applyStyles(img) {
+      img.style.width = "120px";
+      img.style.height = "30px";
+      img.style.objectFit = "contain";
+    },
 
     pagoEpayco() {
       document.getElementById("Epayco").click();
     },
+  },
+  beforeDestroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   },
 };
 </script>

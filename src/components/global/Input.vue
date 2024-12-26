@@ -36,7 +36,6 @@
     :id="field.id"
     outlined
     dense
-    solo
   >
   </v-text-field>
 </template>
@@ -106,18 +105,3 @@ export default {
   },
 };
 </script>
-<style>
-.custom-text-field .v-input {
-  border: 2px solid #e4cc8e !important; /* Borde con color personalizado */
-  border-radius: 4px; /* Opcional: ajusta el radio del borde */
-  transition: border-color 0.3s ease; /* Transición suave */
-}
-
-.custom-text-field.v-input--is-focused .v-input {
-  border-color: #d1b572 !important; /* Color más oscuro al enfocar */
-}
-
-.custom-text-field.v-input--error .v-input {
-  border-color: #f44336 !important; /* Borde rojo en caso de error */
-}
-</style>

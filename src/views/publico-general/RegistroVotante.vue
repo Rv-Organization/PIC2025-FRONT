@@ -5,20 +5,24 @@
         <v-container>
           <h2 class="py-5">Postulación Miembros Acreditados de la Industria</h2>
           <h4>
-            La Organización de los Premios India Catalina se complace en contar con su experiencia y
-            conocimiento para evaluar o votar las producciones y talentos postulados a la edición número 40 de
-            esta entrega anual, que reconoce a lo mejor de la Industria Audiovisual Colombiana. Este año, cada
-            categoría será evaluada y votada por profesionales con experiencia certificada en los formatos y
-            géneros que dicha categoría premia. Le invitamos a llenar el siguiente formulario y esperamos
-            contar con su valiosa participación.
+            La Organización de los Premios India Catalina se complace en contar
+            con su experiencia y conocimiento para evaluar o votar las
+            producciones y talentos postulados a la edición número 40 de esta
+            entrega anual, que reconoce a lo mejor de la Industria Audiovisual
+            Colombiana. Este año, cada categoría será evaluada y votada por
+            profesionales con experiencia certificada en los formatos y géneros
+            que dicha categoría premia. Le invitamos a llenar el siguiente
+            formulario y esperamos contar con su valiosa participación.
           </h4>
           <br />
           <h4>
-            Antes de llenar el formulario, tenga en cuenta que los procesos de evaluación y votación requieren
-            de su tiempo personal para hacer una visualización a conciencia de las producciones y talentos
-            postulados. Si usted considera que no cuenta con ese tiempo, le agradecemos participar en los
-            Premios India Catalina de otra forma, por ejemplo, votando por los ganadores como público, proceso
-            que vendrá más adelante.
+            Antes de llenar el formulario, tenga en cuenta que los procesos de
+            evaluación y votación requieren de su tiempo personal para hacer una
+            visualización a conciencia de las producciones y talentos
+            postulados. Si usted considera que no cuenta con ese tiempo, le
+            agradecemos participar en los Premios India Catalina de otra forma,
+            por ejemplo, votando por los ganadores como público, proceso que
+            vendrá más adelante.
           </h4>
           <br />
           <h4>
@@ -50,16 +54,43 @@
             </v-row>
             <v-divider class="my-6"></v-divider>
             <v-row justify="start" class="mt-8">
-              <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" class="py-0">
+              <v-col
+                cols="12"
+                xs="12"
+                sm="12"
+                md="12"
+                lg="12"
+                xl="12"
+                class="py-0"
+              >
                 <h3 class="mb-5">
-                  ¿Esta sería su primera vez como Miembro Acreditado de la Industria en los Premios India
-                  Catalina?
+                  ¿Esta sería su primera vez como Miembro Acreditado de la
+                  Industria en los Premios India Catalina?
                 </h3>
                 <v-radio-group v-model="radioGroupPrimeraVez" row>
-                  <v-radio key="1" label="Sí, es mi primera vez." value="1"></v-radio>
-                  <v-radio key="2" label="No, ya he participado antes." value="2"></v-radio>
-                  <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0 mt-4">
-                    <INPUT v-if="radioGroupPrimeraVez == '2'" :field="form.fechaUltimaVez" />
+                  <v-radio
+                    key="1"
+                    label="Sí, es mi primera vez."
+                    value="1"
+                  ></v-radio>
+                  <v-radio
+                    key="2"
+                    label="No, ya he participado antes."
+                    value="2"
+                  ></v-radio>
+                  <v-col
+                    cols="6"
+                    xs="6"
+                    sm="6"
+                    md="6"
+                    lg="6"
+                    xl="6"
+                    class="py-0 mt-4"
+                  >
+                    <INPUT
+                      v-if="radioGroupPrimeraVez == '2'"
+                      :field="form.fechaUltimaVez"
+                    />
                   </v-col>
                 </v-radio-group>
               </v-col>
@@ -78,11 +109,27 @@
               <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0">
                 <INPUT :field="form.ocupacion" />
               </v-col>
-              <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" class="py-0">
-                <h3 class="mb-5">¿Está vinculado actualmente con algún canal, plataforma o productora?</h3>
+              <v-col
+                cols="12"
+                xs="12"
+                sm="12"
+                md="12"
+                lg="12"
+                xl="12"
+                class="py-0"
+              >
+                <h3 class="mb-5">
+                  ¿Está vinculado actualmente con algún canal, plataforma o
+                  productora?
+                </h3>
                 <v-radio-group v-model="radioGroupVinculado" row>
                   <v-radio key="1" label="Sí." value="1"></v-radio>
-                  <v-radio key="2" label="No." value="2" @click="form.vinculado.value = null"></v-radio>
+                  <v-radio
+                    key="2"
+                    label="No."
+                    value="2"
+                    @click="form.vinculado.value = null"
+                  ></v-radio>
                 </v-radio-group>
               </v-col>
               <v-col
@@ -96,18 +143,34 @@
                 class="py-0"
               >
                 <AUTOCOMPLETE :field="form.canales_productoras" />
-                <INPUT v-if="form.canales_productoras.value == 'Otro. ¿Cuál?'" :field="form.vinculado" />
+                <INPUT
+                  v-if="form.canales_productoras.value == 'Otro. ¿Cuál?'"
+                  :field="form.vinculado"
+                />
               </v-col>
 
               <!-- ****************************Lista proyectos**************************** -->
-              <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" class="py-0">
+              <v-col
+                cols="12"
+                xs="12"
+                sm="12"
+                md="12"
+                lg="12"
+                xl="12"
+                class="py-0"
+              >
                 <h3 class="mb-5">
-                  Por favor incluya hasta 5 de los proyectos más representativos en su carrera como miembro de
-                  la Industria Audiovisual Colombiana
+                  Por favor incluya hasta 5 de los proyectos más representativos
+                  en su carrera como miembro de la Industria Audiovisual
+                  Colombiana
                 </h3>
               </v-col>
             </v-row>
-            <v-row justify="start" class="mb-5" v-for="(proyecto, index) in proyectos">
+            <v-row
+              justify="start"
+              class="mb-5"
+              v-for="(proyecto, index) in proyectos"
+            >
               <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="py-0">
                 <INPUT :field="form[`nombre_proyecto_${index + 1}`]" />
               </v-col>
@@ -129,13 +192,23 @@
               <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="py-0">
                 <AUTOCOMPLETE :field="form[`cargo_proyecto_${index + 1}`]" />
                 <INPUT
-                  v-if="form[`cargo_proyecto_${index + 1}`].value == 'Otro. ¿Cuál?'"
+                  v-if="
+                    form[`cargo_proyecto_${index + 1}`].value == 'Otro. ¿Cuál?'
+                  "
                   :field="form[`otro_cargo_proyecto_${index + 1}`]"
                 />
               </v-col>
             </v-row>
             <v-row justify="center" class="mb-5">
-              <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0 text-center">
+              <v-col
+                cols="6"
+                xs="6"
+                sm="6"
+                md="6"
+                lg="6"
+                xl="6"
+                class="py-0 text-center"
+              >
                 <v-btn
                   class="mx-2"
                   fab
@@ -160,13 +233,25 @@
             </v-row>
 
             <!-- ****************************Lista Cargos**************************** -->
-            <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" class="py-0">
+            <v-col
+              cols="12"
+              xs="12"
+              sm="12"
+              md="12"
+              lg="12"
+              xl="12"
+              class="py-0"
+            >
               <h3 class="mb-5">
-                Por favor incluya hasta 5 de los cargos más representativos en su carrera como miembro de la
-                Industria Audiovisual Colombiana
+                Por favor incluya hasta 5 de los cargos más representativos en
+                su carrera como miembro de la Industria Audiovisual Colombiana
               </h3>
             </v-col>
-            <v-row justify="center" class="mb-5" v-for="(cargo, index) in cargos">
+            <v-row
+              justify="center"
+              class="mb-5"
+              v-for="(cargo, index) in cargos"
+            >
               <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" class="py-0">
                 <INPUT :field="form[`nombre_empresa_${index + 1}`]" />
               </v-col>
@@ -185,7 +270,15 @@
               </v-col>
             </v-row>
             <v-row justify="center" class="mb-5">
-              <v-col cols="6" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0 text-center">
+              <v-col
+                cols="6"
+                xs="6"
+                sm="6"
+                md="6"
+                lg="6"
+                xl="6"
+                class="py-0 text-center"
+              >
                 <v-btn
                   class="mx-2"
                   fab
@@ -210,19 +303,36 @@
             </v-row>
 
             <v-row justify="center" class="mb-5">
-              <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12" class="py-0">
+              <v-col
+                cols="12"
+                xs="12"
+                sm="12"
+                md="12"
+                lg="12"
+                xl="12"
+                class="py-0"
+              >
                 <h3 class="mb-5">
-                  Ahora que ha relacionado sus proyectos y cargos más representativos en la industria, por
-                  favor seleccione hasta 3 tipos de categorías en las que considera que tiene una destacada
-                  experiencia profesional certificada
+                  Ahora que ha relacionado sus proyectos y cargos más
+                  representativos en la industria, por favor seleccione hasta 3
+                  tipos de categorías en las que considera que tiene una
+                  destacada experiencia profesional certificada
                 </h3>
               </v-col>
-              <v-col v-for="(categoria, index) in tipos_categorias" :key="index" cols="12" md="6">
+              <v-col
+                v-for="(categoria, index) in tipos_categorias"
+                :key="index"
+                cols="12"
+                md="6"
+              >
                 <v-checkbox
                   :label="categoria"
                   :value="categoria"
                   v-model="selectedCategorias"
-                  :disabled="selectedCategorias.length === 3 && !selectedCategorias.includes(categoria)"
+                  :disabled="
+                    selectedCategorias.length === 3 &&
+                    !selectedCategorias.includes(categoria)
+                  "
                 >
                   <template v-slot:label>
                     <div>
@@ -234,8 +344,14 @@
                           </v-btn>
                         </template>
                         <v-list color="primary" class="mt-0">
-                          <v-list-item class="mt-0" v-for="(item, i) in categorias[index]" :key="i">
-                            <v-list-item-content class="mt-0">{{ item }}</v-list-item-content>
+                          <v-list-item
+                            class="mt-0"
+                            v-for="(item, i) in categorias[index]"
+                            :key="i"
+                          >
+                            <v-list-item-content class="mt-0">{{
+                              item
+                            }}</v-list-item-content>
                           </v-list-item>
                         </v-list>
                       </v-tooltip>
@@ -255,7 +371,9 @@
                 <v-col cols="12" sm="12" xs="6" md="8" lg="8" xl="8">
                   <v-card-text>
                     <h3>Foto donde se le puede identificar claramente *</h3>
-                    <h4>Extensiones permitidas JPG, JPEG, PNG, máximo 25 megas</h4>
+                    <h4>
+                      Extensiones permitidas JPG, JPEG, PNG, máximo 25 megas
+                    </h4>
                   </v-card-text>
                 </v-col>
                 <v-col
@@ -268,9 +386,22 @@
                   class="text-center mx-auto"
                   id="uploadmyfile"
                 >
-                  <v-btn @click="subirArchivo('input-file1')" plain class="upload py-2 mb-3" height="100%">
+                  <v-btn
+                    @click="subirArchivo('input-file1')"
+                    plain
+                    class="upload py-2 mb-3"
+                    height="100%"
+                  >
                     <v-row aling="center">
-                      <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5" class="py-0 mx-auto pl-9 my-0">
+                      <v-col
+                        cols="5"
+                        xs="5"
+                        sm="5"
+                        md="5"
+                        lg="5"
+                        xl="5"
+                        class="py-0 mx-auto pl-9 my-0"
+                      >
                         <v-file-input
                           prepend-icon="mdi-cloud-upload-outline"
                           accept="image/png, image/jpeg, image/jpg"
@@ -293,7 +424,13 @@
               </v-row>
             </v-card>
             <v-col v-if="this.form_uploads.foto.name" class="py-4">
-              <v-img max-height="100%" contain max-width="100%" :src="frames.foto" aspect-ratio="1.4"></v-img>
+              <v-img
+                max-height="100%"
+                contain
+                max-width="100%"
+                :src="frames.foto"
+                aspect-ratio="1.4"
+              ></v-img>
             </v-col>
 
             <!-- DOCUMENTO -->
@@ -303,7 +440,10 @@
                 <v-col cols="12" sm="12" xs="6" md="8" lg="8" xl="8">
                   <v-card-text>
                     <h3>Fotocopia del documento de identidad. *</h3>
-                    <h4>Extensiones permitidas JPG, JPEG, PNG, PDF, máximo 25 megas</h4>
+                    <h4>
+                      Extensiones permitidas JPG, JPEG, PNG, PDF, máximo 25
+                      megas
+                    </h4>
                   </v-card-text>
                 </v-col>
                 <v-col
@@ -316,9 +456,22 @@
                   class="text-center mx-auto"
                   id="uploadmyfile"
                 >
-                  <v-btn @click="subirArchivo('input-file2')" plain class="upload py-2 mb-3" height="100%">
+                  <v-btn
+                    @click="subirArchivo('input-file2')"
+                    plain
+                    class="upload py-2 mb-3"
+                    height="100%"
+                  >
                     <v-row aling="center">
-                      <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5" class="py-0 mx-auto pl-9 my-0">
+                      <v-col
+                        cols="5"
+                        xs="5"
+                        sm="5"
+                        md="5"
+                        lg="5"
+                        xl="5"
+                        class="py-0 mx-auto pl-9 my-0"
+                      >
                         <v-file-input
                           prepend-icon="mdi-cloud-upload-outline"
                           accept="application/pdf, image/png, image/jpeg, image/jpg"
@@ -364,8 +517,8 @@
                 <v-col cols="12" sm="12" xs="6" md="8" lg="8" xl="8">
                   <v-card-text>
                     <h3>
-                      Hoja de vida con diplomas y certificaciones (por favor referenciar solo experiencia
-                      certificada). *
+                      Hoja de vida con diplomas y certificaciones (por favor
+                      referenciar solo experiencia certificada). *
                     </h3>
                     <h4>Extensiones permitidas PDF, máximo 25 megas</h4>
                   </v-card-text>
@@ -380,9 +533,22 @@
                   class="text-center mx-auto"
                   id="uploadmyfile"
                 >
-                  <v-btn @click="subirArchivo('input-file3')" plain class="upload py-2 mb-3" height="100%">
+                  <v-btn
+                    @click="subirArchivo('input-file3')"
+                    plain
+                    class="upload py-2 mb-3"
+                    height="100%"
+                  >
                     <v-row aling="center">
-                      <v-col cols="5" xs="5" sm="5" md="5" lg="5" xl="5" class="py-0 mx-auto pl-9 my-0">
+                      <v-col
+                        cols="5"
+                        xs="5"
+                        sm="5"
+                        md="5"
+                        lg="5"
+                        xl="5"
+                        class="py-0 mx-auto pl-9 my-0"
+                      >
                         <v-file-input
                           prepend-icon="mdi-cloud-upload-outline"
                           accept="application/pdf, image/png, image/jpeg, image/jpg"
@@ -426,7 +592,14 @@
           <v-container>
             <v-row class="my-15 justify-center">
               <v-col cols="12" xs="8" sm="8" md="8" lg="8" xl="8">
-                <v-btn @click="alertaGuardar()" class="botone" color="boton" elevation="0" large block dark
+                <v-btn
+                  @click="alertaGuardar()"
+                  class="botone"
+                  color="boton"
+                  elevation="0"
+                  large
+                  block
+                  dark
                   >Guardar
                 </v-btn>
               </v-col>
@@ -562,7 +735,10 @@ export default {
           tipo: "number",
           maxlength: "10",
           disabled: false,
-          rules: [(v) => !!v || "Celular es requerido", (v) => v.length >= 10 || "Numero celular invalido"],
+          rules: [
+            (v) => !!v || "Celular es requerido",
+            (v) => v.length >= 10 || "Numero celular invalido",
+          ],
         },
         celular_veri: {
           value: "",
@@ -1071,7 +1247,10 @@ export default {
           label: "Email *",
           disabled: true,
           maxlength: "50",
-          rules: [(v) => !!v || "Email es requerido", (v) => /.+@.+\..+/.test(v) || "Email no es valido"],
+          rules: [
+            (v) => !!v || "Email es requerido",
+            (v) => /.+@.+\..+/.test(v) || "Email no es valido",
+          ],
         },
         email_1_veri: {
           value: CURRTET_USER.email,
@@ -1153,19 +1332,27 @@ export default {
   watch: {
     "form_uploads.hoja_vida"() {
       this.format_hoja_vida = this.form_uploads.hoja_vida.name.split(".");
-      this.format_hoja_vida = this.format_hoja_vida[this.format_hoja_vida.length - 1];
+      this.format_hoja_vida =
+        this.format_hoja_vida[this.format_hoja_vida.length - 1];
       if (this.form_uploads.hoja_vida.size > 25000000) {
         this.form_uploads.hoja_vida = "";
         this.ALT_("CORREO-6", "warning");
-      } else this.frames.hoja_vida = URL.createObjectURL(this.form_uploads.hoja_vida);
+      } else
+        this.frames.hoja_vida = URL.createObjectURL(
+          this.form_uploads.hoja_vida
+        );
     },
     "form_uploads.documento"() {
       this.format_documento = this.form_uploads.documento.name.split(".");
-      this.format_documento = this.format_documento[this.format_documento.length - 1];
+      this.format_documento =
+        this.format_documento[this.format_documento.length - 1];
       if (this.form_uploads.documento.size > 25000000) {
         this.form_uploads.documento = "";
         this.ALT_("CORREO-6", "warning");
-      } else this.frames.documento = URL.createObjectURL(this.form_uploads.documento);
+      } else
+        this.frames.documento = URL.createObjectURL(
+          this.form_uploads.documento
+        );
     },
     "form_uploads.foto"() {
       if (this.form_uploads.foto.size > 25000000) {
@@ -1232,7 +1419,11 @@ export default {
       //   this.ALT_("MV-SS", "success", "p", this.reload); //esto no vaaaaaaaa
       // }, 200);
 
-      if ((this.form_uploads.hoja_vida, this.form_uploads.foto, this.form_uploads.documento)) {
+      if (
+        (this.form_uploads.hoja_vida,
+        this.form_uploads.foto,
+        this.form_uploads.documento)
+      ) {
         const hoja_vida = await this.uploadHojaVida();
         const foto = await this.uploadFoto();
         const documento = await this.uploadDocumento();
@@ -1249,7 +1440,9 @@ export default {
 
             isFirstTime: this.radioGroupPrimeraVez == "1" ? true : false,
             DatePrevious:
-              this.radioGroupPrimeraVez == "2" ? new Date(`${this.form.fechaUltimaVez.value}-01-01`) : null,
+              this.radioGroupPrimeraVez == "2"
+                ? new Date(`${this.form.fechaUltimaVez.value}-01-01`)
+                : null,
             celPhone: this.form.celular.value,
             document: this.form.documento.value,
             position: this.form.profesion.value,
@@ -1293,7 +1486,8 @@ export default {
         return;
       }
       if (this.frames.hoja_vida && this.frames.documento && this.frames.foto) {
-        if (this.selectedCategorias.length == 0) this.ALT_("CATEGORIAS-1", "warning");
+        if (this.selectedCategorias.length == 0)
+          this.ALT_("CATEGORIAS-1", "warning");
         else this.ALT_("MV-03", "info", "p", this.registroVotante);
       } else {
         this.ALT_("MV-00", "warning");
@@ -1414,7 +1608,9 @@ export default {
         if (!this.form[`nombre_proyecto_${i + 1}`].value) break;
 
         const value = this.form[`cargo_proyecto_${i + 1}`].value;
-        const occupationId = this.cargosPrueba.find((cargo, i) => cargo.text === value);
+        const occupationId = this.cargosPrueba.find(
+          (cargo, i) => cargo.text === value
+        );
 
         proyectos.push({
           name: this.form[`nombre_proyecto_${i + 1}`].value,
@@ -1439,7 +1635,9 @@ export default {
         if (!this.form[`nombre_empresa_${i + 1}`].value) break;
 
         const value = this.form[`cargo_${i + 1}`].value;
-        const occupationId = this.cargosPrueba.find((cargo, i) => cargo.text === value);
+        const occupationId = this.cargosPrueba.find(
+          (cargo, i) => cargo.text === value
+        );
 
         cargos.push({
           companyName: this.form[`nombre_empresa_${i + 1}`].value,
@@ -1453,7 +1651,7 @@ export default {
           userId: CURRTET_USER.id,
         });
       }
-      console.log(cargos);
+
       return cargos;
     },
 
@@ -1461,7 +1659,8 @@ export default {
       const categorias = [];
       for (let i = 0; i < this.selectedCategorias.length; i++) {
         categorias.push({
-          groupCategoryId: this.tipos_categorias.indexOf(this.selectedCategorias[i]) + 1,
+          groupCategoryId:
+            this.tipos_categorias.indexOf(this.selectedCategorias[i]) + 1,
           userId: CURRTET_USER.id,
         });
       }

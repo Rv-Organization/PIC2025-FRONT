@@ -22,7 +22,6 @@
     row-height="30"
     outlined
     dense
-    solo
   >
   </v-textarea>
 </template>

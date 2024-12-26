@@ -7,7 +7,15 @@
       </v-card>
       <v-container class="container-channel mt-10 bg-color">
         <v-row justify="start">
-          <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6" class="py-0 text-start">
+          <v-col
+            cols="12"
+            xs="6"
+            sm="6"
+            md="6"
+            lg="6"
+            xl="6"
+            class="py-0 text-start"
+          >
             <v-row>
               <v-col cols="1" class=" ">
                 <v-btn
@@ -57,15 +65,27 @@
           </v-col>
           <v-col class="ml-5 mt-3" md="5">
             <h2 class="my-2">Datos del programa</h2>
-            <span v-if="datos.typePostulation == 1">Nombre del talento: {{ datos.name }}</span>
-            <h4 class="my-2">Canal plataforma: {{ this.programa.channelProduct }}</h4>
-            <h4 class="my-2">Canal de emisión: {{ this.programa.channelIssue }}</h4>
-            <h4 class="my-2">Fecha de publicacion: {{ this.programa.dateIssue }}</h4>
-            <h4 class="my-2">Horario de emision: {{ this.programa.hourIssue }}</h4>
+            <span v-if="datos.typePostulation == 1"
+              >Nombre del talento: {{ datos.name }}</span
+            >
+            <h4 class="my-2">
+              Canal plataforma: {{ this.programa.channelProduct }}
+            </h4>
+            <h4 class="my-2">
+              Canal de emisión: {{ this.programa.channelIssue }}
+            </h4>
+            <h4 class="my-2">
+              Fecha de publicacion: {{ this.programa.dateIssue }}
+            </h4>
+            <h4 class="my-2">
+              Horario de emision: {{ this.programa.hourIssue }}
+            </h4>
             <h4>Numero de capitulos: {{ this.programa.numberChapter }}</h4>
             <h4>Numero de temporadas: {{ this.programa.numberSeason }}</h4>
             <h4>Link a la promo: {{ this.programa.webpage }}</h4>
-            <h4 v-if="this.datos.link">Link al proyecto: {{ this.datos.link }}</h4>
+            <h4 v-if="this.datos.link">
+              Link al proyecto: {{ this.datos.link }}
+            </h4>
           </v-col>
         </v-row>
         <v-row v-if="datos.libretto" class="pt-15">
@@ -141,7 +161,6 @@ export default {
   watch: {},
   mounted() {
     this.obtenerPostulacion();
-    console.log(this.datos);
   },
   methods: {
     ...mapActions({
@@ -159,13 +178,14 @@ export default {
     },
     async getPostulationsForCategory(id) {
       //Lineas comentadas por CRISTIAN S.
-      const postulaciones = await this._getPostulationsForCategory(this.datos.categoryId);
+      const postulaciones = await this._getPostulationsForCategory(
+        this.datos.categoryId
+      );
       this.array_categorias = postulaciones?.data?.data;
     },
     async getProgram() {
       const programa = await this._getPrograma(this.datos.programId);
       this.programa = programa.data.data;
-      console.log(this.programa);
     },
     retroceder() {
       window.history.back(); //para devolver esta molestando Pendiente por revisar

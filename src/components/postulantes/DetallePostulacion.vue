@@ -164,7 +164,7 @@ export default {
   watch: {},
   mounted() {
     this.traerConsultas();
-    console.log(this.datos);
+
     this.nameCategory = this.datos.nombre_categoria;
     this.nombreTalento = this.datos.nombre_talento;
     this.fotoTalento = this.datos.foto_talento;

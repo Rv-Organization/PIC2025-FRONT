@@ -100,3 +100,25 @@ body {
   color: #edc358 !important;
   border: 2.5px solid #edc358;
 }
+
+.upload {
+  border-style: dashed;
+  border-color: #e4cc8e;
+}
+
+.boton-focus-animation {
+  animation: focus-animation 1.5s infinite;
+  border-style: dashed;
+  color: #e4cc8e;
+}
+@keyframes focus-animation {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    transform: rotate(0deg);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0);
+    transform: rotate(0deg);
+  }
+}

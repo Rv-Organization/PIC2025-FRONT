@@ -245,7 +245,7 @@ export default {
     }),
     async obteberCategorias() {
       const respuesta = await this._getCatergorias();
-      console.log("🍑  respuesta", respuesta);
+
       const programa = [];
       const talento = [];
       const programa_1 = [];
@@ -263,10 +263,6 @@ export default {
           programa_1.push(respuesta.data.data[i]);
         else talento_1.push(respuesta.data.data[i]);
       }
-      // for (let i = 0; i < res.data.data.length; i++) {
-      //   if (res.data.data[i].typeCategoryId == 2) programa_1.push(res.data.data[i]);
-      //   else talento_1.push(res.data.data[i]);
-      // }
 
       this.form.categoria.items = JSON.stringify(programa_1);
       this.form.categoria.items = JSON.parse(this.form.categoria.items);

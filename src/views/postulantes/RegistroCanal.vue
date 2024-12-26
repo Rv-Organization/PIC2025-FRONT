@@ -113,7 +113,12 @@
             <v-card-text class="asaccent--text mt-8 pb-2 pl-0"
               >Seleccione el sector que lo representa como postulante
             </v-card-text>
-            <v-radio-group v-model="form.sector.value" row>
+            <v-radio-group
+              v-model="form.sector.value"
+              row
+              required
+              :rules="form.sector.rules"
+            >
               <v-radio
                 label="Sector Audiovisual Privado - Canales"
                 value="1"
@@ -241,9 +246,10 @@
                   class="text-center mx-auto"
                 >
                   <v-btn
+                    class="upload boton-focus-animation py-2 mb-3"
                     @click="subirArchivo('input-file1')"
+                    height="100%"
                     plain
-                    class="botone-outlined mb-3 py-2"
                   >
                     <v-file-input
                       prepend-icon="mdi-cloud-upload-outline"
@@ -311,10 +317,10 @@
                   class="text-center mx-auto"
                 >
                   <v-btn
+                    class="upload boton-focus-animation py-2 mb-3"
                     @click="subirArchivo('input-file2')"
-                    plain
-                    class="botone-outlined"
                     height="100%"
+                    plain
                   >
                     <v-file-input
                       prepend-icon="mdi-cloud-upload-outline"
@@ -428,8 +434,7 @@ export default {
             { id: "CityTV", text: "CityTV" },
             { id: "Canal Trece", text: "Canal Trece" },
             { id: "Netflix", text: "Netflix" },
-            { id: "HBO Max", text: "HBO Max" },
-            { id: "Star +", text: "Star +" },
+            { id: "Max", text: "Max" },
             { id: "Prime Video", text: "Prime Video" },
             { id: "Disney +", text: "Disney +" },
             { id: "MinTIC", text: "MinTIC" },
@@ -445,10 +450,9 @@ export default {
             { id: "CityTV", text: "CityTV" },
             { id: " Canal Trece", text: " Canal Trece" },
             { id: "Netflix", text: "Netflix" },
-            { id: "HBO Max", text: "HBO Max" },
+            { id: "Max", text: "Max" },
             { id: "Canal Institucional", text: "Canal Institucional" },
             { id: "RTVCPlay", text: "RTVCPlay" },
-            { id: "Star +", text: "Star +" },
             { id: "Prime Video", text: "Prime Video" },
             { id: "Disney +", text: "Disney +" },
             { id: "MinTIC", text: "MinTIC" },
@@ -573,6 +577,7 @@ export default {
           id: "sector",
           label: "Seleccione el sector que lo representa como postulante",
           rules: [(v) => !!v || "El sector es obligatorio"],
+          required: true,
         },
       },
       form_uploads: {
