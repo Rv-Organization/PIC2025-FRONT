@@ -196,6 +196,69 @@
                 :src="frame.carta"
               ></iframe>
             </v-col>
+            <v-card elevation="0" class="pb-0 mb-0 my-12">
+              <v-row aling="center" class="my-0">
+                <v-col cols="12" xs="12" sm="8" md="8" lg="8" xl="8">
+                  <v-card-text>
+                    <h3>Certificado de emisión Kantar IBOPE o equivalente</h3>
+                    <h4>Extensiones permitidas PDF, máximo 2 megas</h4>
+                  </v-card-text>
+                </v-col>
+                <v-col
+                  cols="5"
+                  xs="6"
+                  sm="4"
+                  md="4"
+                  lg="4"
+                  xl="4"
+                  class="text-center mx-auto"
+                >
+                  <v-btn
+                    @click="subirArchivo('input-file3')"
+                    class="upload boton-focus-animation py-2 mb-3"
+                    height="100%"
+                    plain
+                  >
+                    <v-row align="center">
+                      <v-col
+                        class="py-0 mx-auto pl-9 my-0"
+                        cols="5"
+                        xs="5"
+                        sm="5"
+                        md="5"
+                        lg="5"
+                        xl="5"
+                      >
+                        <v-file-input
+                          prepend-icon="mdi-cloud-upload-outline"
+                          truncate-length="1"
+                          accept="application/pdf"
+                          v-model="certificado"
+                          id="input-file3"
+                          class="mt-0"
+                          hide-input
+                          show-size
+                        />
+                      </v-col>
+                      <v-row>
+                        <v-col class="py-4">
+                          <h3 v-if="!subir_certificado">SUBIR CERTIFICADO</h3>
+                          <h3 v-else>MODIFICAR CERTIFICADO</h3>
+                        </v-col>
+                      </v-row>
+                    </v-row>
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-card>
+            <v-col v-if="subir_certificado" class="py-4">
+              <iframe
+                height="500px"
+                width="500px"
+                class="container"
+                :src="frame.certificado"
+              ></iframe>
+            </v-col>
             <v-divider class="my-4"></v-divider>
             <v-row aling="center">
               <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="6">
@@ -294,14 +357,17 @@ export default {
 
       poster: [],
       carta: [],
+      certificado: [],
 
-      frame: { poster: "", carta: "" },
+      frame: { poster: "", carta: "", certificado: "" },
 
       edit_poster: false,
       edit_carta: false,
+      edit_certificado: false,
 
       subir_poster: false,
       subir_carta: false,
+      subir_certificado: false,
 
       format_poster: "",
       channelIssue: "",
@@ -409,6 +475,20 @@ export default {
         this.subir_carta = true;
       }
     },
+    certificado() {
+      this.format_certificado = this.certificado.name.split(".");
+      this.format_certificado =
+        this.format_certificado[this.format_certificado.length - 1];
+
+      if (this.certificado.size > 10000000) {
+        this.format_certificado = "";
+        this.ALT_("CORREO-10", "warning");
+      } else {
+        this.frame.certificado = URL.createObjectURL(this.certificado);
+        this.edit_certificado = true;
+        this.subir_certificado = true;
+      }
+    },
   },
 
   mounted() {
@@ -437,6 +517,10 @@ export default {
       this.edit_carta = true;
       this.subir_carta = true;
 
+      this.frame.certificado = this.$route.params.data.programa.certificado;
+      this.edit_certificado = true;
+      this.subir_certificado = true;
+
       this.editar = true;
     }
     this.obetenerCanal();
@@ -464,8 +548,16 @@ export default {
       if (validacion) {
         let poster = "";
         let carta = "";
-        if (this.frame.poster) poster = await this.uploadPoster();
-        if (this.frame.carta) carta = await this.uploadCarta();
+        let certificado = "";
+        if (this.frame.poster) {
+          poster = await this.uploadPoster();
+        }
+        if (this.frame.carta) {
+          carta = await this.uploadCarta();
+        }
+        if (this.frame.certificado) {
+          certificado = await this.uploadCertificado();
+        }
         const data = {
           nameProgram: this.form.nombre_programa.value,
           dateIssue: this.form.fecha.value,
@@ -476,6 +568,7 @@ export default {
           format: this.form.formato.value,
           poster: poster ? poster.data.data : "",
           letter: carta ? carta.data.data : "",
+          certifyKantar: certificado ? certificado.data.data : "",
           numberChapter: this.form.numero_capitulos.value,
           numberSeason: this.form.numero_temporada.value,
           Webpage: this.form.pagina_web.value,
@@ -496,8 +589,16 @@ export default {
       if (validacion) {
         let poster = "";
         let carta = "";
-        if (this.poster.length != 0) poster = await this.uploadPoster();
-        if (this.carta.length != 0) carta = await this.uploadCarta();
+        let certificado = "";
+        if (this.poster.length != 0) {
+          poster = await this.uploadPoster();
+        }
+        if (this.carta.length != 0) {
+          carta = await this.uploadCarta();
+        }
+        if (this.certificado.length != 0) {
+          certificado = await this.uploadCertificado();
+        }
         const data = {
           id: this.$route.params.data.programa.id,
           nameProgram: this.form.nombre_programa.value,
@@ -508,6 +609,9 @@ export default {
           format: this.form.formato.value,
           poster: poster?.data?.data || this.$route.params.data.programa.poster,
           letter: carta?.data?.data || this.$route.params.data.programa.letter,
+          certifyKantar:
+            certificado?.data?.data ||
+            this.$route.params.data.programa.certificado,
           numberChapter: this.form.numero_capitulos.value,
           numberSeason: this.form.numero_temporada.value,
           Webpage: this.form.pagina_web.value,
@@ -529,6 +633,12 @@ export default {
     async uploadCarta() {
       return await this._uploadFile({
         archivo: this.carta,
+        tipo: 2,
+      });
+    },
+    async uploadCertificado() {
+      return await this._uploadFile({
+        archivo: this.certificado,
         tipo: 2,
       });
     },
