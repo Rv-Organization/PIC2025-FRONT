@@ -68,7 +68,7 @@
                   <v-card-text>
                     <h3>
                       Póster de la producción: JPG, JPEG, PNG. Tamaño máximo: 10
-                      megas.
+                      megas, Resolución de la imagen: 854 x 1200 pixeles.
                     </h3>
                   </v-card-text>
                 </v-col>

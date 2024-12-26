@@ -4,7 +4,7 @@ import isAuthenticatedGuard from "./auth-guard.js";
 import isValidCanal from "./validarCanal";
 
 Vue.use(VueRouter);
-const TITLE = "PIC2024";
+const TITLE = "PIC2025";
 const routes = [
   {
     path: "*",

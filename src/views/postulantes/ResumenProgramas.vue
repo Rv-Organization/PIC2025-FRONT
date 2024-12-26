@@ -10,7 +10,7 @@
               <h4 class="pt-4" v-if="total_registrados">
                 A continuación encontrará la lista de producciones inscritas
                 hasta este momento para participar en los Premios India Catalina
-                2024. Para postular la producción en una o varias categorías, se
+                2025. Para postular la producción en una o varias categorías, se
                 debe click en el botón Categorías de producción, si se va a
                 postular la producción en categorías que premian el talento, o
                 dar click en Categorías de talento, si lo que se va a postular

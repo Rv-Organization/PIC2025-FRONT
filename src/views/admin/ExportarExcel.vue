@@ -252,7 +252,7 @@ export default {
         { title: "Dirección", value: "adress" },
       ];
       let header = [
-        { text: "PREMIOS INDIA CATALINA 2024", bold: true, size: 16 },
+        { text: "PREMIOS INDIA CATALINA 2025", bold: true, size: 16 },
         `IMPRESION INFORME DE CANALES`,
         `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
         ` `,
@@ -280,7 +280,7 @@ export default {
         { title: "Canal", value: "nameClient" },
       ];
       let header = [
-        { text: "PREMIOS INDIA CATALINA 2024", bold: true, size: 16 },
+        { text: "PREMIOS INDIA CATALINA 2025", bold: true, size: 16 },
         `IMPRESION INFORME DE POSTULACIONES`,
         `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
         ` `,
@@ -407,7 +407,7 @@ export default {
         { title: "Dirección", value: "adress" },
       ];
       let header = [
-        { text: "PREMIOS INDIA CATALINA 2024", bold: true, size: 16 },
+        { text: "PREMIOS INDIA CATALINA 2025", bold: true, size: 16 },
         `IMPRESION INFORME DE CANALES POR PAGAR`,
         `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
         ` `,
@@ -452,7 +452,7 @@ export default {
           },
         ];
         let header = [
-          { text: "PREMIOS INDIA CATALINA 2024", bold: true, size: 16 },
+          { text: "PREMIOS INDIA CATALINA 2025", bold: true, size: 16 },
           `IMPRESIÓN INFORME ESTADO DE VOTACIONES`,
           `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
           ` `,
@@ -489,7 +489,7 @@ export default {
           { title: "Calificación", value: "calificacion", tipo: "number" },
         ];
         let header = [
-          { text: "PREMIOS INDIA CATALINA 2024", bold: true, size: 16 },
+          { text: "PREMIOS INDIA CATALINA 2025", bold: true, size: 16 },
           `IMPRESIÓN INFORME ESTADO DE VOTACIONES`,
           `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
           ` `,
@@ -526,7 +526,7 @@ export default {
           { title: "Calificación", value: "calificacion", tipo: "number" },
         ];
         let header = [
-          { text: "PREMIOS INDIA CATALINA 2024", bold: true, size: 16 },
+          { text: "PREMIOS INDIA CATALINA 2025", bold: true, size: 16 },
           `IMPRESIÓN INFORME ESTADO DE VOTACIONES`,
           `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
           ` `,
@@ -563,7 +563,7 @@ export default {
           { title: "Calificación", value: "calificacion", tipo: "number" },
         ];
         let header = [
-          { text: "PREMIOS INDIA CATALINA 2024", bold: true, size: 16 },
+          { text: "PREMIOS INDIA CATALINA 2025", bold: true, size: 16 },
           `IMPRESIÓN INFORME ESTADO DE VOTACIONES`,
           `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
           ` `,
@@ -600,7 +600,7 @@ export default {
           { title: "Canal", value: "channel" },
         ];
         let header = [
-          { text: "PREMIOS INDIA CATALINA 2024", bold: true, size: 16 },
+          { text: "PREMIOS INDIA CATALINA 2025", bold: true, size: 16 },
           `IMPRESION INFORME DE MIEMBROS VOTANTES`,
           `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
           ` `,
