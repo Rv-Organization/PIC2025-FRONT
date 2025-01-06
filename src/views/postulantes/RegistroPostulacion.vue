@@ -36,15 +36,13 @@
         </v-col>
         <h3>
           Descargue
-           href="https://drive.google.com/drive/folders/10JLRI6kWO5c4MQ2J_ujRPTBFd32BwY6Y?usp=sharing"
-          <a target="_blank">aquí</a>
+          <a target="_blank" href="https://drive.google.com/drive/folders/10JLRI6kWO5c4MQ2J_ujRPTBFd32BwY6Y?usp=sharing">aquí</a>
           la plantilla para usar como claqueta del material audiovisual,
           sobreponga el nombre de la categoría según corresponda (copie y pegue
           el nombre de la lista en el reglamento), y añada solamente el nombre
           de la producción o del talento postulado sin créditos adicionales.
           Tipo de letra Lato, tamaños 48, 90 y 40 de acuerdo con el
-          <a target="_blank">ejemplo.</a>
-          href="https://drive.google.com/file/d/1KEpVA_WTMLtcksDfaqSdmT5i4C0lyeXb/view?usp=drivesdk" 
+          <a target="_blank" href="https://drive.google.com/file/d/1KEpVA_WTMLtcksDfaqSdmT5i4C0lyeXb/view?usp=drivesdk">ejemplo.</a>
         </h3>
         <h2 class="text-start my-10">Archivos requeridos</h2>
 
