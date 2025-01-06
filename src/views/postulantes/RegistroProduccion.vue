@@ -10,7 +10,7 @@
             a las categorías en las que se quiera participar. Antes de postular,
             por favor revise atentamente el
             <a
-              href="https://premiosindiacatalina.com/wp-content/uploads/2024/12/PIC-2025-REGLAMENTO-GENERAL-.pdf"
+              href="https://premiosindiacatalina.com/wp-content/uploads/2025/01/PIC-41-REGLAMENTO-GENERAL-VF-06NE2025.pdf"
               target="_blank"
               >REGLAMENTO</a
             >

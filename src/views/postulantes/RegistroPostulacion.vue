@@ -62,8 +62,7 @@
               <v-card-text>
                 <h3>
                   Una muestra de la producción. Para esto, revisar el anexo de
-                  <!-- href="https://premiosindiacatalina.com/wp-content/uploads/2024/01/PIC-2024-REQUERIMIENTO-AUDIOVISUAL-PARA-POSTULACION.pdf" -->
-                  <a target="_blank">requerimientos</a>
+                  <a target="_blank" href="https://premiosindiacatalina.com/wp-content/uploads/2025/01/PIC-2025-REQUERIMIENTO-AUDIOVISUAL-PARA-POSTULACION.pdf">requerimientos</a>
                   de acuerdo con la categoría. Extensiones permitidas: MP4,
                   WEBM, AVI, MOV. Tamaño máximo:750 megas. (a)
                 </h3>
