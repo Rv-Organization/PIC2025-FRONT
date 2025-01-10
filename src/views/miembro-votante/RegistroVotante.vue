@@ -333,27 +333,29 @@
                     selectedCategorias.length === 3 &&
                     !selectedCategorias.includes(categoria)
                   "
+                  class="d-flex align-center"
                 >
                   <template v-slot:label>
-                    <div>
-                      {{ categoria }}
+                    <div class="d-flex align-center justify-space-between">
+                      <span>{{ categoria }}</span>
                       <v-tooltip bottom color="primary">
                         <template v-slot:activator="{ on }">
                           <v-btn icon v-on="on">
-                            <v-icon> mdi-comment-question-outline </v-icon>
+                            <v-icon>mdi-comment-question-outline</v-icon>
                           </v-btn>
                         </template>
-                        <v-list color="primary" class="mt-0">
-                          <v-list-item
-                            class="mt-0"
-                            v-for="(item, i) in categorias[index]"
-                            :key="i"
-                          >
-                            <v-list-item-content class="mt-0">{{
-                              item
-                            }}</v-list-item-content>
-                          </v-list-item>
-                        </v-list>
+                        <v-card class="tooltip-card" outlined>
+                          <v-list dense>
+                            <v-list-item
+                              v-for="(item, i) in categorias[index]"
+                              :key="i"
+                            >
+                              <v-list-item-content>
+                                {{ item }}
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list>
+                        </v-card>
                       </v-tooltip>
                     </div>
                   </template>
@@ -389,7 +391,7 @@
                   <v-btn
                     @click="subirArchivo('input-file1')"
                     plain
-                    class="upload py-2 mb-3"
+                    class="upload boton-focus-animation py-2 mb-3"
                     height="100%"
                   >
                     <v-row aling="center">
@@ -459,7 +461,7 @@
                   <v-btn
                     @click="subirArchivo('input-file2')"
                     plain
-                    class="upload py-2 mb-3"
+                    class="upload boton-focus-animation py-2 mb-3"
                     height="100%"
                   >
                     <v-row aling="center">
@@ -536,7 +538,7 @@
                   <v-btn
                     @click="subirArchivo('input-file3')"
                     plain
-                    class="upload py-2 mb-3"
+                    class="upload boton-focus-animation py-2 mb-3"
                     height="100%"
                   >
                     <v-row aling="center">
@@ -1395,7 +1397,8 @@ export default {
     }),
 
     async obtenerVotantes() {
-      return this.$router.push("/miembro-votante/votar");
+      /*TODO: Condicion para redireccionar segun una echa de cierre */
+      // return this.$router.push("/miembro-votante/votar");
       /* 22-02-2024 ya no registra, se redirecciona a votar */
       const response = await this._getMiembroVotante();
       if (response.data.success) {
@@ -1685,11 +1688,6 @@ export default {
   width: 75%;
   margin: auto;
   padding-top: 2rem;
-}
-
-.upload {
-  border-style: dashed;
-  border-color: rgba(102, 102, 102, 0.5);
 }
 
 .mdi-cloud-upload-outline::before {
