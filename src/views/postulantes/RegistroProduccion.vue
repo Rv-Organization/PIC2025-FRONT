@@ -492,6 +492,10 @@ export default {
   },
 
   mounted() {
+    window.console.log(
+      "😎 this.$route.params.data?.programa",
+      this.$route.params.data?.programa
+    );
     if (this.$route.params.data?.programa) {
       this.form.nombre_programa.value =
         this.$route.params.data.programa.nameProgram;
@@ -517,7 +521,7 @@ export default {
       this.edit_carta = true;
       this.subir_carta = true;
 
-      this.frame.certificado = this.$route.params.data.programa.certificado;
+      this.frame.certificado = this.$route.params.data.programa.certifyKantar;
       this.edit_certificado = true;
       this.subir_certificado = true;
 

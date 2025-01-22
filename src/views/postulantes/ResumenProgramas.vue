@@ -103,13 +103,28 @@
                   </v-card-actions>
                   <v-divider class="px-md"></v-divider>
                   <v-card-actions class="d-flex justify-left">
-                    <v-btn fab x-small color="primary">
+                    <v-btn
+                      fab
+                      x-small
+                      color="primary"
+                      @click="verPostulacion(item)"
+                    >
                       <v-icon>mdi-eye-outline</v-icon>
                     </v-btn>
-                    <v-btn fab x-small color="primary">
+                    <v-btn
+                      fab
+                      x-small
+                      color="primary"
+                      @click="modificarPrograma(item)"
+                    >
                       <v-icon>mdi-pencil-outline</v-icon>
                     </v-btn>
-                    <v-btn fab x-small color="error">
+                    <v-btn
+                      fab
+                      x-small
+                      color="error"
+                      @click="validarEliminarPrograma(item)"
+                    >
                       <v-icon>mdi-delete-outline</v-icon>
                     </v-btn>
                   </v-card-actions>
@@ -154,29 +169,44 @@
           pago.estado || currentUser.email == 'alejandrodavidospina@gmail.com'
         "
       />
+      <Alerta_ :alert="alert_" v-if="alert_.estado" />
     </v-row>
+    <DetallePostulacion
+      :datos="datos_detalle"
+      v-if="estado_modal_detalle"
+      @cerrar="estado_modal_detalle = false"
+    />
   </div>
 </template>
 
 <script>
 import ResumenPostulacion from "../../components/postulantes/ResumenPostulacion.vue";
 import ResumenPago from "../../components/postulantes/ResumenPago.vue";
+import DetallePostulacion from "@/components/postulantes/DetallePostulacion.vue";
+
 import { INPUT, AUTOCOMPLETE } from "@/mixins/global";
 import { CURRTET_USER } from "../../global";
 import { mapActions } from "vuex";
 import AnimacionVideo from "../../assets/Animation/VideoAnimacion.json";
 import LottieAnimation from "lottie-web-vue";
+import { Components } from "@/mixins";
 
 export default {
-  mixins: [INPUT, AUTOCOMPLETE],
-  components: { ResumenPago, ResumenPostulacion, LottieAnimation },
+  mixins: [INPUT, AUTOCOMPLETE, Components],
+  components: {
+    ResumenPago,
+    ResumenPostulacion,
+    LottieAnimation,
+    DetallePostulacion,
+  },
 
   data() {
     return {
       currentUser: CURRTET_USER,
       animacionVideo: AnimacionVideo,
       tiempo: false,
-
+      estado_modal_detalle: false,
+      datos_detalle: {},
       pago: {
         estado: false,
       },
@@ -194,10 +224,61 @@ export default {
   methods: {
     ...mapActions({
       _getProgramas: "programas/_getProgramas",
+      _deletePrograma: "programas/_deletePrograma",
     }),
 
     añadirPrograma() {
       this.$router.push("/postulantes/registro-produccion");
+    },
+    verPostulacion(item) {
+      this.datos_detalle = {
+        id: item.id,
+        video: item.video,
+        programId: item.id,
+        postulacion: item,
+        nombre_categoria: item.categoria,
+        nombre_talento: item.postulacion,
+        foto_talento: item.poster_talento,
+      };
+      this.estado_modal_detalle = true;
+    },
+    modificarPrograma(item) {
+      this.$router.push({
+        name: "/postulantes/registro-produccion",
+        params: { data: { programa: item } },
+      });
+    },
+    validarEliminarPrograma(item) {
+      return this.callAlerta(
+        "",
+        "info",
+        "P",
+        () => this.eliminarPrograma(item),
+        this.callbackAlerta,
+        `Está seguro de eliminar el programa ${item.nameProgram}, Recuerde que esta acción no se puede deshacer`
+      );
+    },
+    async eliminarPrograma(programa) {
+      try {
+        await this._deletePrograma(programa.id);
+        return this.callAlerta(
+          "",
+          "success",
+          null,
+          null,
+          this.callbackAlerta,
+          "Programa eliminado con éxito"
+        );
+      } catch (error) {
+        return this.callAlerta(
+          "",
+          "info",
+          null,
+          null,
+          this.callbackAlerta,
+          error?.message?.message
+        );
+      }
     },
     async getAllPrograms() {
       const respuesta = await this._getProgramas(CURRTET_USER.id);

@@ -88,16 +88,16 @@
         <p class="mb-13 pr-15">{{ this.programa.sipnosis }}</p>
       </v-container>
       <v-container d-flex justify-center>
-        <!-- <div cols="12" v-if="!datos.video">
-            <lottie-animation
-              :animationData="videoAnimacion"
-              style="height: 400px"
-              :autoPlay="true"
-              :loop="true"
-              :speed="2"
-            />
-            <h2 class="text-center">Procesando...</h2>
-          </div> -->
+        <div class="col-12" v-if="!datos.video">
+          <lottie-animation
+            :animationData="videoAnimacion"
+            style="height: 400px"
+            :autoPlay="true"
+            :loop="true"
+            :speed="2"
+          />
+          <h2 class="text-center">Procesando...</h2>
+        </div>
         <div class="iframe-container rounded-lg">
           <iframe
             class="player"

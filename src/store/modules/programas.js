@@ -71,20 +71,20 @@ export default {
         commit("_loadingState", null, { root: true });
       }
     },
-    async _deletePrograma({ commit }, data) {
+    async _deletePrograma({ commit }, id) {
       try {
         commit("_loadingState", null, { root: true });
         const RES = await postData({
           method: "DELETE",
-          url: `Program/${data}`,
+          url: `Program/${id}`,
         });
         if (RES.status == 200) {
           return RES;
         }
-        return RES;
+        throw RES;
       } catch (error) {
         console.error("_deteleProgramas", error);
-        return error;
+        throw error;
       } finally {
         commit("_loadingState", null, { root: true });
       }
