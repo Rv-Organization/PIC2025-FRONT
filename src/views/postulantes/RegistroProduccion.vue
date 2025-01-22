@@ -492,10 +492,6 @@ export default {
   },
 
   mounted() {
-    window.console.log(
-      "😎 this.$route.params.data?.programa",
-      this.$route.params.data?.programa
-    );
     if (this.$route.params.data?.programa) {
       this.form.nombre_programa.value =
         this.$route.params.data.programa.nameProgram;
