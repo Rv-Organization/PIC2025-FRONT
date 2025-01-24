@@ -36,13 +36,21 @@
         </v-col>
         <h3>
           Descargue
-          <a target="_blank" href="https://drive.google.com/drive/folders/10JLRI6kWO5c4MQ2J_ujRPTBFd32BwY6Y?usp=sharing">aquí</a>
+          <a
+            target="_blank"
+            href="https://drive.google.com/drive/folders/10JLRI6kWO5c4MQ2J_ujRPTBFd32BwY6Y?usp=sharing"
+            >aquí</a
+          >
           la plantilla para usar como claqueta del material audiovisual,
           sobreponga el nombre de la categoría según corresponda (copie y pegue
           el nombre de la lista en el reglamento), y añada solamente el nombre
           de la producción o del talento postulado sin créditos adicionales.
           Tipo de letra Lato, tamaños 48, 90 y 40 de acuerdo con el
-          <a target="_blank" href="https://drive.google.com/file/d/1KEpVA_WTMLtcksDfaqSdmT5i4C0lyeXb/view?usp=drivesdk">ejemplo.</a>
+          <a
+            target="_blank"
+            href="https://drive.google.com/file/d/1KEpVA_WTMLtcksDfaqSdmT5i4C0lyeXb/view?usp=drivesdk"
+            >ejemplo.</a
+          >
         </h3>
         <h2 class="text-start my-10">Archivos requeridos</h2>
 
@@ -62,7 +70,11 @@
               <v-card-text>
                 <h3>
                   Una muestra de la producción. Para esto, revisar el anexo de
-                  <a target="_blank" href="https://premiosindiacatalina.com/wp-content/uploads/2025/01/PIC-2025-REQUERIMIENTO-AUDIOVISUAL-PARA-POSTULACION.pdf">requerimientos</a>
+                  <a
+                    target="_blank"
+                    href="https://premiosindiacatalina.com/wp-content/uploads/2025/01/PIC-2025-REQUERIMIENTO-AUDIOVISUAL-PARA-POSTULACION.pdf"
+                    >requerimientos</a
+                  >
                   de acuerdo con la categoría. Extensiones permitidas: MP4,
                   WEBM, AVI, MOV. Tamaño máximo:750 megas. (a)
                 </h3>
@@ -322,9 +334,9 @@ export default {
     },
   },
   computed: {
-    id_vimeo_c() {
-      return this.id_video;
-    },
+    // id_vimeo_c() {
+    //   return this.id_video;
+    // },
   },
 
   mounted() {
@@ -427,6 +439,7 @@ export default {
         header,
         method: "POST",
       });
+      console.log("😎 ");
       let id_video = this.vimeo_crear.data.link.split("/");
       this.url_test_vimeo = this.vimeo_crear.data.player_embed_url;
       this.vimeoUpload(

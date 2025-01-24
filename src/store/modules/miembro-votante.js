@@ -23,7 +23,7 @@ export default {
           data: data.data,
         });
         if (RES.status == 200) {
-          return RES;
+          return RES.data;
         }
         return RES;
       } catch (error) {
@@ -34,6 +34,60 @@ export default {
       }
     },
 
+    async _getAvailabilityDay({ commit }) {
+      try {
+        commit("_loadingState", null, { root: true });
+        const response = await postData({
+          method: "get",
+          url: `AvailabilityDay`,
+        });
+        if (response.status == 200) {
+          return response.data.data;
+        }
+        throw new Error(response);
+      } catch (error) {
+        console.error("_getAvailabilityDay", error);
+        throw new Error(error);
+      } finally {
+        commit("_loadingState", null, { root: true });
+      }
+    },
+    async _getAvailabilityWeek({ commit }) {
+      try {
+        commit("_loadingState", null, { root: true });
+        const response = await postData({
+          method: "get",
+          url: `AvailabilityWeek`,
+        });
+        if (response.status == 200) {
+          return response.data.data;
+        }
+        throw new Error(response);
+      } catch (error) {
+        console.error("_getAvailabilityWeek", error);
+        throw new Error(error);
+      } finally {
+        commit("_loadingState", null, { root: true });
+      }
+    },
+    async _getPredominancia({ commit }) {
+      try {
+        commit("_loadingState", null, { root: true });
+        const response = await postData({
+          method: "get",
+          url: `Predominancia`,
+        });
+        if (response.status == 200) {
+          return response.data.data;
+        }
+        throw new Error(response);
+      } catch (error) {
+        console.error("_getPredominancia", error);
+        throw new Error(error);
+      } finally {
+        commit("_loadingState", null, { root: true });
+      }
+    },
     async _getMiembroVotante({ commit }) {
       try {
         commit("_loadingState", null, { root: true });

@@ -133,6 +133,153 @@
                 </v-radio-group>
               </v-col>
               <v-col
+                cols="12"
+                xs="12"
+                sm="12"
+                md="12"
+                lg="12"
+                xl="12"
+                class="py-0"
+                v-if="['1', '2'].includes(radioGroupVinculado)"
+              >
+                <h3>
+                  Seleccione el sector que mejor representa su realidad
+                  profesional actual.
+                </h3>
+                <p class="mb-5">
+                  Si usted es freelancer, deberá considerarse como
+                  independiente, salvo que mantenga un vínculo activo con
+                  proyectos específicos en los sectores privados o públicos.
+                  <br />
+                  <br />
+                  Se entiende por vínculo activo cualquier relación contractual
+                  o de prestación de servicios que se encuentre vigente al
+                  momento de la convocatoria.
+                </p>
+                <v-radio-group v-model="sector" row>
+                  <v-radio key="1" :value="1" class="col-6">
+                    <template v-slot:label>
+                      <div class="d-flex align-center justify-space-between">
+                        <span>1. Sector Audiovisual Privado - Canales</span>
+                        <v-tooltip bottom color="primary">
+                          <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on">
+                              <v-icon>mdi-comment-question-outline</v-icon>
+                            </v-btn>
+                          </template>
+                          <v-card class="tooltip-card" outlined>
+                            <p class="ma-2">
+                              Profesionales que mantienen una vinculación
+                              directa con canales o proyectos de televisión
+                              locales, nacionales o regionales que operan con
+                              recursos privados, ya sea como empleados o
+                              contratistas. Los freelancers o productoras serán
+                              incluidos en este sector únicamente si poseen un
+                              vínculo activo con un proyecto participante en el
+                              año de la convocatoria.
+                            </p>
+                          </v-card>
+                        </v-tooltip>
+                      </div>
+                    </template>
+                  </v-radio>
+
+                  <v-radio
+                    key="2"
+                    label=""
+                    :value="2"
+                    @click="form.vinculado.value = null"
+                  >
+                    <template v-slot:label>
+                      <div class="d-flex align-center justify-space-between">
+                        <span>2. Sector Audiovisual Privado - Plataformas</span>
+                        <v-tooltip bottom color="primary">
+                          <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on">
+                              <v-icon>mdi-comment-question-outline</v-icon>
+                            </v-btn>
+                          </template>
+                          <v-card class="tooltip-card" outlined>
+                            <p class="ma-2">
+                              Profesionales que mantienen una vinculación
+                              directa con plataformas OTT (Over-The-Top), ya sea
+                              como empleados o contratistas.Los freelancers o
+                              porductoras serán incluidos en este sector
+                              únicamente si poseen un vínculo activo con un
+                              proyecto participante en el año de la
+                              convocatoria.
+                            </p>
+                          </v-card>
+                        </v-tooltip>
+                      </div>
+                    </template>
+                  </v-radio>
+
+                  <v-radio
+                    key="3"
+                    label=""
+                    :value="3"
+                    @click="form.vinculado.value = null"
+                    class="col-6"
+                  >
+                    <template v-slot:label>
+                      <div class="d-flex align-center justify-space-between">
+                        <span>3. Sector Audiovisual Público</span>
+                        <v-tooltip bottom color="primary">
+                          <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on">
+                              <v-icon>mdi-comment-question-outline</v-icon>
+                            </v-btn>
+                          </template>
+                          <v-card class="tooltip-card" outlined>
+                            <p class="ma-2">
+                              Profesionales que mantienen una vinculación
+                              directa con el sistema de medios públicos, ya sea
+                              como empleados o contratistas, participando en la
+                              producción de contenido audiovisual financiado con
+                              recursos estatales. Los freelancers o productoras
+                              serán incluidos en este sector únicamente si
+                              poseen un vínculo activo con un proyecto
+                              financiado por recursos estatales al momento de la
+                              convocatoria.
+                            </p>
+                          </v-card>
+                        </v-tooltip>
+                      </div>
+                    </template>
+                  </v-radio>
+
+                  <v-radio
+                    key="4"
+                    label="4. Independiente"
+                    :value="4"
+                    @click="form.vinculado.value = null"
+                  >
+                    <template v-slot:label>
+                      <div class="d-flex align-center justify-space-between">
+                        <span>4. Independiente</span>
+                        <v-tooltip bottom color="primary">
+                          <template v-slot:activator="{ on }">
+                            <v-btn icon v-on="on">
+                              <v-icon>mdi-comment-question-outline</v-icon>
+                            </v-btn>
+                          </template>
+                          <v-card class="tooltip-card" outlined>
+                            <p class="ma-2">
+                              Profesionales que trabajan de manera autónoma, sin
+                              vínculos activos con los sectores mencionados
+                              anteriormente, participando en proyectos
+                              financiados con recursos propios y produciendo
+                              contenido para canales alternativos o digitales.
+                            </p>
+                          </v-card>
+                        </v-tooltip>
+                      </div>
+                    </template></v-radio
+                  >
+                </v-radio-group>
+              </v-col>
+              <v-col
                 v-if="radioGroupVinculado == 1"
                 cols="12"
                 xs="12"
@@ -314,9 +461,9 @@
               >
                 <h3 class="mb-5">
                   Ahora que ha relacionado sus proyectos y cargos más
-                  representativos en la industria, por favor seleccione hasta 3
-                  tipos de categorías en las que considera que tiene una
-                  destacada experiencia profesional certificada
+                  representativos en la industria, Seleccione hasta tres áreas
+                  en las que tenga mayor experiencia certificada, indicando su
+                  nivel de predominancia (1: Principal, 3: Menos predominante)
                 </h3>
               </v-col>
               <v-col
@@ -589,6 +736,35 @@
                 aspect-ratio="1.4"
               ></v-img>
             </v-col>
+            <v-row class="mt-10 justify-center">
+              <h3 class="mb-5">
+                Porfavor seleccione su disponibilidad para participar en las
+                postulaciones como miebro acreditado de la industria
+              </h3>
+              <AUTOCOMPLETE
+                class="mx-2"
+                :field="form.availability_week"
+                item_text="description"
+              />
+              <AUTOCOMPLETE
+                class="mx-2"
+                :field="form.availability_day"
+                item_text="description"
+              />
+            </v-row>
+            <v-row class="mt-10 justify-center">
+              <h3 class="col-12">Declaración de Confidencialidad</h3>
+
+              <v-checkbox
+                v-model="form.confidentiality_authorization.value"
+                :rules="[
+                  (v) =>
+                    !!v || 'Debe aceptar la declaración de confidencialidad',
+                ]"
+                label="Confirmo que no tengo conflictos de interés con ninguna producción postulada y que cumpliré con las normas de confidencialidad establecidas."
+                class="d-flex align-center"
+              />
+            </v-row>
           </v-form>
 
           <v-container>
@@ -647,6 +823,7 @@ export default {
       estado: false,
       radioGroupPrimeraVez: "1",
       radioGroupVinculado: "2",
+      sector: "",
       proyectos: 1,
       cargos: 1,
       tipos_categorias: [
@@ -1315,11 +1492,38 @@ export default {
           ],
           rules: [(v) => !!v || "Cargo es requerido"],
         },
+        availability_week: {
+          value: "",
+          id: "availability_week",
+          item_value: "id",
+          item_text: "description",
+          label: "Cuantas semanas puede dedicar *",
+          rules: [(v) => !!v || "Especificar semanas"],
+          items: [],
+        },
+        availability_day: {
+          value: "",
+          id: "availability_day",
+          item_value: "id",
+          item_text: "description",
+          label: "Cuantas dias puede dedicar *",
+          rules: [(v) => !!v || "Espeficar dias"],
+          items: [],
+        },
         canal_productora: {
           value: "",
           id: "canal_productora",
           label: "Canal o productora",
           maxlength: "100",
+        },
+
+        confidentiality_authorization: {
+          value: "",
+          id: "confidentiality_authorization",
+          label: "Declaración de Confidencialidad",
+          rules: [
+            (v) => !!v || "Debe aceptar la declaración de confidencialidad",
+          ],
         },
       },
       form_uploads: {
@@ -1367,6 +1571,11 @@ export default {
     },
   },
   async created() {
+    const availability_day = await this._getAvailabilityDay();
+    const availability_week = await this._getAvailabilityWeek();
+    this.form.availability_week.items = availability_week;
+    this.form.availability_day.items = availability_day;
+
     const cargos = await this._getCargos();
     for (let i = 0; i < cargos.data.data.length; i++) {
       this.cargosPrueba.push({
@@ -1392,6 +1601,8 @@ export default {
       _getCanal: "canales/_getCanal",
       _uploadFile: "canales/_uploadFile",
       _getCargos: "miembro_votante/_getCargos",
+      _getAvailabilityDay: "miembro_votante/_getAvailabilityDay",
+      _getAvailabilityWeek: "miembro_votante/_getAvailabilityWeek",
       _addMiembroVotante: "miembro_votante/_addMiembroVotante",
       _getMiembroVotante: "miembro_votante/_getMiembroVotante",
     }),
@@ -1446,6 +1657,7 @@ export default {
             document: this.form.documento.value,
             position: this.form.profesion.value,
             occupation: this.form.ocupacion.value,
+
             channel: this.validarCanal(),
             Projects: this.guardarProyectos(),
             positionRepresentatives: this.guardarCargos(),
@@ -1459,6 +1671,11 @@ export default {
 
             userId: CURRTET_USER.id,
             isValidate: false,
+            availabilityWeekId: this.form.availability_week.value,
+            availabilityDayId: this.form.availability_day.value,
+            confidentialityAuthorization:
+              this.form.confidentiality_authorization.value,
+            sectorid: this.sector,
           };
 
           const RES = await this._addMiembroVotante({ data });

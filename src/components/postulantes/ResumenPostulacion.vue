@@ -364,7 +364,9 @@ export default {
       });
     },
     editarTalento(item) {
-      this.postulacion = item;
+      // this.postulacion = item;
+      console.log("😎 this.postulacion", this.postulacion);
+      Object.assign(this.postulacion, item);
       const categoria = this.talento_lista.find(
         (categoria) => categoria.nameCategory === `${item.categoria}`
       );
