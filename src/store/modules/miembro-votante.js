@@ -52,6 +52,24 @@ export default {
         commit("_loadingState", null, { root: true });
       }
     },
+    async _getSector({ commit }) {
+      try {
+        commit("_loadingState", null, { root: true });
+        const response = await postData({
+          method: "get",
+          url: `Sector`,
+        });
+        if (response.status == 200) {
+          return response.data.data;
+        }
+        throw new Error(response);
+      } catch (error) {
+        console.error("_getSector", error);
+        throw new Error(error);
+      } finally {
+        commit("_loadingState", null, { root: true });
+      }
+    },
     async _getAvailabilityWeek({ commit }) {
       try {
         commit("_loadingState", null, { root: true });

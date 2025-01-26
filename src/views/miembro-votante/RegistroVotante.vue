@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-row class="container-channel px-8">
+    <v-row class="container-channel px-5">
       <v-col cols="12" class="mt-0 pt-0">
         <v-container>
           <h2 class="py-5">Postulación Miembros Acreditados de la Industria</h2>
@@ -131,6 +131,13 @@
                     @click="form.vinculado.value = null"
                   ></v-radio>
                 </v-radio-group>
+                <div v-if="radioGroupVinculado == 1">
+                  <AUTOCOMPLETE :field="form.canales_productoras" />
+                  <INPUT
+                    v-if="form.canales_productoras.value == 'Otro. ¿Cuál?'"
+                    :field="form.vinculado"
+                  />
+                </div>
               </v-col>
               <v-col
                 cols="12"
@@ -156,11 +163,18 @@
                   o de prestación de servicios que se encuentre vigente al
                   momento de la convocatoria.
                 </p>
+
                 <v-radio-group v-model="sector" row>
-                  <v-radio key="1" :value="1" class="col-6">
+                  <v-radio
+                    :label="sector.description"
+                    v-for="sector in sectores"
+                    :value="sector.id"
+                    class="col-6 mx-0"
+                    :key="sector.id"
+                  >
                     <template v-slot:label>
                       <div class="d-flex align-center justify-space-between">
-                        <span>1. Sector Audiovisual Privado - Canales</span>
+                        <span>{{ sector.id + ". " + sector.description }}</span>
                         <v-tooltip bottom color="primary">
                           <template v-slot:activator="{ on }">
                             <v-btn icon v-on="on">
@@ -169,131 +183,14 @@
                           </template>
                           <v-card class="tooltip-card" outlined>
                             <p class="ma-2">
-                              Profesionales que mantienen una vinculación
-                              directa con canales o proyectos de televisión
-                              locales, nacionales o regionales que operan con
-                              recursos privados, ya sea como empleados o
-                              contratistas. Los freelancers o productoras serán
-                              incluidos en este sector únicamente si poseen un
-                              vínculo activo con un proyecto participante en el
-                              año de la convocatoria.
+                              {{ sector.detail }}
                             </p>
                           </v-card>
                         </v-tooltip>
                       </div>
                     </template>
                   </v-radio>
-
-                  <v-radio
-                    key="2"
-                    label=""
-                    :value="2"
-                    @click="form.vinculado.value = null"
-                  >
-                    <template v-slot:label>
-                      <div class="d-flex align-center justify-space-between">
-                        <span>2. Sector Audiovisual Privado - Plataformas</span>
-                        <v-tooltip bottom color="primary">
-                          <template v-slot:activator="{ on }">
-                            <v-btn icon v-on="on">
-                              <v-icon>mdi-comment-question-outline</v-icon>
-                            </v-btn>
-                          </template>
-                          <v-card class="tooltip-card" outlined>
-                            <p class="ma-2">
-                              Profesionales que mantienen una vinculación
-                              directa con plataformas OTT (Over-The-Top), ya sea
-                              como empleados o contratistas.Los freelancers o
-                              porductoras serán incluidos en este sector
-                              únicamente si poseen un vínculo activo con un
-                              proyecto participante en el año de la
-                              convocatoria.
-                            </p>
-                          </v-card>
-                        </v-tooltip>
-                      </div>
-                    </template>
-                  </v-radio>
-
-                  <v-radio
-                    key="3"
-                    label=""
-                    :value="3"
-                    @click="form.vinculado.value = null"
-                    class="col-6"
-                  >
-                    <template v-slot:label>
-                      <div class="d-flex align-center justify-space-between">
-                        <span>3. Sector Audiovisual Público</span>
-                        <v-tooltip bottom color="primary">
-                          <template v-slot:activator="{ on }">
-                            <v-btn icon v-on="on">
-                              <v-icon>mdi-comment-question-outline</v-icon>
-                            </v-btn>
-                          </template>
-                          <v-card class="tooltip-card" outlined>
-                            <p class="ma-2">
-                              Profesionales que mantienen una vinculación
-                              directa con el sistema de medios públicos, ya sea
-                              como empleados o contratistas, participando en la
-                              producción de contenido audiovisual financiado con
-                              recursos estatales. Los freelancers o productoras
-                              serán incluidos en este sector únicamente si
-                              poseen un vínculo activo con un proyecto
-                              financiado por recursos estatales al momento de la
-                              convocatoria.
-                            </p>
-                          </v-card>
-                        </v-tooltip>
-                      </div>
-                    </template>
-                  </v-radio>
-
-                  <v-radio
-                    key="4"
-                    label="4. Independiente"
-                    :value="4"
-                    @click="form.vinculado.value = null"
-                  >
-                    <template v-slot:label>
-                      <div class="d-flex align-center justify-space-between">
-                        <span>4. Independiente</span>
-                        <v-tooltip bottom color="primary">
-                          <template v-slot:activator="{ on }">
-                            <v-btn icon v-on="on">
-                              <v-icon>mdi-comment-question-outline</v-icon>
-                            </v-btn>
-                          </template>
-                          <v-card class="tooltip-card" outlined>
-                            <p class="ma-2">
-                              Profesionales que trabajan de manera autónoma, sin
-                              vínculos activos con los sectores mencionados
-                              anteriormente, participando en proyectos
-                              financiados con recursos propios y produciendo
-                              contenido para canales alternativos o digitales.
-                            </p>
-                          </v-card>
-                        </v-tooltip>
-                      </div>
-                    </template></v-radio
-                  >
                 </v-radio-group>
-              </v-col>
-              <v-col
-                v-if="radioGroupVinculado == 1"
-                cols="12"
-                xs="12"
-                sm="12"
-                md="12"
-                lg="12"
-                xl="12"
-                class="py-0"
-              >
-                <AUTOCOMPLETE :field="form.canales_productoras" />
-                <INPUT
-                  v-if="form.canales_productoras.value == 'Otro. ¿Cuál?'"
-                  :field="form.vinculado"
-                />
               </v-col>
 
               <!-- ****************************Lista proyectos**************************** -->
@@ -1533,6 +1430,7 @@ export default {
       },
       estado_registro: false,
       cargosPrueba: [],
+      sectores: [],
     };
   },
   watch: {
@@ -1573,6 +1471,11 @@ export default {
   async created() {
     const availability_day = await this._getAvailabilityDay();
     const availability_week = await this._getAvailabilityWeek();
+    const sector = await this._getSector();
+    if (sector.length > 0) {
+      this.sectores = sector;
+      console.log("😎 this.sectores", this.sectores);
+    }
     this.form.availability_week.items = availability_week;
     this.form.availability_day.items = availability_day;
 
@@ -1605,6 +1508,7 @@ export default {
       _getAvailabilityWeek: "miembro_votante/_getAvailabilityWeek",
       _addMiembroVotante: "miembro_votante/_addMiembroVotante",
       _getMiembroVotante: "miembro_votante/_getMiembroVotante",
+      _getSector: "miembro_votante/_getSector",
     }),
 
     async obtenerVotantes() {
