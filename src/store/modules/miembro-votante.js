@@ -52,6 +52,42 @@ export default {
         commit("_loadingState", null, { root: true });
       }
     },
+    async _getSubGroupCategory({ commit }) {
+      try {
+        commit("_loadingState", null, { root: true });
+        const response = await postData({
+          method: "get",
+          url: `SubGroupCategory`,
+        });
+        if (response.status == 200) {
+          return response.data.data;
+        }
+        throw new Error(response);
+      } catch (error) {
+        console.error("_getSubGroupCategory", error);
+        throw new Error(error);
+      } finally {
+        commit("_loadingState", null, { root: true });
+      }
+    },
+    async _getProductionRole({ commit }) {
+      try {
+        commit("_loadingState", null, { root: true });
+        const response = await postData({
+          method: "get",
+          url: `ProductionRole`,
+        });
+        if (response.status == 200) {
+          return response.data.data;
+        }
+        throw new Error(response);
+      } catch (error) {
+        console.error("_getProductionRole", error);
+        throw new Error(error);
+      } finally {
+        commit("_loadingState", null, { root: true });
+      }
+    },
     async _getSector({ commit }) {
       try {
         commit("_loadingState", null, { root: true });

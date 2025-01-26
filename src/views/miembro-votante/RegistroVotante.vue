@@ -364,24 +364,25 @@
                 </h3>
               </v-col>
               <v-col
-                v-for="(categoria, index) in tipos_categorias"
+                v-for="(categoria, index) in sub_group_category"
                 :key="index"
+                class="my-0 py-0"
                 cols="12"
-                md="6"
+                md="4"
               >
                 <v-checkbox
-                  :label="categoria"
-                  :value="categoria"
+                  :label="categoria.description"
+                  :value="categoria.id"
                   v-model="selectedCategorias"
                   :disabled="
                     selectedCategorias.length === 3 &&
-                    !selectedCategorias.includes(categoria)
+                    !selectedCategorias.includes(categoria.id)
                   "
                   class="d-flex align-center"
                 >
                   <template v-slot:label>
                     <div class="d-flex align-center justify-space-between">
-                      <span>{{ categoria }}</span>
+                      <span>{{ categoria.description }}</span>
                       <v-tooltip bottom color="primary">
                         <template v-slot:activator="{ on }">
                           <v-btn icon v-on="on">
@@ -633,6 +634,47 @@
                 aspect-ratio="1.4"
               ></v-img>
             </v-col>
+
+            <v-row class="mt-10 justify-left">
+              <h3>Rol Principal en Producciones Audiovisuales</h3>
+              <p class="mb-5">
+                Seleccione el rol con el que tiene más experiencia en su carrera
+                profesional (marque solo uno):
+              </p>
+              <v-radio-group v-model="role" row>
+                <v-radio
+                  v-for="item in production_role"
+                  :label="item.description"
+                  :value="item.id"
+                  class="col-6 mx-0"
+                  :key="item.id"
+                >
+                  <template v-slot:label>
+                    <div class="d-flex align-center justify-space-between">
+                      <span>{{ item.id + ". " + item.description }}</span>
+                      <v-tooltip bottom color="primary">
+                        <template v-slot:activator="{ on }">
+                          <v-btn icon v-on="on">
+                            <v-icon>mdi-comment-question-outline</v-icon>
+                          </v-btn>
+                        </template>
+                        <v-card class="tooltip-card" outlined>
+                          <p class="ma-2">
+                            <span
+                              v-html="
+                                item?.productionSubRoles
+                                  .map((e) => e.description)
+                                  .join('<br>')
+                              "
+                            ></span>
+                          </p>
+                        </v-card>
+                      </v-tooltip>
+                    </div>
+                  </template>
+                </v-radio>
+              </v-radio-group>
+            </v-row>
             <v-row class="mt-10 justify-center">
               <h3 class="mb-5">
                 Porfavor seleccione su disponibilidad para participar en las
@@ -721,15 +763,27 @@ export default {
       radioGroupPrimeraVez: "1",
       radioGroupVinculado: "2",
       sector: "",
+      role: null,
+      sub_group_category: [],
+      production_role: [],
       proyectos: 1,
       cargos: 1,
       tipos_categorias: [
-        "Ficción",
-        "Documentales, periodísticos, deportivos e inclusión",
-        "Variedades, reality, comedia y musical",
-        "Infantil, juvenil, universitaria y animación",
-        "Categorías técnicas ",
-        "Transmedia, vodcast y marca",
+        /*    "Ficción",
+        "Documentales, periodísticos",
+        "Deportivos",
+        "Inclusión social",
+        "Infantil",
+        "Juvenil",
+        "Universitaria",
+        "Animación",
+        "Variedades",
+        "Realities",
+        "Comedia",
+        "Musical",
+        "Digital",
+        "Transmedia",
+        "Vodcast", */
       ],
       categorias: [
         [
@@ -1470,14 +1524,19 @@ export default {
   },
   async created() {
     const availability_day = await this._getAvailabilityDay();
-    const availability_week = await this._getAvailabilityWeek();
-    const sector = await this._getSector();
-    if (sector.length > 0) {
-      this.sectores = sector;
-      console.log("😎 this.sectores", this.sectores);
-    }
-    this.form.availability_week.items = availability_week;
     this.form.availability_day.items = availability_day;
+
+    const availability_week = await this._getAvailabilityWeek();
+    this.form.availability_week.items = availability_week;
+
+    const sector = await this._getSector();
+    this.sectores = sector;
+
+    const production_role = await this._getProductionRole();
+    this.production_role = production_role;
+
+    const sub_group_category = await this._getSubGroupCategory();
+    this.sub_group_category = sub_group_category;
 
     const cargos = await this._getCargos();
     for (let i = 0; i < cargos.data.data.length; i++) {
@@ -1509,6 +1568,8 @@ export default {
       _addMiembroVotante: "miembro_votante/_addMiembroVotante",
       _getMiembroVotante: "miembro_votante/_getMiembroVotante",
       _getSector: "miembro_votante/_getSector",
+      _getSubGroupCategory: "miembro_votante/_getSubGroupCategory",
+      _getProductionRole: "miembro_votante/_getProductionRole",
     }),
 
     async obtenerVotantes() {
@@ -1574,12 +1635,13 @@ export default {
             //*******//
 
             userId: CURRTET_USER.id,
+            productionSubRoleId: this.role,
             isValidate: false,
             availabilityWeekId: this.form.availability_week.value,
             availabilityDayId: this.form.availability_day.value,
             confidentialityAuthorization:
               this.form.confidentiality_authorization.value,
-            sectorid: this.sector,
+            sectorId: this.sector,
           };
 
           const RES = await this._addMiembroVotante({ data });
@@ -1777,13 +1839,12 @@ export default {
 
     guardarCategoria() {
       const categorias = [];
-      for (let i = 0; i < this.selectedCategorias.length; i++) {
+      this.selectedCategorias.forEach((categoriaId) => {
         categorias.push({
-          groupCategoryId:
-            this.tipos_categorias.indexOf(this.selectedCategorias[i]) + 1,
+          groupCategoryId: categoriaId,
           userId: CURRTET_USER.id,
         });
-      }
+      });
       return categorias;
     },
 
