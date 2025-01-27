@@ -357,10 +357,11 @@
                 class="py-0"
               >
                 <h3 class="mb-5">
-                  Ahora que ha relacionado sus proyectos y cargos más
-                  representativos en la industria, Seleccione hasta tres áreas
-                  en las que tenga mayor experiencia certificada, indicando su
+                  Ahora que ha listado sus proyectos y cargos más
+                  representativos en la industria, seleccione hasta tres áreas
+                  en las que tenga mayor experiencia certificada. Indique su
                   nivel de predominancia (1: Principal, 3: Menos predominante)
+                  en el orden en que las selecciona.
                 </h3>
               </v-col>
               <v-col
@@ -1590,9 +1591,6 @@ export default {
     },
     async registroVotante() {
       if (!this.$refs.form.validate()) return;
-      // setTimeout(() => {
-      //   this.ALT_("MV-SS", "success", "p", this.reload); //esto no vaaaaaaaa
-      // }, 200);
 
       if (
         (this.form_uploads.hoja_vida,
@@ -1626,7 +1624,8 @@ export default {
             channel: this.validarCanal(),
             Projects: this.guardarProyectos(),
             positionRepresentatives: this.guardarCargos(),
-            groupCategoryVoters: this.guardarCategoria(),
+            // groupCategoryVoters: this.guardarCategoria(),
+            subGroupCategoryVoters: this.guardarSubCategoria(),
 
             // DOCUMENTOS
             curriculumVitae: hoja_vida.data.data,
@@ -1645,7 +1644,8 @@ export default {
           };
 
           const RES = await this._addMiembroVotante({ data });
-          if (RES.status === 200)
+
+          if (RES.success)
             setTimeout(() => {
               this.ALT_("MV-SS", "success", "p", this.logout);
             }, 200);
@@ -1843,6 +1843,17 @@ export default {
         categorias.push({
           groupCategoryId: categoriaId,
           userId: CURRTET_USER.id,
+        });
+      });
+      return categorias;
+    },
+    guardarSubCategoria() {
+      const categorias = [];
+      this.selectedCategorias.forEach((categoriaId, index) => {
+        categorias.push({
+          groupCategoryId: categoriaId,
+          userId: CURRTET_USER.id,
+          groupLevelId: index + 1,
         });
       });
       return categorias;

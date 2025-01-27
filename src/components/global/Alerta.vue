@@ -1,5 +1,10 @@
 <template>
-  <v-dialog v-model="alert.estado" persistent width="500" class="rounded-0 border-card">
+  <v-dialog
+    v-model="alert.estado"
+    persistent
+    width="500"
+    class="rounded-0 border-card"
+  >
     <v-card width="500" class="mx-auto border-card">
       <v-footer color="white" class="mb-0 pb-0">
         <v-spacer></v-spacer>
@@ -25,13 +30,44 @@
         <h4 class="text-center my-5 mx-16" v-html="cuerpo"></h4>
         <v-divider class="mx-14"></v-divider>
         <v-card-actions class="mx-0 mx-6 pb-10">
-          <v-btn ref="btn3" color="boton" class="botone" v-if="!btn_cancel" dark block @click="cancel()">{{ texto_boton }} </v-btn>
-          <v-col cols="12" lg="12" md="12" sm="12" class="py-2 my-0 text-center" v-if="btn_cancel">
-            <v-btn ref="btn1" color="boton" width="110" class="botone" dark @click="confirm()">
+          <v-btn
+            ref="btn3"
+            color="boton"
+            class="botone"
+            v-if="!btn_cancel"
+            dark
+            block
+            @click="cancel()"
+            >{{ texto_boton }}
+          </v-btn>
+          <v-col
+            cols="12"
+            lg="12"
+            md="12"
+            sm="12"
+            class="py-2 my-0 text-center"
+            v-if="btn_cancel"
+          >
+            <v-btn
+              ref="btn1"
+              color="boton"
+              width="110"
+              class="botone"
+              dark
+              @click="confirm()"
+            >
               Aceptar
               <v-icon>mdi-check</v-icon>
             </v-btn>
-            <v-btn ref="btn2" color="error" width="110" class="botone ml-2" @click="cancel()"> cancelar </v-btn>
+            <v-btn
+              ref="btn2"
+              color="error"
+              width="110"
+              class="botone ml-2"
+              @click="cancel()"
+            >
+              cancelar
+            </v-btn>
           </v-col>
         </v-card-actions>
       </v-container>
@@ -100,7 +136,8 @@ export default {
           break;
         case "deleteProgram":
           this.title = `¡Cuidado!`;
-          this.cuerpo = "¿Desea eliminar el programa? Recuerda que tambien se eliminaran todas las postulaciones realacionadas a este.";
+          this.cuerpo =
+            "¿Desea eliminar el programa? Recuerda que tambien se eliminaran todas las postulaciones realacionadas a este.";
           this.texto_boton = `Eliminar programa`;
           break;
         case "editProgram":
@@ -125,7 +162,8 @@ export default {
           break;
         case "guardarCanal":
           this.title = `¿Deseas continuar?`;
-          this.cuerpo = "Una vez guardada la informacion, no podrá ser editada.";
+          this.cuerpo =
+            "Una vez guardada la informacion, no podrá ser editada.";
           this.texto_boton = `Guardar`;
           break;
         case "xlsx_":
@@ -165,7 +203,7 @@ export default {
           break;
         case "MV-SS":
           this.title = `¡Registro creado correctamente!`;
-          this.cuerpo = `Muchas gracias por su interés en participar como Miembro Acreditado de la Industria en la entrega número 40 de los Premios India Catalina. Su información compartida será analizada por la Organización y pronto nos pondremos en contacto con Ud. para confirmarle su participación y, en ese caso, las categorías en las cuales agradecemos su evaluación o votación. Hasta pronto.`;
+          this.cuerpo = `Muchas gracias por su interés en participar como Miembro Acreditado de la Industria en la entrega número 41 de los Premios India Catalina. Su información compartida será analizada por la Organización y pronto nos pondremos en contacto con Ud. para confirmarle su participación y, en ese caso, las categorías en las cuales agradecemos su evaluación o votación. Hasta pronto.`;
           this.texto_boton = `Aceptar`;
           break;
         case "VOTO":
@@ -348,12 +386,14 @@ export default {
           break;
         case "PROGRAMA-0":
           this.title = `El programa ya se encuentra inscrito`;
-          this.cuerpo = "El nombre de programa ya se encuentra registrado, intenta con otro.";
+          this.cuerpo =
+            "El nombre de programa ya se encuentra registrado, intenta con otro.";
           this.texto_boton = `Cambiar nombre`;
           break;
         case "VIMEO-0":
           this.title = `El video no se ha cargado 100 %`;
-          this.cuerpo = "Verifica que hayas subido el video al 100% para continuar";
+          this.cuerpo =
+            "Verifica que hayas subido el video al 100% para continuar";
           this.texto_boton = `Aceptar`;
           break;
         case "CTG-0":
@@ -363,7 +403,8 @@ export default {
           break;
         case "pago-1":
           this.title = `Se hizo el pago correctamente`;
-          this.cuerpo = "Se acaba de cambiar el estado de pago de la postulación";
+          this.cuerpo =
+            "Se acaba de cambiar el estado de pago de la postulación";
           this.texto_boton = `Aceptar`;
           break;
         case "VOTO":
