@@ -8,9 +8,17 @@
     :mini-variant-width="80"
     :width="is_open ? 400 : 300"
   >
-    <v-container fluid class="container-sidebar d-flex align-center flex-column">
+    <v-container
+      fluid
+      class="container-sidebar d-flex align-center flex-column"
+    >
       <v-row class="mt-4 mb-2">
-        <v-img width="150" contain class="mx-auto pr-12" src="@/assets/image/logoPic40.png"></v-img>
+        <v-img
+          width="150"
+          contain
+          class="mx-auto pr-12"
+          src="@/assets/image/logoPic41.png"
+        ></v-img>
       </v-row>
       <v-row>
         <v-container>
@@ -58,14 +66,25 @@
 
       <v-row justify="center">
         <v-col cols="12" class="py-0 my-0 text-center">
-          <v-btn class="my-2 mr-16 botone" @click="cerrarSesion()" color="icon" small dark text>
-            <v-icon size="30" class="mr-2" color="botone">mdi-exit-to-app </v-icon>
+          <v-btn
+            class="my-2 mr-16 botone"
+            @click="cerrarSesion()"
+            color="icon"
+            small
+            dark
+            text
+          >
+            <v-icon size="30" class="mr-2" color="botone"
+              >mdi-exit-to-app
+            </v-icon>
             Cerrar sesión
           </v-btn>
         </v-col>
         <v-col cols="12" class="py-0 my-0 text-center" v-if="!is_mobil">
           <v-btn icon @click="is_open = false" class="botone" color="accent">
-            <v-icon size="30" class="mr-2" color="red"> mdi-close-circle-outline</v-icon>
+            <v-icon size="30" class="mr-2" color="red">
+              mdi-close-circle-outline</v-icon
+            >
             minimizar
           </v-btn>
         </v-col>
@@ -105,7 +124,9 @@
                     </h5>
                   </v-col>
                   <v-col cols="6">
-                    <h5 class="black--text pt-1">Todos lo derechos reservados</h5>
+                    <h5 class="black--text pt-1">
+                      Todos lo derechos reservados
+                    </h5>
                   </v-col>
                 </v-row>
                 <v-row class="">
@@ -118,7 +139,11 @@
                         <h5 class="black--text pt-1">Powered By</h5>
                       </v-row>
                       <v-row class="my-0 ml-0">
-                        <img src="../../assets/image/logo-rv.svg" alt="" width="30" />
+                        <img
+                          src="../../assets/image/logo-rv.svg"
+                          alt=""
+                          width="30"
+                        />
                       </v-row>
                     </v-container>
                   </v-col>
@@ -170,9 +195,15 @@ export default {
       nav: null,
       logo: "",
       icons: [
-        { icon: "mdi-facebook", url: "https://www.facebook.com/premiosindiacatalina" },
+        {
+          icon: "mdi-facebook",
+          url: "https://www.facebook.com/premiosindiacatalina",
+        },
         { icon: "mdi-twitter", url: "https://twitter.com/premiosindia" },
-        { icon: "mdi-instagram", url: "https://www.instagram.com/premiosindiacatalina" },
+        {
+          icon: "mdi-instagram",
+          url: "https://www.instagram.com/premiosindiacatalina",
+        },
       ],
 
       ruta: "",
@@ -193,7 +224,12 @@ export default {
               icon: "mdi-shape-plus",
               show: [],
             },
-            { title: "Usuarios", to: "/admin/usuarios", icon: "mdi-account-multiple", show: [] },
+            {
+              title: "Usuarios",
+              to: "/admin/usuarios",
+              icon: "mdi-account-multiple",
+              show: [],
+            },
             {
               title: "Pagos",
               to: "/admin/pagos",

@@ -43,16 +43,16 @@
         :key="item.id"
       >
         <v-card
-          class="py-2  my-2"
+          class="py-2 my-2"
           height="auto"
           elevation="4"
-          style="border-radius: 20px;"
+          style="border-radius: 20px"
         >
           <v-row class="mx-4 my-2">
             <v-col cols="12" xs="4" sm="4" md="5" lg="4" xl="5" class="mx-auto">
               <v-img
                 v-if="item.typePostulation == '1'"
-                lazy-src="https://premiosindiacatalina.com/wp-content/uploads/2023/12/LogoPic40.png"
+                lazy-src="https://premiosindiacatalina.com/wp-content/uploads/2023/12/logoPic41.png"
                 :src="item.photo"
                 @click="abrirSipnosis(item)"
                 class="mx-auto"
@@ -60,15 +60,15 @@
               />
               <v-img
                 v-else
-                lazy-src="https://premiosindiacatalina.com/wp-content/uploads/2023/12/LogoPic40.png"
+                lazy-src="https://premiosindiacatalina.com/wp-content/uploads/2023/12/logoPic41.png"
                 :src="item.program.poster"
                 @click="abrirSipnosis(item)"
                 class="mx-auto"
                 height="300"
               />
             </v-col>
-            <v-col class="py-0 ">
-              <v-row class="pl-4 ">
+            <v-col class="py-0">
+              <v-row class="pl-4">
                 <v-col
                   cols="9"
                   xs="9"
@@ -76,7 +76,7 @@
                   md="10"
                   lg="10"
                   xl="10"
-                  class="py-0 "
+                  class="py-0"
                 >
                   <h3 class="my-4" v-if="item.typePostulation == '1'">
                     {{ item.name?.toUpperCase() }}
@@ -100,7 +100,7 @@
                   class="py-0"
                 >
                   <v-divider class="pb-5"></v-divider>
-                  <p  v-if="item.typePostulation == '1'" class="my-2" >
+                  <p v-if="item.typePostulation == '1'" class="my-2">
                     <strong>Programa:</strong>
                     {{ item.program?.nameProgram.toUpperCase() }}
                   </p>
@@ -119,7 +119,7 @@
                     <strong>Temporadas:</strong>
                     {{ item.program?.numberSeason }}
                   </p>
-                  <p v-if="item.typePostulation == '2'" class="py-4" > </p>
+                  <p v-if="item.typePostulation == '2'" class="py-4"></p>
                 </v-col>
                 <v-col
                   cols="12"

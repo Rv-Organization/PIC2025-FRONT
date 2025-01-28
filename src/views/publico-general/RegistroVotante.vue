@@ -7,7 +7,7 @@
           <h4>
             La Organización de los Premios India Catalina se complace en contar
             con su experiencia y conocimiento para evaluar o votar las
-            producciones y talentos postulados a la edición número 40 de esta
+            producciones y talentos postulados a la edición número 41 de esta
             entrega anual, que reconoce a lo mejor de la Industria Audiovisual
             Colombiana. Este año, cada categoría será evaluada y votada por
             profesionales con experiencia certificada en los formatos y géneros
@@ -28,7 +28,7 @@
           <h4>
             Antes de inscribirse, por favor revise atentamente el
             <a
-              href="https://premiosindiacatalina.com/wp-content/uploads/2023/12/PIC-2024-REGLAMENTO-MIEMBROS-ACREDITADOS-DE-LA-INDUSTRIA-VF.pdf"
+              href="https://premiosindiacatalina.com/wp-content/uploads/2025/01/PIC-41-REGLAMENTO-GENERAL-VF-06NE2025.pdf"
               target="_blank"
               >REGLAMENTO</a
             >

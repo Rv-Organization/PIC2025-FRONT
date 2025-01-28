@@ -6,10 +6,13 @@
     @input="lastEstado"
     disable-resize-watcher
   >
-    <v-container fluid class="container-sidebar ma-0 pa-0 d-flex align-center flex-column mt-0">
-      <!-- <img src="@/assets/image/logoPic40.png" alt="Logo_Premios_India_Catalina_39" contain class="logo py-4" /> -->
+    <v-container
+      fluid
+      class="container-sidebar ma-0 pa-0 d-flex align-center flex-column mt-0"
+    >
+      <!-- <img src="@/assets/image/logoPic41.png" alt="Logo_Premios_India_Catalina_39" contain class="logo py-4" /> -->
       <img
-        src="@/assets/image/logoPic40.png"
+        src="@/assets/image/logoPic41.png"
         alt="Logo_Premios_India_Catalina_39"
         contain
         class="logo py-4"
@@ -20,12 +23,18 @@
           <v-row class="pl-12 py-0 my-0">
             <v-col cols="12" class="pa-0 ml-16 my-1" v-if="estado_registro">
               <h4
-                :class="`${$route.path == '/miembro-votante/votar' ? 'primary--text' : ''}`"
+                :class="`${
+                  $route.path == '/miembro-votante/votar' ? 'primary--text' : ''
+                }`"
                 @click="$router.push('/publico-general/votar')"
                 style="cursor: pointer"
               >
                 <v-icon
-                  :color="$route.path == '/miembro-votante/votar' ? 'primary' : 'accent'"
+                  :color="
+                    $route.path == '/miembro-votante/votar'
+                      ? 'primary'
+                      : 'accent'
+                  "
                   @click="$router.push('/publico-general/votar')"
                   class="mr-4"
                   size="30"
@@ -33,14 +42,26 @@
                 >Inicio
               </h4>
             </v-col>
-            <v-col cols="12" class="pa-0 ml-16 my-1" v-if="usuario.roleId != 1 && !estado_registro">
+            <v-col
+              cols="12"
+              class="pa-0 ml-16 my-1"
+              v-if="usuario.roleId != 1 && !estado_registro"
+            >
               <h4
-                :class="`${$route.path == '/miembro-votante/registro' ? 'primary--text' : ''}`"
+                :class="`${
+                  $route.path == '/miembro-votante/registro'
+                    ? 'primary--text'
+                    : ''
+                }`"
                 @click="$router.push('/publico-general/votar')"
                 style="cursor: pointer"
               >
                 <v-icon
-                  :color="$route.path == '/miembro-votante/registro' ? 'primary' : 'accent'"
+                  :color="
+                    $route.path == '/miembro-votante/registro'
+                      ? 'primary'
+                      : 'accent'
+                  "
                   @click="$router.push('/publico-general/votar')"
                   class="mr-4"
                   size="30"
@@ -169,14 +190,25 @@
       </v-row>
       <v-row justify="center">
         <v-col cols="12" class="py-0 my-0 text-center">
-          <v-btn class="my-2 mr-16 botone" @click="cerrarSesion()" color="icon" small dark text>
-            <v-icon size="30" class="mr-2" color="botone">mdi-exit-to-app </v-icon>
+          <v-btn
+            class="my-2 mr-16 botone"
+            @click="cerrarSesion()"
+            color="icon"
+            small
+            dark
+            text
+          >
+            <v-icon size="30" class="mr-2" color="botone"
+              >mdi-exit-to-app
+            </v-icon>
             Cerrar sesión
           </v-btn>
         </v-col>
         <v-col cols="12" class="py-0 my-0 text-center" v-if="!is_mobil">
           <v-btn icon @click="is_open = false" class="botone" color="accent">
-            <v-icon size="30" class="mr-2" color="red"> mdi-close-circle-outline</v-icon>
+            <v-icon size="30" class="mr-2" color="red">
+              mdi-close-circle-outline</v-icon
+            >
             minimizar
           </v-btn>
         </v-col>
@@ -341,7 +373,8 @@ export default {
     }),
     async obtenerVotantes() {
       const RES = await this._getMiembroVotante();
-      RES.data?.data?.isValidate && (this.estado_registro = RES.data.data.isValidate);
+      RES.data?.data?.isValidate &&
+        (this.estado_registro = RES.data.data.isValidate);
     },
     cerrarSesion() {
       this.ALT_("logout", "info", "p");

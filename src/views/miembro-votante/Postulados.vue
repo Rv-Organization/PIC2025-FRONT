@@ -66,14 +66,14 @@
             >
               <v-img
                 v-if="item.typePostulation == '1'"
-                lazy-src="https://premiosindiacatalina.com/wp-content/uploads/2023/12/LogoPic40.png"
+                lazy-src="https://premiosindiacatalina.com/wp-content/uploads/2023/12/logoPic41.png"
                 :src="item.photo"
                 class="mx-auto"
                 height="200"
               />
               <v-img
                 v-else
-                lazy-src="https://premiosindiacatalina.com/wp-content/uploads/2023/12/LogoPic40.png"
+                lazy-src="https://premiosindiacatalina.com/wp-content/uploads/2023/12/logoPic41.png"
                 :src="item.program.poster"
                 class="mx-auto"
                 height="200"

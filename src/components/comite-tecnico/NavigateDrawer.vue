@@ -6,9 +6,12 @@
     @input="lastEstado"
     disable-resize-watcher
   >
-    <v-container fluid class="container-sidebar ma-0 pa-0 d-flex align-center flex-column mt-0">
+    <v-container
+      fluid
+      class="container-sidebar ma-0 pa-0 d-flex align-center flex-column mt-0"
+    >
       <img
-        src="@/assets/image/logoPic40.png"
+        src="@/assets/image/logoPic41.png"
         alt="Logo_Premios_India_Catalina_39"
         class="logo py-4"
         contain
@@ -19,17 +22,24 @@
         <v-container>
           <v-divider color="#E4CC8E" class="mb-10"></v-divider>
           <v-row class="pl-12 py-0 my-0">
-            <v-col @click="$router.push('/comite-tecnico/panel-comite-tecnico')" cols="12" class="pa-0 ml-16 my-1">
+            <v-col
+              @click="$router.push('/comite-tecnico/panel-comite-tecnico')"
+              cols="12"
+              class="pa-0 ml-16 my-1"
+            >
               <h4
                 :class="`${
-                  $route.path == '/comite-tecnico/panel-comite-tecnico' ? 'primary--text' : ''
+                  $route.path == '/comite-tecnico/panel-comite-tecnico'
+                    ? 'primary--text'
+                    : ''
                 }`"
-                
                 style="cursor: pointer"
               >
                 <v-icon
                   :color="
-                    $route.path == '/comite-tecnico/panel-comite-tecnico' ? 'primary' : 'accent'
+                    $route.path == '/comite-tecnico/panel-comite-tecnico'
+                      ? 'primary'
+                      : 'accent'
                   "
                   class="mr-4"
                   size="30"
@@ -39,12 +49,20 @@
             </v-col>
             <v-col cols="12" class="pa-0 ml-16 my-1">
               <h4
-                :class="`${$route.path == '/comite-tecnico/instrucciones' ? 'primary--text' : ''}`"
+                :class="`${
+                  $route.path == '/comite-tecnico/instrucciones'
+                    ? 'primary--text'
+                    : ''
+                }`"
                 @click="$router.push('/comite-tecnico/instrucciones')"
                 style="cursor: pointer"
               >
                 <v-icon
-                  :color="$route.path == '/comite-tecnico/instrucciones' ? 'primary' : 'accent'"
+                  :color="
+                    $route.path == '/comite-tecnico/instrucciones'
+                      ? 'primary'
+                      : 'accent'
+                  "
                   @click="$router.push('/comite-tecnico/instrucciones')"
                   class="mr-4"
                   size="30"
@@ -55,12 +73,20 @@
             <v-col cols="12" class="pa-0 ml-16 my-1">
               <h4
                 @click="$router.push('/comite-tecnico/sugerencias')"
-                :class="`${$route.path == '/comite-tecnico/sugerencias' ? 'primary--text' : ''}`"
+                :class="`${
+                  $route.path == '/comite-tecnico/sugerencias'
+                    ? 'primary--text'
+                    : ''
+                }`"
                 style="cursor: pointer"
               >
                 <v-icon
                   @click="$router.push('/comite-tecnico/sugerencias')"
-                  :color="$route.path == '/comite-tecnico/sugerencias' ? 'primary' : 'accent'"
+                  :color="
+                    $route.path == '/comite-tecnico/sugerencias'
+                      ? 'primary'
+                      : 'accent'
+                  "
                   class="mr-4"
                   size="30"
                   >mdi-book-edit </v-icon
@@ -70,7 +96,9 @@
 
             <v-col cols="12" class="pa-0 ml-16 my-1">
               <h4
-                :class="`${$route.path == '/admin/pagos' ? 'primary--text' : ''}`"
+                :class="`${
+                  $route.path == '/admin/pagos' ? 'primary--text' : ''
+                }`"
                 style="cursor: pointer"
                 @click="usu.estado = true"
               >
@@ -88,14 +116,25 @@
       </v-row>
       <v-row justify="center">
         <v-col cols="12" class="py-0 my-0 text-center">
-          <v-btn class="my-2 mr-16 botone" @click="cerrarSesion()" color="icon" small dark text>
-            <v-icon size="30" class="mr-2" color="botone">mdi-exit-to-app </v-icon>
+          <v-btn
+            class="my-2 mr-16 botone"
+            @click="cerrarSesion()"
+            color="icon"
+            small
+            dark
+            text
+          >
+            <v-icon size="30" class="mr-2" color="botone"
+              >mdi-exit-to-app
+            </v-icon>
             Cerrar sesión
           </v-btn>
         </v-col>
         <v-col cols="12" class="py-0 my-0 text-center" v-if="!is_mobil">
           <v-btn icon @click="is_open = false" class="botone" color="accent">
-            <v-icon size="30" class="mr-2" color="red"> mdi-close-circle-outline</v-icon>
+            <v-icon size="30" class="mr-2" color="red">
+              mdi-close-circle-outline</v-icon
+            >
             minimizar
           </v-btn>
         </v-col>
@@ -135,7 +174,9 @@
                     </h5>
                   </v-col>
                   <v-col cols="6">
-                    <h5 class="black--text pt-1">Todos lo derechos reservados</h5>
+                    <h5 class="black--text pt-1">
+                      Todos lo derechos reservados
+                    </h5>
                   </v-col>
                 </v-row>
                 <v-row class="">
@@ -148,7 +189,11 @@
                         <h5 class="black--text pt-1">Powered By</h5>
                       </v-row>
                       <v-row class="my-0 ml-0">
-                        <img src="../../assets/image/logo-rv.svg" alt="" width="30" />
+                        <img
+                          src="../../assets/image/logo-rv.svg"
+                          alt=""
+                          width="30"
+                        />
                       </v-row>
                     </v-container>
                   </v-col>
@@ -200,9 +245,15 @@ export default {
       nav: null,
       logo: "",
       icons: [
-        { icon: "mdi-facebook", url: "https://www.facebook.com/premiosindiacatalina" },
+        {
+          icon: "mdi-facebook",
+          url: "https://www.facebook.com/premiosindiacatalina",
+        },
         { icon: "mdi-twitter", url: "https://twitter.com/premiosindia" },
-        { icon: "mdi-instagram", url: "https://www.instagram.com/premiosindiacatalina" },
+        {
+          icon: "mdi-instagram",
+          url: "https://www.instagram.com/premiosindiacatalina",
+        },
       ],
       ruta: "",
       rutas: [

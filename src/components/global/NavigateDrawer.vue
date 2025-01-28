@@ -118,7 +118,7 @@
         </v-container>
       </v-row>
       <!-- <v-row class="mb-2">
-        <v-img width="150" contain class="mx-auto pr-12" src="@/assets/image/logoPic40.png"></v-img>
+        <v-img width="150" contain class="mx-auto pr-12" src="@/assets/image/logoPic41.png"></v-img>
       </v-row> -->
       <v-row justify="center">
         <v-col cols="12" class="py-0 my-0 text-center">
