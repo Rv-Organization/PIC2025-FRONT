@@ -249,7 +249,7 @@
                     <h5 class="black--text" style="cursor: pointer">
                       <!-- @click="$router.push('/postulantes/reglamento')" -->
                       <a
-                        href="https://premiosindiacatalina.com/wp-content/uploads/2023/12/PIC-2024-REGLAMENTO-MIEMBROS-ACREDITADOS-DE-LA-INDUSTRIA-VF.pdf"
+                        href="https://premiosindiacatalina.com/wp-content/uploads/2025/01/PIC-41-REGLAMENTO-GENERAL-VF-06NE2025.pdf"
                         class="black--text"
                         target="_blank"
                         >Reglamento</a

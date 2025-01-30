@@ -370,7 +370,7 @@
                 :key="index"
                 class="my-0 py-0"
                 cols="12"
-                md="4"
+                md="6"
               >
                 <v-checkbox
                   :label="categoria.description"
@@ -382,7 +382,7 @@
                   "
                   class="d-flex align-center"
                 >
-                  <template v-slot:label>
+                  <!-- <template v-slot:label>
                     <div class="d-flex align-center justify-space-between">
                       <span>{{ categoria.description }}</span>
                       <v-tooltip bottom color="primary">
@@ -405,7 +405,7 @@
                         </v-card>
                       </v-tooltip>
                     </div>
-                  </template>
+                  </template> -->
                 </v-checkbox>
               </v-col>
             </v-row>
@@ -695,7 +695,18 @@
             </v-row>
             <v-row class="mt-10 justify-center">
               <h3 class="col-12">Declaración de Confidencialidad</h3>
-
+              <div class="col-12">
+                <p>
+                  Puede consultar la declaración de confidencialidad y
+                  compromiso ético
+                  <a
+                    href="https://premiosindiacatalina.com/wp-content/uploads/2025/01/DECLARACION-DE-CONFIDENCIALIDAD-Y-COMPROMISO-ETICO.pdf"
+                    target="_blank"
+                  >
+                    aquí</a
+                  >
+                </p>
+              </div>
               <v-checkbox
                 v-model="form.confidentiality_authorization.value"
                 :rules="[
