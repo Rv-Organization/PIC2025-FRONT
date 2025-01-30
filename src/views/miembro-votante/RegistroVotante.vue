@@ -408,6 +408,13 @@
                   </template> -->
                 </v-checkbox>
               </v-col>
+              <v-text-field
+                v-if="selectedCategorias.includes(16)"
+                label="Si elegiste 'Otro', por favor especifica"
+                v-model="other"
+                outlined
+                dense
+              ></v-text-field>
             </v-row>
           </v-form>
           <v-divider class="my-4"></v-divider>
@@ -777,6 +784,7 @@ export default {
       radioGroupVinculado: "2",
       sector: "",
       role: null,
+      other: "",
       sub_group_category: [],
       production_role: [],
       proyectos: 1,
@@ -1865,6 +1873,7 @@ export default {
         categorias.push({
           groupCategoryId: categoriaId,
           userId: CURRTET_USER.id,
+          other: categoriaId == 16 ? this.other : "",
           groupLevelId: index + 1,
         });
       });
