@@ -1651,7 +1651,6 @@ export default {
             curriculumVitae: hoja_vida.data.data,
             photo: foto.data.data,
             documentFotocopy: documento.data.data,
-            //*******//
 
             userId: CURRTET_USER.id,
             productionSubRoleId: this.role,
@@ -1871,7 +1870,7 @@ export default {
       const categorias = [];
       this.selectedCategorias.forEach((categoriaId, index) => {
         categorias.push({
-          groupCategoryId: categoriaId,
+          subGroupCategoryId: categoriaId,
           userId: CURRTET_USER.id,
           other: categoriaId == 16 ? this.other : "",
           groupLevelId: index + 1,
