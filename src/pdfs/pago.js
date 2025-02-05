@@ -2,7 +2,9 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { formatNum_ } from "../global";
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.vfs = pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : null;
+
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import moment from "moment";
 
 let estructure_image = (image) => {
@@ -27,7 +29,12 @@ let format_item = (item) => {
   return [
     { text: item.quantity, fontSize: 9, bold: true, alignment: "center" },
     { text: item.nameCategory, fontSize: 9, bold: true, alignment: "center" },
-    { text: formatNum_(item.price), fontSize: 9, bold: true, alignment: "center" },
+    {
+      text: formatNum_(item.price),
+      fontSize: 9,
+      bold: true,
+      alignment: "center",
+    },
   ];
 };
 export default function (items, logo, name) {
@@ -79,8 +86,18 @@ export default function (items, logo, name) {
               ...table_body(data),
               [
                 { text: "", fontSize: 9, bold: true, alignment: "center" },
-                { text: "Total :", fontSize: 9, bold: true, alignment: "center" },
-                { text: formatNum_(total), fontSize: 9, bold: true, alignment: "center" },
+                {
+                  text: "Total :",
+                  fontSize: 9,
+                  bold: true,
+                  alignment: "center",
+                },
+                {
+                  text: formatNum_(total),
+                  fontSize: 9,
+                  bold: true,
+                  alignment: "center",
+                },
               ],
             ],
           },
@@ -88,9 +105,9 @@ export default function (items, logo, name) {
         },
       ],
     };
-    pdfMake.createPdf(dd).open()
+    pdfMake.createPdf(dd).open();
     pdfMake.createPdf(dd).download();
-    
+
     resolve(true);
   });
 }

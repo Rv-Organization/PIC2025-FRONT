@@ -8,12 +8,24 @@
       <v-col cols="12" class="mt-0 pt-0">
         <v-container>
           <v-row justify="center" class="mb-5">
-            <v-col cols="4" xs="4" sm="4" md="4" lg="4" xl="4" class="py-0 text-start">
+            <v-col
+              cols="4"
+              xs="4"
+              sm="4"
+              md="4"
+              lg="4"
+              xl="4"
+              class="py-0 text-start"
+            >
               <h2 class="">Pagos</h2>
               <h5>Pendiente: ${{ formatNum_(total_pendiente || 0) }}</h5>
-              <h5 class="success--text">Entrante: ${{ formatNum_(total_pagados || 0) }}</h5>
+              <h5 class="success--text">
+                Entrante: ${{ formatNum_(total_pagados || 0) }}
+              </h5>
             </v-col>
-            <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="py-0"> <INPUT :field="form.buscar" /> </v-col>
+            <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" class="py-0">
+              <INPUT :field="form.buscar" />
+            </v-col>
           </v-row>
           <v-row>
             <v-col cols="12" v-for="(item, index) in array_pagos" :key="index">
@@ -23,20 +35,74 @@
                     <v-col cols="6" xs="6" sm="6" md="5" lg="5" xl="5">
                       <h4>{{ item.nameClients }}</h4>
                     </v-col>
-                    <v-col cols="5" xs="5" sm="4" md="3" lg="3" xl="3" class="text-center my-0 py-1 mx-auto">
-                      <v-btn fab dark small :color="item.stateOrderId === 1 ? 'green' : 'red'" rounded class="botone">
-                        <v-icon v-if="item.stateOrderId != 1">mdi-close-circle</v-icon>
-                        <v-icon v-if="item.stateOrderId === 1">mdi-check-circle</v-icon>
+                    <v-col
+                      cols="5"
+                      xs="5"
+                      sm="4"
+                      md="3"
+                      lg="3"
+                      xl="3"
+                      class="text-center my-0 py-1 mx-auto"
+                    >
+                      <v-btn
+                        fab
+                        dark
+                        small
+                        :color="item.stateOrderId === 1 ? 'green' : 'red'"
+                        rounded
+                        class="botone"
+                      >
+                        <v-icon v-if="item.stateOrderId != 1"
+                          >mdi-close-circle</v-icon
+                        >
+                        <v-icon v-if="item.stateOrderId === 1"
+                          >mdi-check-circle</v-icon
+                        >
                       </v-btn>
-                      <v-container class="px-0" fluid v-if="item.stateOrderId != 1">
-                        <v-btn dark small color="green" rounded class="botone mr-6" @click="validarPago(item)">Aprobar pago</v-btn>
+                      <v-container
+                        class="px-0"
+                        fluid
+                        v-if="item.stateOrderId != 1"
+                      >
+                        <v-btn
+                          dark
+                          small
+                          color="green"
+                          rounded
+                          class="botone mr-6"
+                          @click="validarPago(item)"
+                          >Aprobar pago</v-btn
+                        >
                       </v-container>
                     </v-col>
-                    <v-col cols="6" xs="6" sm="6" md="2" lg="2" xl="2" class="text-center">
-                      <a style="font-size: 15px" @click="verPago(item)" class="icon--text mr-6">Ver detalle</a>
+                    <v-col
+                      cols="6"
+                      xs="6"
+                      sm="6"
+                      md="2"
+                      lg="2"
+                      xl="2"
+                      class="text-center"
+                    >
+                      <a
+                        style="font-size: 15px"
+                        @click="verPago(item)"
+                        class="icon--text mr-6"
+                        >Ver detalle</a
+                      >
                     </v-col>
-                    <v-col cols="6" xs="6" sm="6" md="2" lg="2" xl="2" class="text-center">
-                      <h4 class="ml-2">${{ formatNum_(item.totalPrice) || 0 }}</h4>
+                    <v-col
+                      cols="6"
+                      xs="6"
+                      sm="6"
+                      md="2"
+                      lg="2"
+                      xl="2"
+                      class="text-center"
+                    >
+                      <h4 class="ml-2">
+                        ${{ formatNum_(item.totalPrice) || 0 }}
+                      </h4>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -45,14 +111,21 @@
           </v-row>
         </v-container>
       </v-col>
-      <ALT @exitEsc="cancel()" @cancel="cancel()" @cancelAlert="cancelAlert()" @confirm="confirm()" :alert="alert" v-if="alert.estado" />
+      <ALT
+        @exitEsc="cancel()"
+        @cancel="cancel()"
+        @cancelAlert="cancelAlert()"
+        @confirm="confirm()"
+        :alert="alert"
+        v-if="alert.estado"
+      />
       <ResumenPago :pago="pago" v-if="pago.estado" />
     </v-row>
   </v-app>
 </template>
 
 <script>
-import ResumenPago from "../../components/admin/ResumenPago.vue";
+import ResumenPago from "@/components/admin/ResumenPago.vue";
 import { INPUT, AUTOCOMPLETE } from "@/mixins/global";
 import { ALERTA } from "../../mixins/alerta";
 import { CURRTET_USER, formatNum_ } from "../../global";
@@ -92,7 +165,9 @@ export default {
   watch: {
     "form.buscar.value"() {
       this.array_pagos = this.array_pagos_base;
-      let filtro = this.array_pagos.filter((pago) => pago.nameClients.includes(this.form.buscar.value));
+      let filtro = this.array_pagos.filter((pago) =>
+        pago.nameClients.includes(this.form.buscar.value)
+      );
       this.array_pagos = filtro;
       this.validar_buscar = this.array_pagos.length == 0 ? true : false;
     },
@@ -103,7 +178,10 @@ export default {
   },
   methods: {
     formatNum_,
-    ...mapActions({ _getPagos: "postulacion/_getPagos", _putPago: "postulacion/_putPago" }),
+    ...mapActions({
+      _getPagos: "postulacion/_getPagos",
+      _putPago: "postulacion/_putPago",
+    }),
     validarPago(valor) {
       this.ALT_(
         "pago",

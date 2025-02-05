@@ -71,10 +71,8 @@ export default {
   },
   async created() {
     let totalPrice = 0;
-
     this.page = this.pago;
     this.total = this.page.totalPrice;
-
     this.page.orderItems.forEach((e) => {
       totalPrice += e.category.price;
       this.array_order_items.push({
@@ -85,10 +83,10 @@ export default {
     });
   },
   methods: {
-    formatNum_,
     ...mapActions({
       _getPago: "postulacion/_getPago",
     }),
+    formatNum_,
     async generarImpresion() {
       let image = await imageBase64(
         require("../../assets/image/logoPic41.png")
@@ -99,7 +97,6 @@ export default {
         this.page.nameClients
       );
     },
-
     pagoEpayco() {
       document.getElementById("Epayco").click();
     },
