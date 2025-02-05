@@ -395,7 +395,8 @@ export default {
     },
     async cargarUSuariosNoPago() {
       this.array_usuarios = [];
-      const RES = await this._getPagos();
+      const reponse = await this._getPagos();
+
       let columnas = [
         { title: "Nombre", value: "nameClient" },
         { title: "Email", value: "email" },
@@ -412,8 +413,9 @@ export default {
         `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
         ` `,
       ];
-      if (RES.data.data.length) {
-        const array_new = RES.data.data.channelForOrders;
+
+      if ("channelForOrders" in reponse.data.data) {
+        const array_new = reponse.data.data.channelForOrders;
         array_new.forEach((e) => {
           e.orders.forEach((i) => {
             this.array_usuarios.push({ ...i, ...e.channel });
