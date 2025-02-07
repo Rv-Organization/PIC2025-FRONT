@@ -27,7 +27,9 @@
             <v-list class="mx-auto">
               <v-list-group
                 :prepend-icon="item.icon"
-                v-for="item in opciones"
+                v-for="item in opciones.filter(
+                  (e) => !e.show.includes(usuario.email)
+                )"
                 v-model="item.active"
                 :key="item.title"
                 no-action
@@ -53,7 +55,15 @@
                   </v-list-item-content>
                 </v-list-item>
               </v-list-group>
-              <v-list-item to="/admin/excel" color="primary">
+              <v-list-item
+                to="/admin/excel"
+                color="primary"
+                v-if="
+                  !['convocatoriamai@premiosindiacatalina.com'].includes(
+                    usuario.email
+                  )
+                "
+              >
                 <v-list-item-icon>
                   <v-icon>mdi-microsoft-excel</v-icon>
                 </v-list-item-icon>
@@ -238,6 +248,7 @@ export default {
             },
           ],
           title: "Postulantes",
+          show: ["convocatoriamai@premiosindiacatalina.com"],
         },
         {
           icon: "mdi-account-multiple-check",
@@ -262,6 +273,7 @@ export default {
             },
           ],
           title: "Miembros Acreditados",
+          show: [],
         },
       ],
       menu_postulantes: false,
