@@ -281,6 +281,7 @@ export default {
       this.postulaciones = respuesta.data.data;
       let newDessertTalento = [];
       let newDesserts = [];
+
       for (let i = 0; i < respuesta.data.data.length; i++) {
         if (respuesta.data.data[i].typePostulation == "2") {
           newDessertTalento.push({
@@ -288,6 +289,7 @@ export default {
             postulacion: respuesta.data.data[i].name,
             id: respuesta.data.data[i].id,
             video: respuesta.data.data[i].video,
+            libretto: respuesta.data.data[i].libretto,
           });
         } else {
           newDesserts.push({
@@ -296,6 +298,7 @@ export default {
             poster_talento: respuesta.data.data[i].photo,
             id: respuesta.data.data[i].id,
             video: respuesta.data.data[i].video,
+            libretto: respuesta.data.data[i].libretto,
           });
         }
       }
@@ -364,8 +367,6 @@ export default {
       });
     },
     editarTalento(item) {
-      // this.postulacion = item;
-      console.log("😎 this.postulacion", this.postulacion);
       Object.assign(this.postulacion, item);
       const categoria = this.talento_lista.find(
         (categoria) => categoria.nameCategory === `${item.categoria}`

@@ -15,6 +15,7 @@
         <h2 class="py-5">
           Programa: {{ $route.params.data?.programa.nameProgram }}
         </h2>
+
         <h4>{{ $route.params.data?.postulacion.nameCategory }}</h4>
         <v-divider class="my-6"></v-divider>
         <h3 class="py-5 mb-6">
@@ -53,6 +54,72 @@
         </v-form>
         <v-divider class="my-4"></v-divider>
         <h2 class="text-start my-10">Archivos requeridos</h2>
+        <v-card elevation="0" class="px-3 pb-0 mb-10" v-if="this.is_libreto">
+          <!-- MEJOR LIBRETO CATEGORIA 6 -->
+          <v-row aling="center" class="my-0">
+            <v-col cols="12" xs="12" sm="8" md="8" lg="8" xl="8">
+              <v-card-text>
+                <h3>Libreto</h3>
+                <h4>Extensiones permitidas solo pdf máximo 2 megas</h4>
+              </v-card-text>
+            </v-col>
+
+            <v-col
+              cols="5"
+              xs="6"
+              sm="4"
+              md="4"
+              lg="4"
+              xl="4"
+              class="text-center mx-auto"
+            >
+              <v-btn
+                @click="subirArchivo('file-libreto')"
+                plain
+                class="upload py-2 mb-3 boton-focus-animation"
+                height="100%"
+              >
+                <v-row align="center">
+                  <v-col
+                    cols="5"
+                    xs="5"
+                    sm="5"
+                    md="5"
+                    lg="5"
+                    xl="5"
+                    class="py-0 mx-auto pl-9 my-0"
+                  >
+                    <v-file-input
+                      accept="application/pdf"
+                      prepend-icon="mdi-cloud-upload-outline"
+                      truncate-length="1"
+                      id="file-libreto"
+                      v-model="libreto"
+                      class="mt-0"
+                      hide-input
+                      show-size
+                    />
+                  </v-col>
+                  <v-row>
+                    <v-col class="py-4">
+                      <h3 v-if="!subir_libreto">SUBIR LIBRETO</h3>
+                      <h3 v-else>MODIFICAR LIBRETO</h3>
+                    </v-col>
+                  </v-row>
+                </v-row>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card>
+
+        <v-col class="py-4" v-if="is_libreto && subir_libreto">
+          <iframe
+            :src="frame.libreto"
+            class="container"
+            height="500px"
+            width="500px"
+          ></iframe>
+        </v-col>
         <v-card elevation="0" class="px-3 pb-0 mb-0">
           <v-row aling="center" class="my-0">
             <v-col cols="12" xs="12" sm="8" md="8" lg="8" xl="8">
@@ -285,18 +352,22 @@ export default {
     return {
       files: [],
       photo: [],
+      libreto: [],
       letter: [],
 
       format_image: "",
+      format_libreto: "",
       format_letter: "",
 
       edit_photo: false,
       edit_video: false,
       edit_letter: false,
+      edit_libreto: false,
 
       subir_foto: false,
       subir_video: false,
       subir_letter: false,
+      subir_libreto: false,
 
       validar_mov: false,
 
@@ -305,6 +376,7 @@ export default {
         photo: "",
         video: "",
         letter: "",
+        libreto: "",
       },
       options: {
         muted: true,
@@ -319,6 +391,7 @@ export default {
 
       playerReady: false,
       validacion: false,
+      is_libreto: false,
 
       form: {
         nombre: {
@@ -385,6 +458,18 @@ export default {
         this.frame.letter = URL.createObjectURL(this.letter);
       }
     },
+    libreto() {
+      this.format_libreto = this.libreto.name.split(".");
+      this.format_libreto = this.format_libreto[this.format_libreto.length - 1];
+      if (this.libreto.size > 2000000) {
+        this.libreto = "";
+        this.ALT_("CORREO-6", "warning");
+      } else {
+        this.edit_libreto = true;
+        this.subir_libreto = true;
+        this.frame.libreto = URL.createObjectURL(this.libreto);
+      }
+    },
   },
   computed: {
     id_vimeo_c() {
@@ -397,6 +482,9 @@ export default {
       this.$router.push("/postulantes/resumen-produccion");
     if (this.$route.params?.data?.id) this.buscarPostulacion();
     if (this.$route.params.postulacion) this.$route.params.postulacion;
+    if (this.$route.params.data?.postulacion.id == 6) {
+      this.is_libreto = true;
+    }
   },
   methods: {
     ...mapActions({
@@ -539,7 +627,11 @@ export default {
             this.ALT_("editpostulacion", "info", "p");
           } else {
             const logo = await this.uploadPhoto();
-            // const letter = await this.uploadLetter();
+
+            let libreto = {};
+            if (this.is_libreto) {
+              libreto = await this.uploadLibreto();
+            }
             if (logo.status === 200) {
               const data = {
                 name: this.form.nombre.value,
@@ -553,10 +645,12 @@ export default {
                 categoryId: datos.postulacion.id,
                 userId: CURRTET_USER.id,
                 programId: datos.programa.id,
+                libretto: this.is_libreto ? libreto.data.data : "",
               };
               const respuesta = await this._addPostulacion(data);
-              if (respuesta.status === 200)
+              if (respuesta.status === 200) {
                 this.$router.push("/postulantes/resumen-produccion");
+              }
             }
           }
         }
@@ -567,6 +661,9 @@ export default {
         archivo: this.photo,
         tipo: 4,
       });
+    },
+    async uploadLibreto() {
+      return await this._uploadFile({ archivo: this.libreto, tipo: 3 });
     },
     async uploadLetter() {
       return await this._uploadFile({
@@ -584,9 +681,11 @@ export default {
       this.form.email.value = respuesta.data.data.email;
       this.form.telefono.value = respuesta.data.data.phone;
       this.frame.photo = respuesta.data.data.photo;
+      this.frame.libreto = respuesta.data.data.libretto;
       // this.frame.letter = respuesta.data.data.letterManager;
 
       this.subir_foto = true;
+      this.subir_libreto = true;
       // this.subir_letter = true;
       const new_id_video = respuesta.data.data.video.split("/");
       this.id_video = new_id_video[new_id_video.length - 1];
@@ -596,16 +695,25 @@ export default {
     },
     async editarPostulacion() {
       let logo = {};
+      let libreto = {};
       // let letter = {};
       if (this.edit_photo) logo = await this.uploadPhoto();
+      if (this.edit_libreto && this.is_libreto) {
+        libreto = await this.uploadLibreto();
+      }
       // if (this.edit_letter) letter = await this.uploadLetter();
       if (logo.status === 200 || !this.edit_photo) {
         let newLogo = "";
+        var new_libreto = "";
         // let newLetter = "";
         if (this.edit_photo) newLogo = logo.data.data;
         else newLogo = this.datosPostulacion.photo;
         // if (this.edit_letter) newLetter = letter.data.data;
         // else newLetter = this.datosPostulacion.LetterManager;
+
+        if (libreto.status === 200) {
+          if (this.edit_libreto) new_libreto = libreto.data.data;
+        } else new_libreto = this.datosPostulacion.libretto;
 
         const data = {
           id: this.$route.params.data.id,
@@ -620,6 +728,7 @@ export default {
           categoryId: this.datosPostulacion.categoryId,
           userId: CURRTET_USER.id,
           programId: this.datosPostulacion.programId,
+          libretto: this.is_libreto ? new_libreto : "",
         };
         const respuesta = await this._editPostulacion(data);
         if (respuesta.status === 200)

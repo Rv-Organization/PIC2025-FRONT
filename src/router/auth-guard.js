@@ -6,8 +6,10 @@ const isAuthenticatedGuard = async (to, from, next) => {
     if (CURRTET_USER?.roleId == 1) return next();
     // else if (CURRTET_USER?.roleId == 6) return next();
     // else if (CURRTET_USER?.roleId == 4) return next({ path: "/comite-tecnico/panel-comite-tecnico" });
-    else if ([2, 5, 6, 3].includes(CURRTET_USER?.roleId))
+    else if ([2, 5, 6, 3].includes(CURRTET_USER?.roleId)) {
       return next({ path: "/publico-general/votar" });
+    }
+
     // else if ([6, 3].includes(CURRTET_USER?.roleId)) return next({ path: "/miembro-votante/votar" });
     else next({ path: "/inicio" });
   });

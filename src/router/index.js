@@ -488,6 +488,7 @@ router.beforeEach((to, from, next) => {
   } else if (!requiresAuth && CURRTET_USER && CURRTET_USER.roleId == "4") {
     next("admin/panel-administrativo");
   } else if (!requiresAuth && CURRTET_USER && CURRTET_USER.roleId == 5) {
+    /* Valida a donde van a ir a votan los miembros votantes */
     next("miembro-votante/registro");
   } else if (
     !requiresAuth &&
