@@ -16,7 +16,9 @@ export default {
           data,
         })
           .then((response) => {
-            response.data.success ? resolve(response.data.data) : reject(response.data.message);
+            response.data.success
+              ? resolve(response.data.data)
+              : reject(response.data.message);
           })
           .catch((error) => {
             console.error(error);
@@ -49,7 +51,9 @@ export default {
           method: "POST",
         })
           .then((response) => {
-            response.data.success ? resolve("Miembro revisado") : reject(response.data.message);
+            response.data.success
+              ? resolve("Miembro revisado")
+              : reject(response.data.message);
           })
           .catch((error) => console.error(error));
         commit("_loadingState", null, { root: true });
@@ -63,7 +67,9 @@ export default {
           method: "GET",
         })
           .then((response) => {
-            response.data.success ? resolve(response.data.data) : reject(response.data.message);
+            response.data.success
+              ? resolve(response.data.data)
+              : reject(response.data.message);
           })
           .catch((error) => console.error(error));
         commit("_loadingState", null, { root: true });
@@ -77,7 +83,9 @@ export default {
           method: "DELETE",
         })
           .then((response) => {
-            response.data.success ? resolve(response.data.data) : reject(response.data.message);
+            response.data.success
+              ? resolve(response.data.data)
+              : reject(response.data.message);
           })
           .catch((error) => {
             console.error(error);
@@ -95,7 +103,9 @@ export default {
           data,
         })
           .then((response) => {
-            response.data.success ? resolve(response.data.data) : reject(response.data.message);
+            response.data.success
+              ? resolve(response.data.data)
+              : reject(response.data.message);
           })
           .catch((error) => {
             console.error(error);
@@ -112,7 +122,9 @@ export default {
           method: "GET",
         })
           .then((response) => {
-            response.data.success ? resolve(response.data.data) : reject(response.data.message);
+            response.data.success
+              ? resolve(response.data.data)
+              : reject(response.data.message);
           })
           .catch((error) => {
             console.error(error);
@@ -130,7 +142,9 @@ export default {
           data: item.categoriesId,
         })
           .then((response) => {
-            response.data.success ? resolve("Categorias cambiadas correctamente") : reject(response.data.message);
+            response.data.success
+              ? resolve("Categorias cambiadas correctamente")
+              : reject(response.data.message);
           })
           .catch((error) => {
             console.error(error);

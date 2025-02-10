@@ -9,7 +9,6 @@ const isAuthenticatedGuard = async (to, from, next) => {
     else if ([2, 5, 6, 3].includes(CURRTET_USER?.roleId)) {
       return next({ path: "/publico-general/votar" });
     }
-
     // else if ([6, 3].includes(CURRTET_USER?.roleId)) return next({ path: "/miembro-votante/votar" });
     else next({ path: "/inicio" });
   });
