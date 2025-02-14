@@ -17,7 +17,9 @@
       <v-row class="justify-center">
         <v-col cols="10 px-8 mt-15">
           <h2>
-            {{ this.usuario_votante.name + " " + this.usuario_votante.lastName }}
+            {{
+              this.usuario_votante.name + " " + this.usuario_votante.lastName
+            }}
           </h2>
           <hr color="E4CC8E" class="mb-5 mt-2" />
           <b>Correo Electrónico: </b> {{ this.usuario_votante.email }} <br />
@@ -28,6 +30,11 @@
           <b>Canal: </b> {{ this.usuario_votante.channel }} <br />
           <b>Cargo: </b> {{ this.usuario_votante.position }} <br />
           <b>Ocupacion: </b> {{ this.usuario_votante.occupation }} <br />
+          <b>Disponibilidad de dias a la semana: </b>
+          {{ this.usuario_votante.availabilityWeek.description }}
+          <br />
+          <b>Disponibilidad de horas a la semana: </b>
+          {{ this.usuario_votante.availabilityDay.description }}
           <br />
         </v-col>
       </v-row>
@@ -49,7 +56,9 @@
                 <tr v-for="item in usuario_votante.projects" :key="item.id">
                   <td>{{ item.name }}</td>
                   <td>{{ item.channel }}</td>
-                  <td v-if="item.occupationId == 35">Otro: {{ item.otherOccupation }}</td>
+                  <td v-if="item.occupationId == 35">
+                    Otro: {{ item.otherOccupation }}
+                  </td>
                   <td v-else>{{ item.occupation.description }}</td>
                 </tr>
               </tbody>
@@ -73,9 +82,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in usuario_votante.positionRepresentatives" :key="item.id">
+                <tr
+                  v-for="item in usuario_votante.positionRepresentatives"
+                  :key="item.id"
+                >
                   <td>{{ item.companyName }}</td>
-                  <td v-if="item.occupationId == 35">Otro: {{ item.otherOccupation }}</td>
+                  <td v-if="item.occupationId == 35">
+                    Otro: {{ item.otherOccupation }}
+                  </td>
                   <td v-else>{{ item.occupation.description }}</td>
                   <td>{{ item.dateInital }}</td>
                   <td>{{ item.dateFinal }}</td>
@@ -90,7 +104,12 @@
       <v-row class="justify-center">
         <h2 class="my-8">Documentos Adjuntos</h2>
         <v-col cols="12" class="py-4">
-          <v-img :src="foto" height="500px" width="500px" class="container"></v-img>
+          <v-img
+            :src="foto"
+            height="500px"
+            width="500px"
+            class="container"
+          ></v-img>
         </v-col>
       </v-row>
       <v-row class="justify-center">
@@ -105,7 +124,12 @@
       </v-row>
       <v-row class="justify-center">
         <v-col cols="10" class="py-4">
-          <iframe height="500px" width="500px" class="container" :src="hoja_vida"></iframe>
+          <iframe
+            height="500px"
+            width="500px"
+            class="container"
+            :src="hoja_vida"
+          ></iframe>
         </v-col>
       </v-row>
       <v-row class="justify-center">
@@ -114,16 +138,18 @@
           <template>
             <v-expansion-panels :value="panelSelect">
               <v-expansion-panel
-                v-for="(item, index) in usuario_votante.groupCategoryVoters"
+                v-for="(item, index) in usuario_votante.subGroupCategoryVoters"
                 v-model="expandedPanels[index]"
                 :key="index"
               >
                 <v-expansion-panel-header>
-                  {{ getCategoryName(item.groupCategoryId) }}
+                  {{ item.subGroupCategory?.description }}
                   <v-spacer> </v-spacer>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content
-                  v-for="categoria in categoriasPorGrupo[item.groupCategoryId]"
+                  v-for="categoria in categoriasPorGrupo[
+                    item.subGroupCategoryId
+                  ]"
                 >
                   <v-checkbox
                     :label="categoria.nameCategory"
@@ -143,12 +169,17 @@
           <h2 class="my-8">Categorias no selecionadas</h2>
           <template>
             <v-expansion-panels :value="panelNoSelect">
-              <v-expansion-panel v-for="(item, index) in groupCategory" :key="index">
+              <v-expansion-panel
+                v-for="(item, index) in sub_group_category"
+                :key="index"
+              >
                 <v-expansion-panel-header>
-                  {{ item.Description }}
+                  {{ item?.description }}
                   <v-spacer> </v-spacer>
                 </v-expansion-panel-header>
-                <v-expansion-panel-content v-for="categoria in categoriasPorGrupo[item.Id]">
+                <v-expansion-panel-content
+                  v-for="categoria in categoriasPorGrupo[item.Id]"
+                >
                   <v-checkbox
                     :label="categoria.nameCategory"
                     :value="categoria.Id"
@@ -203,22 +234,28 @@ export default {
       frames: {
         hoja_vida: "",
       },
-      groupCategory: [
-        { Id: 1, Description: "Ficción" },
-        { Id: 2, Description: "Documentales, periodísticos, deportivos e inclusión" },
-        { Id: 3, Description: "Variedades, reality, comedia y musical" },
-        { Id: 4, Description: "Infantil, juvenil, universitaria y animación" },
-        { Id: 5, Description: "Categorías técnicas " },
-        { Id: 6, Description: "Transmedia, vodcast y marca" },
-      ],
-      groupCategoryBase: [
-        { Id: 1, Description: "Ficción" },
-        { Id: 2, Description: "Documentales, periodísticos, deportivos e inclusión" },
-        { Id: 3, Description: "Variedades, reality, comedia y musical" },
-        { Id: 4, Description: "Infantil, juvenil, universitaria y animación" },
-        { Id: 5, Description: "Categorías técnicas " },
-        { Id: 6, Description: "Transmedia, vodcast y marca" },
-      ],
+      // groupCategory: [
+      //   { Id: 1, Description: "Ficción" },
+      //   {
+      //     Id: 2,
+      //     Description: "Documentales, periodísticos, deportivos e inclusión",
+      //   },
+      //   { Id: 3, Description: "Variedades, reality, comedia y musical" },
+      //   { Id: 4, Description: "Infantil, juvenil, universitaria y animación" },
+      //   { Id: 5, Description: "Categorías técnicas " },
+      //   { Id: 6, Description: "Transmedia, vodcast y marca" },
+      // ],
+      // groupCategoryBase: [
+      //   { Id: 1, Description: "Ficción" },
+      //   {
+      //     Id: 2,
+      //     Description: "Documentales, periodísticos, deportivos e inclusión",
+      //   },
+      //   { Id: 3, Description: "Variedades, reality, comedia y musical" },
+      //   { Id: 4, Description: "Infantil, juvenil, universitaria y animación" },
+      //   { Id: 5, Description: "Categorías técnicas " },
+      //   { Id: 6, Description: "Transmedia, vodcast y marca" },
+      // ],
       current_user: {},
       validacion: true,
       form: {
@@ -329,54 +366,51 @@ export default {
       foto: this.usuario_votante.photo,
       fotocapia_documento: this.usuario_votante.documentFotocopy,
       groupCategoryVotersFormat: [],
+      sub_group_category: [],
+      sub_group_category_base: [],
     };
   },
   watch: {},
   async mounted() {
     Object.assign(this.current_user, CURRTET_USER);
-    this.groupCategoryVotersFormat = this.usuario_votante.groupCategoryVoters.map(
-      (e) => e.groupCategoryId
-    );
+    this.groupCategoryVotersFormat =
+      this.usuario_votante.subGroupCategoryVoters.map(
+        (e) => e.subGroupCategoryId
+      );
     this.obtenerCategorias();
   },
   methods: {
     ...mapActions({
       _getCatergorias: "categorias/_getCatergorias",
+      _getSubGroupCategory: "miembro_votante/_getSubGroupCategory",
     }),
 
-    getCategoryName(categoryId) {
-      switch (categoryId) {
-        case 1:
-          return "Ficción";
-        case 2:
-          return "Documentales, periodísticos, deportivos e inclusión";
-        case 3:
-          return "Variedades, reality, comedia y musical";
-        case 4:
-          return "Infantil, juvenil, universitaria y animación";
-        case 5:
-          return "Categorías técnicas";
-        case 6:
-          return "Transmedia, vodcast y marca";
-        case 7:
-          return "Favoritas del público";
-        default:
-          return "Categoria desconocida";
-      }
-    },
     async obtenerCategorias() {
       try {
-        const subCategorias = this.usuario_votante.categoryVoters.map((e) => e.categoryId);
+        const sub_group_category = await this._getSubGroupCategory();
+        this.sub_group_category = sub_group_category;
+        this.sub_group_category_base = JSON.parse(
+          JSON.stringify(sub_group_category)
+        );
+
+        const subCategorias = this.usuario_votante.categoryVoters.map(
+          (e) => e.categoryId
+        );
 
         const response = await this._getCatergorias();
+
         if (response.data?.data) {
           const categorias = response.data.data;
           this.categorias_base = JSON.parse(JSON.stringify(response.data.data));
           categorias.forEach((categoria) => {
             const idCategory = categoria.id;
-            if (this.groupCategoryVotersFormat.includes(categoria.groupCategoryId)) {
-              this.groupCategory = this.groupCategory.filter(
-                (e) => e.Id != categoria.groupCategoryId
+            if (
+              this.groupCategoryVotersFormat.includes(
+                categoria.subGroupCategoryId
+              )
+            ) {
+              this.sub_group_category = this.sub_group_category.filter(
+                (e) => e.Id != categoria.subGroupCategoryId
               );
 
               if (subCategorias.includes(idCategory)) {
@@ -385,7 +419,7 @@ export default {
             } else {
               this.idCategoriasNoSelect.push(idCategory);
             }
-            const groupId = categoria.groupCategoryId;
+            const groupId = categoria.subGroupCategoryId;
             if (!this.categoriasPorGrupo[groupId]) {
               this.$set(this.categoriasPorGrupo, groupId, []);
             }

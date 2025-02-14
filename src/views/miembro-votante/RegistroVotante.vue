@@ -1594,7 +1594,8 @@ export default {
     }),
 
     async obtenerVotantes() {
-      /*TODO: Condicion para redireccionar segun una echa de cierre */
+      /**
+       * TODO: Condicion para redireccionar segun una echa de cierre */
       // return this.$router.push("/miembro-votante/votar");
       /* 22-02-2024 ya no registra, se redirecciona a votar */
       const response = await this._getMiembroVotante();

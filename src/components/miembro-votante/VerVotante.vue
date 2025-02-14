@@ -17,13 +17,16 @@
       <v-row class="justify-center">
         <v-col cols="10 px-8 mt-15">
           <h2>
-            {{ this.usuario_votante.name + " " + this.usuario_votante.lastName }}
+            {{
+              this.usuario_votante.name + " " + this.usuario_votante.lastName
+            }}
           </h2>
           <hr color="E4CC8E" class="mb-5 mt-2" />
           <b>Correo Electrónico: </b> {{ this.usuario_votante.email }} <br />
           <b>Celular: </b> {{ this.usuario_votante.celPhone }} <br />
           <b>Documento: </b> {{ this.usuario_votante.document }} <br />
-          <b>Pimera vez: </b> {{ this.usuario_votante.firstTime ? "Si" : "No" }}<br />
+          <b>Pimera vez: </b> {{ this.usuario_votante.firstTime ? "Si" : "No"
+          }}<br />
           <b v-if="!this.usuario_votante.firstTime">Fecha de la ultima vez: </b>
           {{
             this.usuario_votante.datePrevious
@@ -34,6 +37,11 @@
           <b>Canal: </b> {{ this.usuario_votante.channel }} <br />
           <b>Cargo: </b> {{ this.usuario_votante.position }} <br />
           <b>Ocupacion: </b> {{ this.usuario_votante.occupation }} <br />
+          <b>Disponibilidad de dias a la semana: </b>
+          {{ this.usuario_votante.availabilityWeek.description }}
+          <br />
+          <b>Disponibilidad de horas a la semana: </b>
+          {{ this.usuario_votante.availabilityDay.description }}
           <br />
         </v-col>
       </v-row>
@@ -55,7 +63,9 @@
                 <tr v-for="item in usuario_votante.projects" :key="item.id">
                   <td>{{ item.name }}</td>
                   <td>{{ item.channel }}</td>
-                  <td v-if="item.occupationId == 35">Otro: {{ item.otherOccupation }}</td>
+                  <td v-if="item.occupationId == 35">
+                    Otro: {{ item.otherOccupation }}
+                  </td>
                   <td v-else>{{ item.occupation.description }}</td>
                 </tr>
               </tbody>
@@ -79,9 +89,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in usuario_votante.positionRepresentatives" :key="item.id">
+                <tr
+                  v-for="item in usuario_votante.positionRepresentatives"
+                  :key="item.id"
+                >
                   <td>{{ item.companyName }}</td>
-                  <td v-if="item.occupationId == 35">Otro: {{ item.otherOccupation }}</td>
+                  <td v-if="item.occupationId == 35">
+                    Otro: {{ item.otherOccupation }}
+                  </td>
                   <td v-else>{{ item.occupation.description }}</td>
                   <td>{{ item.dateInital }}</td>
                   <td>{{ item.dateFinal }}</td>
@@ -96,17 +111,32 @@
       <v-row class="justify-center">
         <h2 class="my-8">Documentos Adjuntos</h2>
         <v-col cols="12" class="py-4">
-          <v-img :src="foto" height="500px" width="500px" class="container"></v-img>
+          <v-img
+            :src="foto"
+            height="500px"
+            width="500px"
+            class="container"
+          ></v-img>
         </v-col>
       </v-row>
       <v-row class="justify-center">
         <v-col cols="10" class="py-4">
-          <iframe height="500px" width="500px" class="container" :src="fotocapia_documento"></iframe>
+          <iframe
+            height="500px"
+            width="500px"
+            class="container"
+            :src="fotocapia_documento"
+          ></iframe>
         </v-col>
       </v-row>
       <v-row class="justify-center">
         <v-col cols="10" class="py-4">
-          <iframe height="500px" width="500px" class="container" :src="hoja_vida"></iframe>
+          <iframe
+            height="500px"
+            width="500px"
+            class="container"
+            :src="hoja_vida"
+          ></iframe>
         </v-col>
       </v-row>
       <v-row class="justify-center">
@@ -114,31 +144,46 @@
           <h2 class="my-8">Categorias Seleccionadas por el usuario</h2>
           <template>
             <v-expansion-panels :value="panelSelect">
-              <v-expansion-panel v-for="(item, index) in usuario_votante.groupCategoryVoters" :key="index">
+              <v-expansion-panel
+                v-for="(item, index) in usuario_votante.subGroupCategoryVoters"
+                :key="index"
+              >
                 <v-expansion-panel-header>
                   <h5>
-                    {{ getCategoryName(item.groupCategoryId) }}
+                    {{ item.subGroupCategory?.description }}
                     <h5 v-if="validarCumplimiento(item)" class="mt-3">
-                      <v-icon color="green" class="text-start">mdi-check-circle</v-icon>
+                      <v-icon color="green" class="text-start"
+                        >mdi-check-circle</v-icon
+                      >
                       cumple
                     </h5>
                     <h5 v-else class="mt-3">
-                      <v-icon color="orange" class="text-start">mdi-earbuds-outline</v-icon>
+                      <v-icon color="orange" class="text-start"
+                        >mdi-earbuds-outline</v-icon
+                      >
                       Pendiente por revisión
                     </h5>
                   </h5>
                   <v-spacer> </v-spacer>
                   <div class="text-end">
-                    <v-btn class="mx-1 white--text" color="red" @click="removeGroupCategory(item)"
+                    <v-btn
+                      class="mx-1 white--text"
+                      color="red"
+                      @click="removeGroupCategory(item)"
                       >Retirar</v-btn
                     >
-                    <v-btn class="mx-1 white--text" color="primary" @click="addGroupCategoryCumple(item)"
+                    <v-btn
+                      class="mx-1 white--text"
+                      color="primary"
+                      @click="addGroupCategoryCumple(item)"
                       >Cumple</v-btn
                     >
                   </div>
                 </v-expansion-panel-header>
 
-                <v-expansion-panel-content v-for="categoria in categoriasPorGrupo[item.groupCategoryId]">
+                <v-expansion-panel-content
+                  v-for="categoria in categorias_Grupo[item.subGroupCategoryId]"
+                >
                   <v-checkbox
                     v-model="idCategory"
                     @change="cambiarCategoriasMiembro"
@@ -157,17 +202,25 @@
           <h2 class="my-8">Categorias no selecionadas</h2>
           <template>
             <v-expansion-panels :value="panelNoSelect">
-              <v-expansion-panel v-for="(item, index) in groupCategory" :key="index">
+              <v-expansion-panel
+                v-for="(item, index) in sub_group_category"
+                :key="index"
+              >
                 <v-expansion-panel-header>
-                  {{ item.Description }}
+                  {{ item?.description }}
                   <v-spacer> </v-spacer>
                   <div class="text-end">
-                    <v-btn class="mx-1 white--text" color="green" @click="addGroupCategory(item)"
+                    <v-btn
+                      class="mx-1 white--text"
+                      color="green"
+                      @click="addGroupCategory(item)"
                       >Agregar</v-btn
                     >
                   </div>
                 </v-expansion-panel-header>
-                <v-expansion-panel-content v-for="categoria in categoriasPorGrupo[item.Id]">
+                <v-expansion-panel-content
+                  v-for="categoria in categorias_Grupo[item.Id]"
+                >
                   <v-checkbox
                     v-model="idCategory"
                     :label="categoria.nameCategory"
@@ -181,7 +234,15 @@
       </v-row>
 
       <v-row class="mt-12 justify-center">
-        <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" v-if="[1, 4].includes(usuario_votante.statusId)">
+        <v-col
+          cols="12"
+          xs="4"
+          sm="4"
+          md="4"
+          lg="4"
+          xl="4"
+          v-if="[1, 4].includes(usuario_votante.statusId)"
+        >
           <v-btn
             v-if="[1, 4].includes(usuario_votante.statusId)"
             @click="$emit('rechazar', usuario_votante)"
@@ -195,7 +256,15 @@
           </v-btn>
         </v-col>
 
-        <v-col cols="12" xs="4" sm="4" md="4" lg="4" xl="4" v-if="[1, 4].includes(usuario_votante.statusId)">
+        <v-col
+          cols="12"
+          xs="4"
+          sm="4"
+          md="4"
+          lg="4"
+          xl="4"
+          v-if="[1, 4].includes(usuario_votante.statusId)"
+        >
           <v-btn
             @click="habiliarMiembro"
             class="botone text-center"
@@ -246,7 +315,14 @@
           lg="8"
           xl="8"
         >
-          <v-btn @click="revisarMiembro" class="botone" elevation="0" color="blue" large block dark
+          <v-btn
+            @click="revisarMiembro"
+            class="botone"
+            elevation="0"
+            color="blue"
+            large
+            block
+            dark
             >Marcar como revisado
           </v-btn>
         </v-col>
@@ -283,7 +359,7 @@ export default {
       idCategory: [],
       idCategoriasNoSelect: [],
       categorias_base: [],
-      categoriasPorGrupo: {},
+      categorias_Grupo: {},
       categoriasNoSeleccionadas: {},
       format_hoja_vida: "",
       pdf_reglamento: null,
@@ -293,22 +369,7 @@ export default {
       frames: {
         hoja_vida: "",
       },
-      groupCategory: [
-        { Id: 1, Description: "Ficción" },
-        { Id: 2, Description: "Documentales, periodísticos, deportivos e inclusión" },
-        { Id: 3, Description: "Variedades, reality, comedia y musical" },
-        { Id: 4, Description: "Infantil, juvenil, universitaria y animación" },
-        { Id: 5, Description: "Categorías técnicas " },
-        { Id: 6, Description: "Transmedia, vodcast y marca" },
-      ],
-      groupCategoryBase: [
-        { Id: 1, Description: "Ficción" },
-        { Id: 2, Description: "Documentales, periodísticos, deportivos e inclusión" },
-        { Id: 3, Description: "Variedades, reality, comedia y musical" },
-        { Id: 4, Description: "Infantil, juvenil, universitaria y animación" },
-        { Id: 5, Description: "Categorías técnicas " },
-        { Id: 6, Description: "Transmedia, vodcast y marca" },
-      ],
+
       current_user: {},
       validacion: true,
       form: {
@@ -335,7 +396,10 @@ export default {
           tipo: "number",
           maxlength: "13",
           disabled: true,
-          rules: [(v) => !!v || "Celular es requerido", (v) => v.length >= 10 || "Numero celular invalido"],
+          rules: [
+            (v) => !!v || "Celular es requerido",
+            (v) => v.length >= 10 || "Numero celular invalido",
+          ],
         },
         documento: {
           value: "",
@@ -356,7 +420,10 @@ export default {
           label: "Email *",
           disabled: true,
           maxlength: "150",
-          rules: [(v) => !!v || "Email es requerido", (v) => /.+@.+\..+/.test(v) || "Email no es valido"],
+          rules: [
+            (v) => !!v || "Email es requerido",
+            (v) => /.+@.+\..+/.test(v) || "Email no es valido",
+          ],
         },
 
         direccion_oficina: {
@@ -413,26 +480,38 @@ export default {
       foto: this.usuario_votante.photo,
       fotocapia_documento: this.usuario_votante.documentFotocopy,
       groupCategoryVotersFormat: [],
+      sub_group_category: [],
+      sub_group_category_base: [],
     };
   },
   watch: {},
   async mounted() {
     Object.assign(this.current_user, CURRTET_USER);
-    this.groupCategoryVotersFormat = this.usuario_votante.groupCategoryVoters.map((e) => e.groupCategoryId);
+    this.groupCategoryVotersFormat =
+      this.usuario_votante.subGroupCategoryVoters.map(
+        (e) => e.subGroupCategoryId
+      );
     this.obtenerCategorias();
+    const sub_group_category = await this._getSubGroupCategory();
+    this.sub_group_category = sub_group_category;
+    this.sub_group_category_base = JSON.parse(
+      JSON.stringify(sub_group_category)
+    );
   },
   methods: {
     ...mapActions({
       _getCatergorias: "categorias/_getCatergorias",
       _agregarGroupCategory: "admin/_agregarGroupCategory",
       _deleteGroupCategory: "admin/_deleteGroupCategory",
+      _getSubGroupCategory: "miembro_votante/_getSubGroupCategory",
     }),
 
     habiliarMiembro() {
-      this.$emit("habilitar", {
-        userId: this.usuario_votante.userId,
-        categoriesId: this.idCategory,
-      });
+      console.log("😎 ", this.idCategory);
+      // this.$emit("habilitar", {
+      //   userId: this.usuario_votante.userId,
+      //   categoriesId: this.idCategory,
+      // });
     },
     cambiarCategoriasMiembro() {
       this.$emit("cambiarCategoria", {
@@ -444,17 +523,20 @@ export default {
       this.$emit("revisar", this.usuario_votante);
     },
     async removeGroupCategory(item) {
-      const category = this.groupCategoryBase.find((e) => e.Id == item.groupCategoryId);
+      const category = this.sub_group_category_base.find(
+        (e) => e.Id == item.subGroupCategoryId
+      );
       const elemnt = this.categorias_base
-        .filter((e) => e.groupCategoryId == item.groupCategoryId)
+        .filter((e) => e.subGroupCategoryId == item.subGroupCategoryId)
         .map((e) => e.id);
 
       await this.deleteGroupCategory(item.id);
 
-      this.groupCategory.push(category);
-      this.usuario_votante.groupCategoryVoters = this.usuario_votante.groupCategoryVoters.filter(
-        (e) => e.groupCategoryId != category.Id
-      );
+      this.sub_group_category.push(category);
+      this.usuario_votante.subGroupCategoryVoters =
+        this.usuario_votante.subGroupCategoryVoters.filter(
+          (e) => e.subGroupCategoryId != category.Id
+        );
       this.idCategory = this.eliminarIdCategorias(elemnt, this.idCategory);
       this.panelSelect = 0;
       setTimeout(() => (this.panelSelect = null), 10);
@@ -462,7 +544,7 @@ export default {
     },
     addGroupCategoryCumple(item) {
       const elemnt = this.categorias_base
-        .filter((e) => e.groupCategoryId == item.groupCategoryId)
+        .filter((e) => e.subGroupCategoryId == item.subGroupCategoryId)
         .map((e) => e.id);
 
       const uniqueSet = new Set([...this.idCategory, ...elemnt]);
@@ -472,9 +554,11 @@ export default {
     },
     validarCumplimiento(item) {
       const elemnt = this.categorias_base
-        .filter((e) => e.groupCategoryId == item.groupCategoryId)
+        .filter((e) => e.subGroupCategoryId == item.subGroupCategoryId)
         .map((e) => e.id);
-      const existsInIdCategory = elemnt.some((e) => this.idCategory.includes(e));
+      const existsInIdCategory = elemnt.some((e) =>
+        this.idCategory.includes(e)
+      );
       return existsInIdCategory;
     },
 
@@ -485,7 +569,7 @@ export default {
       };
       await this.agregarGroupCategory(data);
 
-      if (this.usuario_votante.groupCategoryVoters.length >= 3) {
+      if (this.usuario_votante.subGroupCategoryVoters.length >= 3) {
         return this.ALT_(
           "",
           "info",
@@ -495,10 +579,12 @@ export default {
           "No se puede agregar más de 3 categorías para ser calificador como miembro votante."
         );
       }
-      this.usuario_votante.groupCategoryVoters.push({
-        groupCategoryId: item.Id,
+      this.usuario_votante.subGroupCategoryVoters.push({
+        subGroupCategoryId: item.Id,
       });
-      this.groupCategory = this.groupCategory.filter((e) => e.Id != item.Id);
+      this.sub_group_category = this.sub_group_category.filter(
+        (e) => e.Id != item.Id
+      );
       this.panelNoSelect = 0;
       setTimeout(() => {
         this.panelNoSelect = null;
@@ -523,7 +609,9 @@ export default {
 
     eliminarIdCategorias(array1, array2) {
       const conjuntoArray1 = new Set(array1);
-      const resultado = array2.filter((elemento) => !conjuntoArray1.has(elemento));
+      const resultado = array2.filter(
+        (elemento) => !conjuntoArray1.has(elemento)
+      );
       return resultado;
     },
 
@@ -549,7 +637,9 @@ export default {
     },
     async obtenerCategorias() {
       try {
-        const subCategorias = this.usuario_votante.categoryVoters.map((e) => e.categoryId);
+        const subCategorias = this.usuario_votante.categoryVoters.map(
+          (e) => e.categoryId
+        );
         const response = await this._getCatergorias();
         if (response.data?.data) {
           const categorias = response.data.data;
@@ -557,20 +647,27 @@ export default {
 
           categorias.forEach((categoria) => {
             const idCategory = categoria.id;
-            if (this.groupCategoryVotersFormat.includes(categoria.groupCategoryId)) {
-              this.groupCategory = this.groupCategory.filter((e) => e.Id != categoria.groupCategoryId);
-              if (subCategorias.includes(idCategory)) this.idCategory.push(idCategory);
+            if (
+              this.groupCategoryVotersFormat.includes(
+                categoria.subGroupCategoryId
+              )
+            ) {
+              this.sub_group_category = this.sub_group_category.filter(
+                (e) => e.Id != categoria.subGroupCategoryId
+              );
+              if (subCategorias.includes(idCategory))
+                this.idCategory.push(idCategory);
             } else {
               this.idCategoriasNoSelect.push(idCategory);
             }
-            const groupId = categoria.groupCategoryId;
-            if (!this.categoriasPorGrupo[groupId]) {
-              this.$set(this.categoriasPorGrupo, groupId, []);
+            const groupId = categoria.subGroupCategoryId;
+            if (!this.categorias_Grupo[groupId]) {
+              this.$set(this.categorias_Grupo, groupId, []);
             }
             if (!this.categoriasNoSeleccionadas[groupId]) {
               this.$set(this.categoriasNoSeleccionadas, groupId, []);
             }
-            this.categoriasPorGrupo[groupId].push(categoria);
+            this.categorias_Grupo[groupId].push(categoria);
           });
         }
       } catch (error) {

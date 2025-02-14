@@ -9,7 +9,15 @@
       <v-col cols="12" class="mt-0 pt-0">
         <v-container fluid>
           <v-row justify="start" class="my-2">
-            <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="12" class="py-0 text-start">
+            <v-col
+              cols="12"
+              xs="6"
+              sm="6"
+              md="6"
+              lg="6"
+              xl="12"
+              class="py-0 text-start"
+            >
               <h2 class="">Listado miembros registrados</h2>
             </v-col>
           </v-row>
@@ -27,10 +35,19 @@
                   append-icon="mdi-magnify"
                 ></v-text-field>
               </v-card-title>
-              <v-data-table :items="voterMember" class="elevation-1" :headers="headers" :search="search">
+              <v-data-table
+                :items="voterMember"
+                class="elevation-1"
+                :headers="headers"
+                :search="search"
+              >
                 <template v-slot:item.actions="{ item }">
-                  <v-icon class="mx-1" small @click="verVotante(item)"> mdi-eye </v-icon>
-                  <v-icon class="mx-1" small @click="validarEliminar(item)"> mdi-delete </v-icon>
+                  <v-icon class="mx-1" small @click="verVotante(item)">
+                    mdi-eye
+                  </v-icon>
+                  <v-icon class="mx-1" small @click="validarEliminar(item)">
+                    mdi-delete
+                  </v-icon>
                 </template>
               </v-data-table>
             </v-col>
@@ -44,7 +61,10 @@
         v-if="alert.estado"
         @cancelAlert="cancelAlert()"
       />
-      <VOTANTE v-if="usuario_votante.estado" :usuario_votante="usuario_votante" />
+      <VOTANTE
+        v-if="usuario_votante.estado"
+        :usuario_votante="usuario_votante"
+      />
     </v-row>
   </v-app>
 </template>
@@ -86,7 +106,8 @@ export default {
     async consultarMiembros() {
       try {
         const response = await this._getMiembroVotantes();
-        if (response.data?.data) this.voterMember = response.data.data.filter((e) => e.statusId == 1);
+        if (response?.length)
+          this.voterMember = response.filter((e) => e.statusId == 1);
       } catch (error) {
         console.error(error);
         this.ALT_("", "warning", null, null, this.ALTD_, error);
@@ -109,9 +130,23 @@ export default {
         const response = await this._eliminarVotante(id);
         if (response.data.success) {
           this.voterMember.splice(this.index, 1);
-          this.ALT_("", "success", null, null, this.ALTD_, "Miembro votante eliminado correctamente");
+          this.ALT_(
+            "",
+            "success",
+            null,
+            null,
+            this.ALTD_,
+            "Miembro votante eliminado correctamente"
+          );
         } else {
-          this.ALT_("", "error", null, null, this.ALTD_, "Ocurrio un error eliminando el miembro votante");
+          this.ALT_(
+            "",
+            "error",
+            null,
+            null,
+            this.ALTD_,
+            "Ocurrio un error eliminando el miembro votante"
+          );
         }
       } catch (error) {
         console.error(error);

@@ -9,7 +9,15 @@
       <v-col cols="12" class="mt-0 pt-0">
         <v-container fluid>
           <v-row justify="start" class="my-2">
-            <v-col cols="12" xs="6" sm="6" md="6" lg="6" xl="12" class="py-0 text-start">
+            <v-col
+              cols="12"
+              xs="6"
+              sm="6"
+              md="6"
+              lg="6"
+              xl="12"
+              class="py-0 text-start"
+            >
               <h2 class="">Listado miembros registrados</h2>
             </v-col>
           </v-row>
@@ -117,8 +125,8 @@ export default {
     }),
     async consultarMiembros() {
       try {
-        const RES = await this._getMiembroVotantes();
-        if (RES.data?.data) this.miembros_votantes = RES.data.data;
+        const response = await this._getMiembroVotantes();
+        if (response?.length) this.miembros_votantes = response;
       } catch (error) {
         console.error(error);
         this.ALT_("", "warning", null, null, this.ALTD_, error);
@@ -138,13 +146,31 @@ export default {
       );
     },
     validarAceptarPrueba(item) {
-      this.ALT_("MV-01", "warning", "p", () => this.aceptarVotante(item), this.ALTD_);
+      this.ALT_(
+        "MV-01",
+        "warning",
+        "p",
+        () => this.aceptarVotante(item),
+        this.ALTD_
+      );
     },
     validarRechazar(item) {
-      this.ALT_("MV-02", "warning", "p", () => this.rechazarVotante(item), this.ALTD_);
+      this.ALT_(
+        "MV-02",
+        "warning",
+        "p",
+        () => this.rechazarVotante(item),
+        this.ALTD_
+      );
     },
     validarRevision(item) {
-      this.ALT_("MV-03", "warning", "p", () => this.revisarVotante(item), this.ALTD_);
+      this.ALT_(
+        "MV-03",
+        "warning",
+        "p",
+        () => this.revisarVotante(item),
+        this.ALTD_
+      );
     },
 
     async habilitarValidacion(miembro) {
