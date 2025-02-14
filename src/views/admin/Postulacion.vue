@@ -124,6 +124,16 @@
             width="98%"
           ></iframe>
         </v-row>
+        <v-row class="pt-10" v-if="programa.certifyKantar">
+          <h2>Certificado Kantar</h2>
+          <iframe
+            :src="programa.certifyKantar"
+            frameborder="0"
+            allowfullscreen
+            height="680PX"
+            width="98%"
+          ></iframe>
+        </v-row>
       </v-container>
     </v-container>
   </v-app>
