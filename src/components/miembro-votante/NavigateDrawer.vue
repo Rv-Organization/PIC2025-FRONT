@@ -26,7 +26,7 @@
                 :class="`${
                   $route.path == '/miembro-votante/votar' ? 'primary--text' : ''
                 }`"
-                @click="$router.push('/publico-general/votar')"
+                @click="validarRedireccion()"
                 style="cursor: pointer"
               >
                 <v-icon
@@ -35,7 +35,7 @@
                       ? 'primary'
                       : 'accent'
                   "
-                  @click="$router.push('/publico-general/votar')"
+                  @click="validarRedireccion()"
                   class="mr-4"
                   size="30"
                   >mdi-vote-outline </v-icon
@@ -53,7 +53,7 @@
                     ? 'primary--text'
                     : ''
                 }`"
-                @click="$router.push('/publico-general/votar')"
+                @click="validarRedireccion()"
                 style="cursor: pointer"
               >
                 <v-icon
@@ -62,7 +62,7 @@
                       ? 'primary'
                       : 'accent'
                   "
-                  @click="$router.push('/publico-general/votar')"
+                  @click="validarRedireccion()"
                   class="mr-4"
                   size="30"
                   >mdi-shape-plus </v-icon
@@ -384,6 +384,17 @@ export default {
     },
     confirmar() {
       this._logout();
+    },
+
+    validarRedireccion() {
+      if (this.$route.fullPath == "/miembro-votante/votar") {
+      } else {
+        if (this.usuario.roleId == 7) {
+          this.$router.push("/miembro-votante/votar");
+        } else {
+          this.$router.push("/publico-general/votar");
+        }
+      }
     },
     mobile(data) {
       switch (data) {
