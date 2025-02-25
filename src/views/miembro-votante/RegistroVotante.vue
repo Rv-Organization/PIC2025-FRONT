@@ -382,30 +382,6 @@
                   "
                   class="d-flex align-center"
                 >
-                  <!-- <template v-slot:label>
-                    <div class="d-flex align-center justify-space-between">
-                      <span>{{ categoria.description }}</span>
-                      <v-tooltip bottom color="primary">
-                        <template v-slot:activator="{ on }">
-                          <v-btn icon v-on="on">
-                            <v-icon>mdi-comment-question-outline</v-icon>
-                          </v-btn>
-                        </template>
-                        <v-card class="tooltip-card" outlined>
-                          <v-list dense>
-                            <v-list-item
-                              v-for="(item, i) in categorias[index]"
-                              :key="i"
-                            >
-                              <v-list-item-content>
-                                {{ item }}
-                              </v-list-item-content>
-                            </v-list-item>
-                          </v-list>
-                        </v-card>
-                      </v-tooltip>
-                    </div>
-                  </template> -->
                 </v-checkbox>
               </v-col>
               <v-text-field
