@@ -8,13 +8,12 @@
           <v-icon color="primary">mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-container v-for="(categoria, index) in postulacionesPorCategoria" :key="index">
+      <v-container
+        v-for="(categoria, index) in postulacionesPorCategoria"
+        :key="index"
+      >
         <h2>{{ categoria[0].categoryName }}</h2>
-        <v-data-table
-          :headers="headers"
-          :items="categoria"
-          class="elevation-1"
-        >
+        <v-data-table :headers="headers" :items="categoria" class="elevation-1">
           <template v-slot:top>
             <v-text-field
               v-model="buscar"
@@ -43,6 +42,11 @@ export default {
         { text: "Categoria", align: "left", value: "categoryName" },
         { text: "ID", align: "left", value: "postulationId" },
         { text: "Postulación", align: "left", value: "postulationName" },
+        {
+          text: "Votos curadores",
+          align: "left",
+          value: "resultCuratorialComitee",
+        },
         { text: "Votos evaluadores", align: "left", value: "resultEvaluators" },
         { text: "Publico general", align: "left", value: "resultPublic" },
       ],
@@ -52,17 +56,18 @@ export default {
   },
   methods: {
     organizarInfo() {
-      const postulacionesPorCategoria = this.resultado_votaciones.votaciones.reduce(
-        (acumulador, postulacion) => {
-          const { categoryId } = postulacion;
-          if (!acumulador[categoryId]) {
-            acumulador[categoryId] = [];
-          }
-          acumulador[categoryId].push(postulacion);
-          return acumulador;
-        },
-        {}
-      );
+      const postulacionesPorCategoria =
+        this.resultado_votaciones.votaciones.reduce(
+          (acumulador, postulacion) => {
+            const { categoryId } = postulacion;
+            if (!acumulador[categoryId]) {
+              acumulador[categoryId] = [];
+            }
+            acumulador[categoryId].push(postulacion);
+            return acumulador;
+          },
+          {}
+        );
 
       this.postulacionesPorCategoria = Object.values(postulacionesPorCategoria);
     },
