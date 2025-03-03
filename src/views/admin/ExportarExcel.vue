@@ -153,6 +153,10 @@ export default {
           text: "Estado de miembros votantes",
           id: 10,
         },
+        {
+          text: "Estado de votaciones curadores",
+          id: 11,
+        },
       ],
       array_usuarios: [],
       array_postulaciones: [],
@@ -170,6 +174,7 @@ export default {
     ...mapActions({
       _consultVotacionMiembrosVotantes:
         "admin/_consultVotacionMiembrosVotantes",
+      _getResultadoVotosCuradores: "admin/_getResultadoVotosCuradores",
       _consultResultadoVotosV2: "admin/_consultResultadoVotosV2",
       _consultResultadoVotos: "admin/_consultResultadoVotos",
       _getPostulaciones: "postulacion/_getPostulaciones",
@@ -220,6 +225,9 @@ export default {
         case 10:
           // this.cargarEstadoMiembros();
           this.reportVoter();
+        case 11:
+          // this.cargarEstadoMiembros();
+          this.getResultadoVotosCuradores();
           break;
       }
     },
@@ -484,6 +492,44 @@ export default {
           { title: "Apellido", value: "apellido" },
           { title: "Email", value: "email" },
           { title: "Telefono", value: "telefono" },
+          { title: "Categoria", value: "categoria" },
+          { title: "Talento", value: "talento" },
+          { title: "Producción", value: "produccion" },
+          { title: "Criterio", value: "criterio" },
+          { title: "Calificación", value: "calificacion", tipo: "number" },
+        ];
+        let header = [
+          { text: "PREMIOS INDIA CATALINA 2025", bold: true, size: 16 },
+          `IMPRESIÓN INFORME ESTADO DE VOTACIONES`,
+          `Fecha de impresión ${moment().format("YYYY-MM-DD")}`,
+          ` `,
+        ];
+        await generarImpresion({
+          header,
+          logo: this.logo,
+          tabla: { columnas, data: response },
+        });
+        this.callAlerta(
+          "",
+          "success",
+          null,
+          this.ALTD_,
+          this.ALTD_,
+          "Impresión generada correctamente"
+        );
+      } catch (error) {
+        this.callAlerta("", "info", error, this.ALTD_, this.ALTD_, error);
+      }
+    },
+    async getResultadoVotosCuradores() {
+      try {
+        const response = await this._getResultadoVotosCuradores();
+
+        let columnas = [
+          // { title: "Nombre", value: "nombre" },
+          // { title: "Apellido", value: "apellido" },
+          // { title: "Email", value: "email" },
+          // { title: "Telefono", value: "telefono" },
           { title: "Categoria", value: "categoria" },
           { title: "Talento", value: "talento" },
           { title: "Producción", value: "produccion" },

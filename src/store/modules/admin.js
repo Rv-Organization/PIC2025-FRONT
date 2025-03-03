@@ -303,6 +303,21 @@ export default {
         commit("_loadingState", null, { root: true });
       });
     },
+    async _getResultadoVotosCuradores({ commit }) {
+      return new Promise((resolve, reject) => {
+        commit("_loadingState", null, { root: true });
+        postDatav2({ method: "get", url: `Report/QualificationCuratorial` })
+          .then((response) => {
+            response.data.length && resolve(response.data);
+            reject("No existen registros");
+          })
+          .catch((error) => {
+            reject(error);
+            console.error("_getResultadoVotosCuradores", error);
+          });
+        commit("_loadingState", null, { root: true });
+      });
+    },
     async _consultVotacionMiembrosVotantes({ commit }) {
       try {
         commit("_loadingState", null, { root: true });
