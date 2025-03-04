@@ -526,10 +526,10 @@ export default {
         const response = await this._getResultadoVotosCuradores();
 
         let columnas = [
-          // { title: "Nombre", value: "nombre" },
-          // { title: "Apellido", value: "apellido" },
-          // { title: "Email", value: "email" },
-          // { title: "Telefono", value: "telefono" },
+          { title: "Nombre", value: "nombre" },
+          { title: "Apellido", value: "apellido" },
+          { title: "Email", value: "email" },
+          { title: "Telefono", value: "telefono" },
           { title: "Categoria", value: "categoria" },
           { title: "Talento", value: "talento" },
           { title: "Producción", value: "produccion" },

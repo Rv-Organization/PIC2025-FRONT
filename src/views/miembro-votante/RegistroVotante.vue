@@ -696,7 +696,7 @@
                   (v) =>
                     !!v || 'Debe aceptar la declaración de confidencialidad',
                 ]"
-                label="Confirmo que no tengo conflictos de interés con ninguna producción postulada y que cumpliré con las normas de confidencialidad establecidas."
+                label="Confirmo que cumpliré con las normas de confidencialidad establecidas."
                 class="d-flex align-center"
               />
             </v-row>
