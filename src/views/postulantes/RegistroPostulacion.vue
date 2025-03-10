@@ -439,7 +439,6 @@ export default {
         header,
         method: "POST",
       });
-      console.log("😎 ");
       let id_video = this.vimeo_crear.data.link.split("/");
       this.url_test_vimeo = this.vimeo_crear.data.player_embed_url;
       this.vimeoUpload(

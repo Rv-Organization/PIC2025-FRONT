@@ -231,6 +231,11 @@ export default {
           this.cuerpo = `Por favor espera a que el administrador te acepte.`;
           this.texto_boton = `Aceptar`;
           break;
+        case "000001":
+          this.title = `¡Ya te registraste!`;
+          this.cuerpo = `El administrador ya reviso tu registro, espera a ser evaluado.`;
+          this.texto_boton = `Aceptar`;
+          break;
         case "MV-S2":
           this.title = `¡No se ha validado tu registro!`;
           this.cuerpo = `Porfavor espera a que el administrador verifique tu registro, si no te has registrado porfavor registrate`;

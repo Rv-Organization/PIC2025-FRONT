@@ -139,97 +139,26 @@
           ></iframe>
         </v-col>
       </v-row>
-      <v-row class="justify-center">
-        <v-col cols="10">
-          <h2 class="my-8">Categorias Seleccionadas por el usuario</h2>
-          <template>
-            <v-expansion-panels :value="panelSelect">
-              <v-expansion-panel
-                v-for="(item, index) in usuario_votante.subGroupCategoryVoters"
-                :key="index"
-              >
-                <v-expansion-panel-header>
-                  <h5>
-                    {{ item.subGroupCategory?.description }}
-                    <h5 v-if="validarCumplimiento(item)" class="mt-3">
-                      <v-icon color="green" class="text-start"
-                        >mdi-check-circle</v-icon
-                      >
-                      cumple
-                    </h5>
-                    <h5 v-else class="mt-3">
-                      <v-icon color="orange" class="text-start"
-                        >mdi-earbuds-outline</v-icon
-                      >
-                      Pendiente por revisión
-                    </h5>
-                  </h5>
-                  <v-spacer> </v-spacer>
-                  <div class="text-end">
-                    <v-btn
-                      class="mx-1 white--text"
-                      color="red"
-                      @click="removeGroupCategory(item)"
-                      >Retirar</v-btn
-                    >
-                    <v-btn
-                      class="mx-1 white--text"
-                      color="primary"
-                      @click="addGroupCategoryCumple(item)"
-                      >Cumple</v-btn
-                    >
-                  </div>
-                </v-expansion-panel-header>
-
-                <v-expansion-panel-content
-                  v-for="categoria in categorias_Grupo[item.subGroupCategoryId]"
-                >
-                  <v-checkbox
-                    v-model="idCategory"
-                    @change="cambiarCategoriasMiembro"
-                    :label="categoria.nameCategory"
-                    :value="categoria.id"
-                  ></v-checkbox>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-          </template>
-        </v-col>
-      </v-row>
 
       <v-row class="justify-center">
         <v-col cols="10">
-          <h2 class="my-8">Categorias no selecionadas</h2>
-          <template>
-            <v-expansion-panels :value="panelNoSelect">
-              <v-expansion-panel
-                v-for="(item, index) in sub_group_category"
-                :key="index"
-              >
-                <v-expansion-panel-header>
-                  {{ item?.description }}
-                  <v-spacer> </v-spacer>
-                  <div class="text-end">
-                    <v-btn
-                      class="mx-1 white--text"
-                      color="green"
-                      @click="addGroupCategory(item)"
-                      >Agregar</v-btn
-                    >
-                  </div>
-                </v-expansion-panel-header>
-                <v-expansion-panel-content
-                  v-for="categoria in categorias_Grupo[item.Id]"
-                >
-                  <v-checkbox
-                    v-model="idCategory"
-                    :label="categoria.nameCategory"
-                    :value="categoria.Id"
-                  ></v-checkbox>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-          </template>
+          <h2 class="my-8">Categorias</h2>
+          <v-row>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+              v-for="categoria in categorias_base"
+              :key="categoria.id"
+            >
+              <v-checkbox
+                :label="categoria.nameCategory"
+                :value="categoria.id"
+                v-model="idCategory"
+                multiple
+              ></v-checkbox>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
 
@@ -484,15 +413,24 @@ export default {
       sub_group_category_base: [],
     };
   },
-  watch: {},
+  watch: {
+    idCategory: {
+      handler() {
+        this.cambiarCategoriasMiembro();
+      },
+      deep: true,
+    },
+  },
   async mounted() {
     Object.assign(this.current_user, CURRTET_USER);
     this.groupCategoryVotersFormat =
       this.usuario_votante.subGroupCategoryVoters.map(
         (e) => e.subGroupCategoryId
       );
+
     this.obtenerCategorias();
     const sub_group_category = await this._getSubGroupCategory();
+
     this.sub_group_category = sub_group_category;
     this.sub_group_category_base = JSON.parse(
       JSON.stringify(sub_group_category)
@@ -507,11 +445,10 @@ export default {
     }),
 
     habiliarMiembro() {
-      console.log("😎 ", this.idCategory);
-      // this.$emit("habilitar", {
-      //   userId: this.usuario_votante.userId,
-      //   categoriesId: this.idCategory,
-      // });
+      this.$emit("habilitar", {
+        userId: this.usuario_votante.userId,
+        categoriesId: this.idCategory,
+      });
     },
     cambiarCategoriasMiembro() {
       this.$emit("cambiarCategoria", {
@@ -640,7 +577,9 @@ export default {
         const subCategorias = this.usuario_votante.categoryVoters.map(
           (e) => e.categoryId
         );
+        this.idCategory = subCategorias;
         const response = await this._getCatergorias();
+
         if (response.data?.data) {
           const categorias = response.data.data;
           this.categorias_base = JSON.parse(JSON.stringify(response.data.data));

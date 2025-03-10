@@ -1575,11 +1575,20 @@ export default {
       // return this.$router.push("/miembro-votante/votar");
       /* 22-02-2024 ya no registra, se redirecciona a votar */
       const response = await this._getMiembroVotante();
+
       if (response.data.success) {
+        /* El estado es que el administrador decide si lo reviso acepto o rechazo */
+        if (response.data.data.statusId == 4) {
+          return this.ALT_("000001", "info", "", null, this.logout);
+        } else if (response.data.data.statusId == 3) {
+          return this.$router.push("/miembro-votante/votar");
+        } else {
+          this.ALT_("MV-S1", "info", "", null, this.logout);
+        }
+
         this.estado_registro = response.data.success;
         if (response.data.data.email == "pruebas@pruebas.com") {
         }
-        this.ALT_("MV-S1", "info", "", null, this.logout);
       }
     },
 
