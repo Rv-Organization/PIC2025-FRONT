@@ -145,9 +145,9 @@ export default {
           id: 8,
         },
         {
+          id: 9,
           email: "jhonbra@gmail.com",
           text: "Resultado de votaciones",
-          id: 9,
         },
         {
           text: "Estado de miembros votantes",
@@ -156,6 +156,7 @@ export default {
         {
           text: "Estado de votaciones curadores",
           id: 11,
+          email: "jhonbra@gmail.com",
         },
       ],
       array_usuarios: [],
@@ -184,17 +185,17 @@ export default {
       _getPagos: "postulacion/_getPagos",
       _getConteos: "admin/_getConteos",
     }),
-    preguntarImpresion(item) {
+    preguntarImpresion(id) {
       this.callAlerta(
         "xlsx_",
         "info",
         "p",
-        () => this.seleccionarImpresion(item),
+        () => this.seleccionarImpresion(id),
         this.ALTD_
       );
     },
-    seleccionarImpresion(item) {
-      switch (item) {
+    seleccionarImpresion(id) {
+      switch (id) {
         case 1: //canales
           this.cargarUSuarios();
           break;
@@ -487,6 +488,7 @@ export default {
     async cargarResultadoVotaciones() {
       try {
         const response = await this._consultResultadoVotosV2();
+
         let columnas = [
           { title: "Nombre", value: "nombre" },
           { title: "Apellido", value: "apellido" },
