@@ -94,10 +94,9 @@ export default {
         postDatav2({ url: `Auth/login`, method: "POST", data })
           .then((response) => {
             if (response.data.emailConfirm === false) resolve(2);
-            // if (response.data.roleId == 1) {
-            //   return resolve(5);
-            // }
-            else {
+            if ([1, 5].includes(response.data.roleId)) {
+              return resolve(5);
+            } else {
               sessionStorage.current_user = btoa(JSON.stringify(response.data));
               location.reload();
             }
