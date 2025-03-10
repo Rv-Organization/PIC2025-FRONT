@@ -93,7 +93,7 @@ export default {
         commit("_loadingState", null, { root: true });
         postDatav2({ url: `Auth/login`, method: "POST", data })
           .then((response) => {
-            if (response.data.emailConfirm === false) resolve(2);
+            if (response.data.emailConfirm === false) return resolve(2);
             if ([1, 5].includes(response.data.roleId)) {
               return resolve(5);
             } else {
