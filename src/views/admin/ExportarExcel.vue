@@ -136,6 +136,7 @@ export default {
         },
         {
           text: "Estado de votaciones",
+          email: "jhonbra@gmail.com",
           auditor: true,
           id: 6,
         },
