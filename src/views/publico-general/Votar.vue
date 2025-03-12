@@ -205,12 +205,14 @@ export default {
       // categories.data.data.map((item) => {
       //   RES.data.data.find((e) => e.categoryId == item.id) ? (item.estado = true) : (item.estado = false);
       // });
-      this.array_categorias = categories.data.data;
+      const data = categories.data.data.filter((e) => e.groupCategoryId == 7);
+      this.array_categorias = data;
+
       this.array_categorias = this.array_categorias.map((e) => {
         return { ...e, votado: false };
       });
 
-      this.array_categoria_base = categories.data.data;
+      this.array_categoria_base = data;
       this.array_categoria_base = this.array_categorias.map((e) => {
         return { ...e, votado: false };
       });

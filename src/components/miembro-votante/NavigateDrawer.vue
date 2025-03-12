@@ -69,38 +69,7 @@
                 >Inicio
               </h4>
             </v-col>
-            <!-- <v-col cols="12" class="pa-0 ml-16 my-1">
-              <h4
-                :class="`${
-                  $route.path == '/miembro-votante/instruccionesM' ? 'primary--text' : ''
-                }`"
-                @click="$router.push('/miembro-votante/instruccionesM')"
-                style="cursor: pointer"
-              >
-                <v-icon
-                  :color="$route.path == '/miembro-votante/instruccionesM' ? 'primary' : 'accent'"
-                  @click="$router.push('/miembro-votante/instruccionesM')"
-                  class="mr-4"
-                  size="30"
-                  >mdi-human-queue </v-icon
-                >Instrucciones
-              </h4>
-            </v-col> -->
-            <!-- <v-col cols="12" class="pa-0 ml-16 my-1">
-              <h4
-                @click="$router.push('/miembro-votante/sugerencia')"
-                :class="`${$route.path == '/miembro-votante/sugerencia' ? 'primary--text' : ''}`"
-                style="cursor: pointer"
-              >
-                <v-icon
-                  @click="$router.push('/miembro-votante/sugerencia')"
-                  :color="$route.path == '/miembro-votante/sugerencia' ? 'primary' : 'accent'"
-                  class="mr-4"
-                  size="30"
-                  >mdi-book-edit </v-icon
-                >Sugerencias
-              </h4>
-            </v-col> -->
+
             <v-col cols="12" class="pa-0 ml-16 my-1">
               <h4
                 :class="`${usuario.estado ? 'primary--text' : ''}`"
@@ -116,75 +85,6 @@
                 >Cambiar contraseña
               </h4>
             </v-col>
-
-            <!-- <v-col cols="12" class="pa-0 ml-16 my-1">
-              <h4
-                :class="`${$route.path == '/miembro-votante/registro' ? 'primary--text' : ''}`"
-                @click="$router.push('/miembro-votante/registro')"
-                style="cursor: pointer"
-              >
-                <v-icon
-                  :color="$route.path == '/miembro-votante/reglamento' ? 'primary' : 'accent'"
-                  @click="$router.push('/miembro-votante/reglamento')"
-                  class="mr-4"
-                  size="30"
-                  >mdi-shape-plus </v-icon
-                >Reglamento
-              </h4>
-            </v-col>
-            <v-col cols="12" class="pa-0 ml-16 my-1">
-              <h4
-                :class="`${$route.path == '/miembro-votante/votar' ? 'primary--text' : ''}`"
-                @click="$router.push('/miembro-votante/votar')"
-                style="cursor: pointer"
-              >
-                <v-icon
-                  :color="$route.path == '/miembro-votante/votar' ? 'primary' : 'accent'"
-                  @click="$router.push('/miembro-votante/votar')"
-                  class="mr-4"
-                  size="30"
-                  >mdi-shape-plus </v-icon
-                >Votar
-              </h4>
-            </v-col>
-            <v-col cols="12" class="pa-0 ml-16 my-1">
-              <h4
-                :class="`${$route.path == '/miembro-votante/instrucciones' ? 'primary--text' : ''}`"
-                @click="$router.push('/miembro-votante/instrucciones')"
-                style="cursor: pointer"
-              >
-                <v-icon
-                  :color="$route.path == '/miembro-votante/instrucciones' ? 'primary' : 'accent'"
-                  @click="$router.push('/miembro-votante/instrucciones')"
-                  class="mr-4"
-                  size="30"
-                  >mdi-human-queue </v-icon
-                >Instrucciones
-              </h4>
-            </v-col>
-            <v-col cols="12" class="pa-0 ml-16 my-1">
-              <h4
-                @click="$router.push('/miembro-votante/sugerencia')"
-                :class="`${$route.path == '/miembro-votante/sugerencia' ? 'primary--text' : ''}`"
-                style="cursor: pointer"
-              >
-                <v-icon
-                  @click="$router.push('/miembro-votante/sugerencia')"
-                  :color="$route.path == '/miembro-votante/sugerencia' ? 'primary' : 'accent'"
-                  class="mr-4"
-                  size="30"
-                  >mdi-book-edit </v-icon
-                >Sugerencias
-              </h4>
-            </v-col>
-
-            <v-col cols="12" class="pa-0 ml-16 my-1">
-              <h4 :class="`${$route.path == '/admin/pagos' ? 'primary--text' : ''}`" style="cursor: pointer" @click="usu.estado = true">
-                <v-icon @click="$router.push('/admin/pagos')" :color="$route.path == '/admin/pagos' ? 'primary' : 'accent'" class="mr-4" size="30"
-                  >mdi-account </v-icon
-                >Perfil
-              </h4>
-            </v-col> -->
           </v-row>
         </v-container>
       </v-row>
@@ -389,7 +289,7 @@ export default {
     validarRedireccion() {
       if (this.$route.fullPath == "/miembro-votante/votar") {
       } else {
-        if (this.usuario.roleId == 7) {
+        if ([5, 7].includes(this.usuario.roleId)) {
           this.$router.push("/miembro-votante/votar");
         } else {
           this.$router.push("/publico-general/votar");
