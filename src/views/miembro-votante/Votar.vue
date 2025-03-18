@@ -4,48 +4,32 @@
       <v-col>
         <h2 class="mb-6">Panel de evaluadores</h2>
         <h3>
-          En este panel encontrará {{ array_categorias.length }} categorías que tienes asignadas para realizar la evaluación de todas las
-          postulaciones en cada una de ellas. Para evaluar, debes ingresar en la categoría, revisar el material de cada postulación y dar una
-          puntuación de acuerdo con los criterios de evaluación. Es requisito fundamental hacer el ejercicio con todas las postulaciones.
+          En este panel encontrará {{ array_categorias.length }} categorías que
+          tienes asignadas para realizar la evaluación de todas las
+          postulaciones en cada una de ellas. Para evaluar, debes ingresar en la
+          categoría, revisar el material de cada postulación y dar una
+          puntuación de acuerdo con los criterios de evaluación. Es requisito
+          fundamental hacer el ejercicio con todas las postulaciones.
         </h3>
         <v-divider class="my-4"></v-divider>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
-        Nota: Cada evaluación que realices quedará guardada y podrás modificarla cuentas veces creas necesario hasta terminar con el proceso.
+        Nota: Cada evaluación que realices quedará guardada y podrás modificarla
+        cuentas veces creas necesario hasta terminar con el proceso.
       </v-col>
     </v-row>
     <v-row class="mt-6">
-      <!-- <v-col cols="12" xs="12" sm="6" md="6" lg="6" xl="6" class="py-0 pt-6 mb-6">
-        <v-autocomplete
-          @input="buscar = buscar.toUpperCase()"
-          background-color="#ffffff"
-          v-model="filtro_category"
-          prepend-icon="mdi-filter"
-          label="Filtrar categorias"
-          item-value="id"
-          item-color="primary"
-          :items="[
-            {
-              id: '0',
-              text: 'Todas',
-            },
-            {
-              id: '1',
-              text: 'Completas',
-            },
-            {
-              id: '2',
-              text: 'Incompletas',
-            },
-          ]"
-          outlined
-          rounded
-          dense
-        ></v-autocomplete>
-      </v-col> -->
-      <v-col cols="12" xs="12" sm="6" md="6" lg="6" xl="6" class="py-0 pt-6 mb-6">
+      <v-col
+        cols="12"
+        xs="12"
+        sm="6"
+        md="6"
+        lg="6"
+        xl="6"
+        class="py-0 pt-6 mb-6"
+      >
         <v-text-field
           @input="buscar = buscar.toUpperCase()"
           v-if="array_categorias.length != 0"
@@ -59,10 +43,13 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <!-- <div v-if="array_categorias.length == 0" class="red--text">
+
+    <div
+      v-if="array_categorias.length == 0 && mostrar_mensaje"
+      class="red--text"
+    >
       No has sido seleccionado en ningún criterio para la votación
-    </div> -->
-    <div v-if="array_categorias.length == 0 && mostrar_mensaje" class="red--text">No has sido seleccionado en ningún criterio para la votación</div>
+    </div>
     <transition-group name="fade">
       <v-card
         class="py-4 my-2 category default-cursor"
@@ -76,13 +63,36 @@
             <h4>{{ item.nameCategory }}</h4>
           </v-col>
           <v-col cols="6" xs="6" sm="6" md="3" lg="3" xl="3" class="text-end">
-            <a style="font-size: 18px" class="icon--text underline">Ver postulados</a>
+            <a style="font-size: 18px" class="icon--text underline"
+              >Ver postulados</a
+            >
           </v-col>
-          <v-col cols="6" xs="16" sm="6" md="3" lg="3" xl="3" class="text-center" v-if="![6].includes(usuario.roleId)">
-            <v-btn v-if="item.isCompleted" class="botone py-1 px-6 default-cursor" elevation="0" color="green" rounded>
+          <v-col
+            cols="6"
+            xs="16"
+            sm="6"
+            md="3"
+            lg="3"
+            xl="3"
+            class="text-center"
+            v-if="![6].includes(usuario.roleId)"
+          >
+            <v-btn
+              v-if="item.isCompleted"
+              class="botone py-1 px-6 default-cursor"
+              elevation="0"
+              color="green"
+              rounded
+            >
               <h4 class="black--text">Completo</h4>
             </v-btn>
-            <v-btn v-else rounded elevation="0" color="#FFEBB8" class="botone py-1 px-6 default-cursor">
+            <v-btn
+              v-else
+              rounded
+              elevation="0"
+              color="#FFEBB8"
+              class="botone py-1 px-6 default-cursor"
+            >
               <h4 class="black--text">incompleto</h4>
             </v-btn>
           </v-col>
@@ -90,7 +100,14 @@
       </v-card>
     </transition-group>
     <h2>{{ validar_buscar ? "No se encontraron coincidencias" : "" }}</h2>
-    <ALT @exitEsc="cancel()" @cancel="cancel()" @cancelAlert="cancelAlert()" @confirm="confirmar()" :alert="alert" v-if="alert.estado" />
+    <ALT
+      @exitEsc="cancel()"
+      @cancel="cancel()"
+      @cancelAlert="cancelAlert()"
+      @confirm="confirmar()"
+      :alert="alert"
+      v-if="alert.estado"
+    />
   </v-container>
 </template>
 <script>
@@ -118,7 +135,9 @@ export default {
   watch: {
     buscar() {
       this.array_categorias = this.array_categoria_base;
-      let filtro = this.array_categorias.filter((categoria) => categoria.nameCategory.toUpperCase().includes(this.buscar));
+      let filtro = this.array_categorias.filter((categoria) =>
+        categoria.nameCategory.toUpperCase().includes(this.buscar)
+      );
       this.array_categorias = filtro;
       this.validar_buscar = this.array_categorias.length == 0 ? true : false;
     },
@@ -128,10 +147,14 @@ export default {
         case "0": //Todas
           return (this.array_categorias = this.array_categoria_base);
         case "1": //Completas
-          this.array_categorias = this.array_categorias.filter((e) => e.estado == true);
+          this.array_categorias = this.array_categorias.filter(
+            (e) => e.estado == true
+          );
           break;
         case "2": //Incompletas
-          this.array_categorias = this.array_categorias.filter((e) => e.estado == false);
+          this.array_categorias = this.array_categorias.filter(
+            (e) => e.estado == false
+          );
           break;
         default:
           return (this.array_categorias = this.array_categoria_base);
@@ -146,8 +169,10 @@ export default {
 
   methods: {
     ...mapActions({
-      _getCategoriasMimbroVotante: "miembro_votante/_getCategoriasMimbroVotante",
-      _getCategoriasIberoAmericano: "miembro_votante/_getCategoriasIberoAmericano",
+      _getCategoriasMimbroVotante:
+        "miembro_votante/_getCategoriasMimbroVotante",
+      _getCategoriasIberoAmericano:
+        "miembro_votante/_getCategoriasIberoAmericano",
       _getCatergoriasComite: "categorias/_getCatergoriasComite",
       _terminarVotacion: "votaciones/_terminarVotacion",
       _getVotaciones: "votaciones/_getVotaciones",
@@ -176,7 +201,9 @@ export default {
       }
       const response = await this._getVotos();
       categories?.data?.data.map((item) => {
-        response?.data?.data.find((e) => e.categoryId == item.id) ? (item.estado = true) : (item.estado = false);
+        response?.data?.data.find((e) => e.categoryId == item.id)
+          ? (item.estado = true)
+          : (item.estado = false);
       });
 
       this.array_categorias = categories?.data?.data;

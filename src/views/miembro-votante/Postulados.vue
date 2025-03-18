@@ -69,14 +69,16 @@
                 lazy-src="https://premiosindiacatalina.com/wp-content/uploads/2023/12/logoPic41.png"
                 :src="item.photo"
                 class="mx-auto"
-                height="200"
+                height="250"
+                contain
               />
               <v-img
                 v-else
                 lazy-src="https://premiosindiacatalina.com/wp-content/uploads/2023/12/logoPic41.png"
                 :src="item.program.poster"
                 class="mx-auto"
-                height="200"
+                height="250"
+                contain
               />
             </v-col>
             <v-col cols="12" xs="12" sm="12" md="12" lg="7" xl="7" class="py-0">
