@@ -227,6 +227,7 @@ export default {
         case 10:
           // this.cargarEstadoMiembros();
           this.reportVoter();
+          break;
         case 11:
           // this.cargarEstadoMiembros();
           this.getResultadoVotosCuradores();
