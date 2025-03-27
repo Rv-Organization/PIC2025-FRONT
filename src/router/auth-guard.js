@@ -9,3 +9,10 @@ const isAuthenticatedGuard = async (to, from, next) => {
   });
 };
 export default isAuthenticatedGuard;
+
+export const isAdmin = async (to, from, next) => {
+  return new Promise(() => {
+    if (CURRTET_USER?.roleId != 4) return next({ path: "/inicio" });
+    return next();
+  });
+};

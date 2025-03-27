@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import isAuthenticatedGuard from "./auth-guard.js";
+import isAuthenticatedGuard, { isAdmin } from "./auth-guard.js";
 import isValidCanal from "./validarCanal";
 
 Vue.use(VueRouter);
@@ -43,7 +43,7 @@ const routes = [
   },
   {
     path: "/admin/panel-administrativo",
-    // beforeEnter: isAuthenticatedGuard,
+    beforeEnter: isAdmin,
     component: () => import("../views/admin/Inicio.vue"),
     children: [
       {

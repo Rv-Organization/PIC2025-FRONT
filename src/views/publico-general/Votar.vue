@@ -205,7 +205,8 @@ export default {
       // categories.data.data.map((item) => {
       //   RES.data.data.find((e) => e.categoryId == item.id) ? (item.estado = true) : (item.estado = false);
       // });
-      const data = categories.data.data.filter((e) => e.groupCategoryId == 7);
+      // const data = categories.data.data.filter((e) => e.groupCategoryId == 7);
+      const data = categories.data.data;
       this.array_categorias = data;
 
       this.array_categorias = this.array_categorias.map((e) => {
