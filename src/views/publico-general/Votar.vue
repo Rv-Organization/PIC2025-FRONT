@@ -67,8 +67,8 @@
         v-for="item in array_categorias"
         :key="item.nameCategory"
         class="py-4 my-2 category default-cursor"
-        cols="12"
         @click="consultarPostulaciones(item)"
+        cols="12"
       >
         <v-row class="align-center mx-3">
           <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
@@ -209,12 +209,12 @@ export default {
       const data = categories.data.data;
       this.array_categorias = data;
 
-      this.array_categorias = this.array_categorias.map((e) => {
+      this.array_categorias = data.map((e) => {
         return { ...e, votado: false };
       });
 
       this.array_categoria_base = data;
-      this.array_categoria_base = this.array_categorias.map((e) => {
+      this.array_categoria_base = data.map((e) => {
         return { ...e, votado: false };
       });
 
